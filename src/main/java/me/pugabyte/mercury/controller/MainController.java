@@ -1,12 +1,8 @@
 package me.pugabyte.mercury.controller;
 
-import eden.models.punishments.PunishmentType;
-import eden.models.punishments.PunishmentsService;
-import eden.utils.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;

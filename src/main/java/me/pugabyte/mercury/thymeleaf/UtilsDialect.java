@@ -1,7 +1,6 @@
 package me.pugabyte.mercury.thymeleaf;
 
 import eden.models.nerd.Nerd;
-import eden.models.punishments.PunishmentType;
 import eden.utils.StringUtils;
 import eden.utils.TimeUtils;
 import lombok.SneakyThrows;
