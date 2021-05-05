@@ -1,0 +1,6 @@
+me.pugabyte:
+  mercury:
+    env: DEV
+    databases:
+      mongodb:
+        password: test
