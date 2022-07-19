@@ -1,8 +1,8 @@
-package me.pugabyte.mercury.thymeleaf;
+package gg.projecteden.mercury.thymeleaf;
 
-import eden.models.nerd.Nerd;
-import eden.utils.StringUtils;
-import eden.utils.TimeUtils;
+import gg.projecteden.api.common.utils.StringUtils;
+import gg.projecteden.api.common.utils.TimeUtils;
+import gg.projecteden.api.mongodb.models.nerd.Nerd;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.IExpressionContext;

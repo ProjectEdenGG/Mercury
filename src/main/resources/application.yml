@@ -1,6 +1,0 @@
-me.pugabyte:
-  mercury:
-    env: PROD
-    databases:
-      mongodb:
-        password: ''

@@ -1,8 +1,8 @@
-package me.pugabyte.mercury;
+package gg.projecteden.mercury;
 
-import eden.EdenAPI;
-import eden.mongodb.DatabaseConfig;
-import eden.utils.Env;
+import gg.projecteden.api.common.DatabaseConfig;
+import gg.projecteden.api.common.EdenAPI;
+import gg.projecteden.api.common.utils.Env;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -20,12 +20,17 @@ public class Application extends EdenAPI {
 		instance = this;
 	}
 
+	@Override
+	public void shutdown() {
+
+	}
+
 	@Getter
-	@Value("${me.pugabyte.mercury.env}")
+	@Value("${gg.projecteden.mercury.env}")
 	private Env env;
 
 	@Getter
-	@Value("${me.pugabyte.mercury.databases.mongodb.password}")
+	@Value("${gg.projecteden.mercury.databases.mongodb.password}")
 	private String mongodb_password;
 
 	@Override
