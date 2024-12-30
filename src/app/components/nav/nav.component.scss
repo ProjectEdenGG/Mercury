@@ -1,0 +1,151 @@
+/* General Navbar Styling */
+nav {
+	background-color: #00000022;
+	position: fixed;
+	width: 100%;
+	z-index: 99999;
+}
+
+.logo {
+	width: 3rem;
+	margin-right: 1rem;
+}
+
+.nav-toggle {
+	display: none;
+	background: none;
+	border: none;
+	color: white;
+	font-size: 2rem;
+	cursor: pointer;
+	position: fixed;
+	right: 6px;
+	z-index: 99999;
+}
+
+.nav-list {
+	padding: 10px 20px;
+	display: flex;
+	list-style: none;
+	margin: 0;
+
+	@media (min-width: 768px) {
+		align-items: center;
+	}
+}
+
+.nav-item {
+	font-size: 1.2rem;
+	position: relative; /* Needed for positioning the dropdown */
+	margin-right: 15px;
+
+	@media (max-width: 768px) {
+		margin-right: 35px;
+	}
+}
+
+.nav-item a {
+	text-decoration: none;
+	color: #fff;
+	padding: 8px 12px;
+	display: block;
+	transition: background-color 0.3s ease;
+}
+
+.nav-item a:hover {
+	border-radius: 4px; /* Optional aesthetic touch */
+	background-color: #00000088;
+
+	@media (min-width: 768px) {
+		background-color: #555;
+	}
+}
+
+@media (min-width: 768px) {
+	nav::before, .nav-item-dropdown-menu::before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		backdrop-filter: blur(20px);
+		z-index: -1;
+	}
+}
+
+.nav-item-dropdown-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@media (min-width: 768px) {
+	/* Dropdown Menu Styling */
+	.nav-item-dropdown-menu {
+		position: absolute;
+		top: 45px;
+		left: 0;
+		width: max-content;
+		background-color: #00000022;
+		backdrop-filter: blur(15px);
+		border-radius: 4px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		overflow: hidden;
+
+		/* Initially hidden */
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-10px);
+
+		/* Animation effect */
+		transition: all 0.3s ease;
+	}
+}
+
+.nav-item-dropdown-menu a {
+	color: #fff;
+	text-decoration: none;
+
+	@media (min-width: 768px) {
+		padding: 10px 20px;
+	}
+}
+
+.nav-item-dropdown-menu a:hover {
+	background-color: #00000088;
+}
+
+/* Dropdown Hover Effect */
+.nav-item-dropdown:hover .nav-item-dropdown-menu {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0); /* Animate dropdown to slide down */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+	.nav-list {
+		width: 100%;
+		position: absolute;
+		backdrop-filter: blur(40px);
+		background-color: #00000033;
+		top: 100%;
+		left: 0;
+		z-index: 1000;
+		transition: all 0.3s ease;
+
+		/* Initially hidden */
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-10px);
+	}
+
+	.nav-list.active {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0); /* Animate dropdown to slide down */
+	}
+
+	.nav-toggle {
+		display: block; /* Show the toggle button */
+	}
+}

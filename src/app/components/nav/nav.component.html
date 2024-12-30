@@ -1,0 +1,28 @@
+<nav>
+	<button class="nav-toggle" (click)="toggleNav()">
+		<i class="bi bi-{{navIcon}}"></i>
+	</button>
+	<ul class="nav-list flex-column flex-md-row" #nav>
+		<li class="text-center text-md-left">
+			<a routerLink="/home">
+				<img class="logo" src="assets/images/logo_small.png">
+			</a>
+		</li>
+		<li class="nav-item"><a href="#">Discord</a></li>
+		<li class="nav-item"><a href="#">Vote</a></li>
+		<li class="nav-item"><a href="#">Wiki</a></li>
+		<li class="nav-item"><a href="#">Store</a></li>
+		<li class="nav-item"><a href="#">Map</a></li>
+		<li class="nav-item nav-item-dropdown">
+			<a class="d-none d-md-block" href="#"><i class="bi bi-caret-down-fill"></i></a>
+			<ul class="nav-item-dropdown-menu">
+				<li><a href="#">Status</a></li>
+				<li><a href="#">Applications</a></li>
+				<li><a href="#">Ban Appeal</a></li>
+				<li><a href="#">Staff</a></li>
+				<li><a href="#">Build Showcase</a></li>
+				<li><a href="#">Diversity</a></li>
+			</ul>
+		</li>
+	</ul>
+</nav>

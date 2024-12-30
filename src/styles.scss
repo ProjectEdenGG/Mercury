@@ -1,0 +1,503 @@
+$link-color: rgb(152, 185, 217);
+
+@import 'bootstrap/scss/bootstrap';
+
+$spacer: 2rem;
+$spacers: ();
+$spacers: map-merge((
+	0: 0,
+	1: ($spacer * .25),
+	2: ($spacer * .5),
+	3: ($spacer * 1),
+	4: ($spacer * 1.5),
+	5: ($spacer * 2),
+	6: ($spacer * 2.5),
+	7: ($spacer * 3),
+	8: ($spacer * 3.5),
+	9: ($spacer * 4),
+	10: ($spacer * 4.5)
+), $spacers);
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1400px
+) !default;
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+	@include media-breakpoint-up($breakpoint) {
+		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+		@each $prop, $abbrev in (margin: m, padding: p) {
+			@each $size, $length in $spacers {
+				.#{$abbrev}#{$infix}-#{$size} { #{$prop}: $length !important; }
+				.#{$abbrev}t#{$infix}-#{$size},
+				.#{$abbrev}y#{$infix}-#{$size} {
+					#{$prop}-top: $length !important;
+				}
+				.#{$abbrev}r#{$infix}-#{$size},
+				.#{$abbrev}x#{$infix}-#{$size} {
+					#{$prop}-right: $length !important;
+				}
+				.#{$abbrev}b#{$infix}-#{$size},
+				.#{$abbrev}y#{$infix}-#{$size} {
+					#{$prop}-bottom: $length !important;
+				}
+				.#{$abbrev}l#{$infix}-#{$size},
+				.#{$abbrev}x#{$infix}-#{$size} {
+					#{$prop}-left: $length !important;
+				}
+			}
+		}
+
+		// Negative margins (e.g., where `.mb-n1` is negative version of `.mb-1`)
+		@each $size, $length in $spacers {
+			@if $size != 0 {
+				.m#{$infix}-n#{$size} { margin: -$length !important; }
+				.mt#{$infix}-n#{$size},
+				.my#{$infix}-n#{$size} {
+					margin-top: -$length !important;
+				}
+				.mr#{$infix}-n#{$size},
+				.mx#{$infix}-n#{$size} {
+					margin-right: -$length !important;
+				}
+				.mb#{$infix}-n#{$size},
+				.my#{$infix}-n#{$size} {
+					margin-bottom: -$length !important;
+				}
+				.ml#{$infix}-n#{$size},
+				.mx#{$infix}-n#{$size} {
+					margin-left: -$length !important;
+				}
+			}
+		}
+
+		// Some special margin utils
+		.m#{$infix}-auto { margin: auto !important; }
+		.mt#{$infix}-auto,
+		.my#{$infix}-auto {
+			margin-top: auto !important;
+		}
+		.mr#{$infix}-auto,
+		.mx#{$infix}-auto {
+			margin-right: auto !important;
+		}
+		.mb#{$infix}-auto,
+		.my#{$infix}-auto {
+			margin-bottom: auto !important;
+		}
+		.ml#{$infix}-auto,
+		.mx#{$infix}-auto {
+			margin-left: auto !important;
+		}
+	}
+}
+
+:root {
+	color-scheme: dark;
+}
+
+body {
+	background: #212529
+}
+
+.color-white {
+	color: white;
+}
+
+.font-rem-0_75 {
+	font-size: 0.75rem;
+}
+
+.font-rem-1 {
+	font-size: 1rem;
+}
+
+.font-rem-1_25 {
+	font-size: 1.25rem;
+}
+
+.font-rem-1_5 {
+	font-size: 1.5rem;
+}
+
+.font-rem-1 {
+	font-size: 1rem;
+}
+
+.font-size-default,
+.font-rem-1_125 {
+	font-size: 1.125rem;
+}
+
+.font-rem-1_75 {
+	font-size: 1.75rem;
+}
+
+.font-rem-2 {
+	font-size: 2rem;
+}
+
+.font-rem-2_25 {
+	font-size: 2.25rem;
+}
+
+.font-rem-2_5 {
+	font-size: 2.5rem;
+}
+
+.font-rem-2_75 {
+	font-size: 2.75rem;
+}
+
+.font-rem-3 {
+	font-size: 3rem;
+}
+
+.font-rem-3_25 {
+	font-size: 3.25rem;
+}
+
+.font-rem-3_5 {
+	font-size: 3.5rem;
+}
+
+.font-rem-3_75 {
+	font-size: 3.75rem;
+}
+
+.font-rem-4 {
+	font-size: 4rem;
+}
+
+.font-rem-4_25 {
+	font-size: 4.25rem;
+}
+
+.font-rem-4_5 {
+	font-size: 4.5rem;
+}
+
+.font-rem-4_75 {
+	font-size: 4.75rem;
+}
+
+@media (min-width: 576px) {
+	.font-rem-sm-0_75 {
+		font-size: 0.75rem;
+	}
+
+	.font-rem-sm-1 {
+		font-size: 1rem;
+	}
+
+	.font-rem-sm-1_25 {
+		font-size: 1.25rem;
+	}
+
+	.font-rem-sm-1_5 {
+		font-size: 1.5rem;
+	}
+
+	.font-rem-sm-1 {
+		font-size: 1rem;
+	}
+
+	.font-size-sm-default,
+	.font-rem-sm-1_125 {
+		font-size: 1.125rem;
+	}
+
+	.font-rem-sm-1_75 {
+		font-size: 1.75rem;
+	}
+
+	.font-rem-sm-2 {
+		font-size: 2rem;
+	}
+
+	.font-rem-sm-2_25 {
+		font-size: 2.25rem;
+	}
+
+	.font-rem-sm-2_5 {
+		font-size: 2.5rem;
+	}
+
+	.font-rem-sm-2_75 {
+		font-size: 2.75rem;
+	}
+
+	.font-rem-sm-3 {
+		font-size: 3rem;
+	}
+
+	.font-rem-sm-3_25 {
+		font-size: 3.25rem;
+	}
+
+	.font-rem-sm-3_5 {
+		font-size: 3.5rem;
+	}
+
+	.font-rem-sm-3_75 {
+		font-size: 3.75rem;
+	}
+
+	.font-rem-sm-4 {
+		font-size: 4rem;
+	}
+
+	.font-rem-sm-4_25 {
+		font-size: 4.25rem;
+	}
+
+	.font-rem-sm-4_5 {
+		font-size: 4.5rem;
+	}
+
+	.font-rem-sm-4_75 {
+		font-size: 4.75rem;
+	}
+}
+
+@media (min-width: 768px) {
+	.font-rem-md-0_75 {
+		font-size: 0.75rem;
+	}
+
+	.font-rem-md-1 {
+		font-size: 1rem;
+	}
+
+	.font-rem-md-1_25 {
+		font-size: 1.25rem;
+	}
+
+	.font-rem-md-1_5 {
+		font-size: 1.5rem;
+	}
+
+	.font-rem-md-1 {
+		font-size: 1rem;
+	}
+
+	.font-size-md-default,
+	.font-rem-md-1_125 {
+		font-size: 1.125rem;
+	}
+
+	.font-rem-md-1_75 {
+		font-size: 1.75rem;
+	}
+
+	.font-rem-md-2 {
+		font-size: 2rem;
+	}
+
+	.font-rem-md-2_25 {
+		font-size: 2.25rem;
+	}
+
+	.font-rem-md-2_5 {
+		font-size: 2.5rem;
+	}
+
+	.font-rem-md-2_75 {
+		font-size: 2.75rem;
+	}
+
+	.font-rem-md-3 {
+		font-size: 3rem;
+	}
+
+	.font-rem-md-3_25 {
+		font-size: 3.25rem;
+	}
+
+	.font-rem-md-3_5 {
+		font-size: 3.5rem;
+	}
+
+	.font-rem-md-3_75 {
+		font-size: 3.75rem;
+	}
+
+	.font-rem-md-4 {
+		font-size: 4rem;
+	}
+
+	.font-rem-md-4_25 {
+		font-size: 4.25rem;
+	}
+
+	.font-rem-md-4_5 {
+		font-size: 4.5rem;
+	}
+
+	.font-rem-md-4_75 {
+		font-size: 4.75rem;
+	}
+}
+
+@media (min-width: 992px) {
+	.font-rem-lg-0_75 {
+		font-size: 0.75rem;
+	}
+
+	.font-rem-lg-1 {
+		font-size: 1rem;
+	}
+
+	.font-rem-lg-1_25 {
+		font-size: 1.25rem;
+	}
+
+	.font-rem-lg-1_5 {
+		font-size: 1.5rem;
+	}
+
+	.font-rem-lg-1 {
+		font-size: 1rem;
+	}
+
+	.font-size-lg-default,
+	.font-rem-lg-1_125 {
+		font-size: 1.125rem;
+	}
+
+	.font-rem-lg-1_75 {
+		font-size: 1.75rem;
+	}
+
+	.font-rem-lg-2 {
+		font-size: 2rem;
+	}
+
+	.font-rem-lg-2_25 {
+		font-size: 2.25rem;
+	}
+
+	.font-rem-lg-2_5 {
+		font-size: 2.5rem;
+	}
+
+	.font-rem-lg-2_75 {
+		font-size: 2.75rem;
+	}
+
+	.font-rem-lg-3 {
+		font-size: 3rem;
+	}
+
+	.font-rem-lg-3_25 {
+		font-size: 3.25rem;
+	}
+
+	.font-rem-lg-3_5 {
+		font-size: 3.5rem;
+	}
+
+	.font-rem-lg-3_75 {
+		font-size: 3.75rem;
+	}
+
+	.font-rem-lg-4 {
+		font-size: 4rem;
+	}
+
+	.font-rem-lg-4_25 {
+		font-size: 4.25rem;
+	}
+
+	.font-rem-lg-4_5 {
+		font-size: 4.5rem;
+	}
+
+	.font-rem-lg-4_75 {
+		font-size: 4.75rem;
+	}
+}
+
+@media (min-width: 1200px) {
+	.font-rem-xl-0_75 {
+		font-size: 0.75rem;
+	}
+
+	.font-rem-xl-1 {
+		font-size: 1rem;
+	}
+
+	.font-rem-xl-1_25 {
+		font-size: 1.25rem;
+	}
+
+	.font-rem-xl-1_5 {
+		font-size: 1.5rem;
+	}
+
+	.font-rem-xl-1 {
+		font-size: 1rem;
+	}
+
+	.font-size-xl-default,
+	.font-rem-xl-1_125 {
+		font-size: 1.125rem;
+	}
+
+	.font-rem-xl-1_75 {
+		font-size: 1.75rem;
+	}
+
+	.font-rem-xl-2 {
+		font-size: 2rem;
+	}
+
+	.font-rem-xl-2_25 {
+		font-size: 2.25rem;
+	}
+
+	.font-rem-xl-2_5 {
+		font-size: 2.5rem;
+	}
+
+	.font-rem-xl-2_75 {
+		font-size: 2.75rem;
+	}
+
+	.font-rem-xl-3 {
+		font-size: 3rem;
+	}
+
+	.font-rem-xl-3_25 {
+		font-size: 3.25rem;
+	}
+
+	.font-rem-xl-3_5 {
+		font-size: 3.5rem;
+	}
+
+	.font-rem-xl-3_75 {
+		font-size: 3.75rem;
+	}
+
+	.font-rem-xl-4 {
+		font-size: 4rem;
+	}
+
+	.font-rem-xl-4_25 {
+		font-size: 4.25rem;
+	}
+
+	.font-rem-xl-4_5 {
+		font-size: 4.5rem;
+	}
+
+	.font-rem-xl-4_75 {
+		font-size: 4.75rem;
+	}
+}
