@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"mercury": {
+		"mercury-frontend": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
@@ -18,7 +18,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:application",
 					"options": {
-						"outputPath": "dist/mercury",
+						"outputPath": "dist/mercury-frontend",
 						"index": "src/index.html",
 						"browser": "src/main.ts",
 						"polyfills": [
@@ -63,13 +63,16 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "mercury:build:production"
+							"buildTarget": "mercury-frontend:build:production"
 						},
 						"development": {
-							"buildTarget": "mercury:build:development"
+							"buildTarget": "mercury-frontend:build:development"
 						}
 					},
-					"defaultConfiguration": "development"
+					"defaultConfiguration": "development",
+					"options": {
+						"proxyConfig": "proxy.config.json"
+					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n"

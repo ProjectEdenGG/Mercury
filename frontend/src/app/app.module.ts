@@ -7,6 +7,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterModule } from './components/footer/footer.module';
 import { NavModule } from './components/nav/nav.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { NavModule } from './components/nav/nav.module';
 		NgbModule,
 		FooterModule,
 		NavModule,
+		HttpClientModule,
 	],
 	bootstrap: [AppComponent]
 })
