@@ -6,6 +6,7 @@ export const routes: Routes = [
 		path: '',
 		children: [
 			{ path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+			{ path: 'vote', loadChildren: () => import('./pages/vote/vote.module').then(m => m.VoteModule) },
 			{ path: '**', redirectTo: 'home' },
 		]
 	}

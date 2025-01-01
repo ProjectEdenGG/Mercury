@@ -12,4 +12,7 @@ export class ApiService {
 		return this.http.get('/api/timestamp');
 	}
 
+	getVoteLinks() {
+		return this.http.get('/api/votes/links');
+	}
 }

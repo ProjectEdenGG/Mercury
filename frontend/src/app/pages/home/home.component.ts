@@ -10,12 +10,6 @@ import { ApiService } from '../../service/api.service';
 export class HomeComponent {
 	ip = 'projecteden.gg';
 
-	constructor(
-		public apiService: ApiService,
-	) {
-		this.apiService.timestamp().subscribe(e => console.log(e))
-	}
-
 	copyIp() {
 		navigator.clipboard.writeText(this.ip)
 		// TODO Tooltip
