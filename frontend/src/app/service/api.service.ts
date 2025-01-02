@@ -13,6 +13,10 @@ export class ApiService {
 	}
 
 	getServerStatus() {
+		return this.http.get('/api/status');
+	}
+
+	getMinecraftServerStatus() {
 		return this.http.get('/nexus/status');
 	}
 

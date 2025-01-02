@@ -15,14 +15,16 @@ export class NavComponent {
 	constructor(
 		public router: Router,
 	) {
-		this.open$.subscribe(open => {
-			let classList = this.nav.nativeElement.classList;
-			open ? classList.add('active') : classList.remove('active');
-		})
-
 		this.router.events.subscribe(e => {
 			if (e instanceof NavigationEnd)
 				this.open$.next(false)
+		})
+	}
+
+	ngAfterViewInit() {
+		this.open$.subscribe(open => {
+			let classList = this.nav.nativeElement.classList;
+			open ? classList.add('active') : classList.remove('active');
 		})
 	}
 

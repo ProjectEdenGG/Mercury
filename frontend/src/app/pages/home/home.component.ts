@@ -14,7 +14,7 @@ export class HomeComponent {
 	constructor(
 		public apiService: ApiService,
 	) {
-		this.apiService.getServerStatus().subscribe((result: any) => this.status = result)
+		this.apiService.getMinecraftServerStatus().subscribe((result: any) => this.status = result)
 	}
 
 	copyIp() {

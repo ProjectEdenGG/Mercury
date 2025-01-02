@@ -5,15 +5,20 @@
 			<p>We understand that staff can often be very intimidating, but we don't mean to be! We're all very friendly, normal people just trying to help out and be a part of this awesome community, just like you! You can learn a little about each of us here, and if you see us in-game, dont be afraid to give us a wave!</p>
 			<hr class="spectrum">
 		</div>
-		<div *ngFor="let member of staff" class="col-12 col-lg-6 pb-4">
-			<img style="float:left; padding-right: 30px; padding-bottom: 8px;" src="https://crafatar.com/renders/body/{{member.uuidNoDashes}}?overlay">
-			<h2>{{member.nickname}} <span class="rank-tag rank-tag-{{member.rank.toLowerCase().replace(' ', '-')}}">{{member.rank}}</span></h2>
-			<hr>
-			<p *ngIf="member.promotionDate" class="mb-0"><span class="fw-bold">Promotion Date:</span> {{member.promotionDate}}</p>
-			<p *ngIf="member.birthday" class="mb-0"><span class="fw-bold">Birthday:</span> {{member.birthday}}</p>
-			<p *ngIf="member.preferredName" class="mb-0"><span class="fw-bold">Preferred Name:</span> {{member.preferredName}}</p>
-			<p *ngIf="member.pronouns" class="mb-0"><span class="fw-bold">Pronouns:</span> {{member.pronouns}}</p>
-			<p class="mb-0 mt-2"><span class="fw-bold">About me:</span> {{member.about}}</p>
-		</div>
+		<ng-container *ngIf="staff">
+			<div *ngFor="let member of staff" class="col-12 col-lg-6 pb-4">
+				<img style="float:left; padding-right: 30px; padding-bottom: 8px;" src="https://crafatar.com/renders/body/{{member.uuidNoDashes}}?overlay">
+				<h2>{{member.nickname}} <span class="rank-tag rank-tag-{{member.rank.toLowerCase().replace(' ', '-')}}">{{member.rank}}</span></h2>
+				<hr>
+				<p *ngIf="member.promotionDate" class="mb-0"><span class="fw-bold">Promotion Date:</span> {{member.promotionDate}}</p>
+				<p *ngIf="member.birthday" class="mb-0"><span class="fw-bold">Birthday:</span> {{member.birthday}}</p>
+				<p *ngIf="member.preferredName" class="mb-0"><span class="fw-bold">Preferred Name:</span> {{member.preferredName}}</p>
+				<p *ngIf="member.pronouns" class="mb-0"><span class="fw-bold">Pronouns:</span> {{member.pronouns}}</p>
+				<p class="mb-0 mt-2"><span class="fw-bold">About me:</span> {{member.about}}</p>
+			</div>
+		</ng-container>
+		<ng-container *ngIf="!staff">
+			<p class="text-danger">Could not load staff list</p>
+		</ng-container>
 	</div>
 </div>
