@@ -13,7 +13,10 @@ export class VoteComponent {
 	constructor(
 		public apiService: ApiService,
 	) {
-		this.apiService.getVoteSites().subscribe(result => this.sites = result);
+		this.apiService.getVoteSites().subscribe({
+			next: result => this.sites = result,
+			error: () => this.sites = null
+		});
 	}
 
 }
