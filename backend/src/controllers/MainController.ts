@@ -35,7 +35,13 @@ export class MainController {
 				let available = Number(split[1]) / 1000000
 				let total = used + available;
 
-				resolve({ diskspace: { used: Number(used.toFixed(2)), available: Number(available.toFixed(2)), total: Number(total.toFixed(2)) } })
+				resolve({
+					diskspace: {
+						used: Number(used.toFixed(2)),
+						available: Number(available.toFixed(2)),
+						total: Number(total.toFixed(2))
+					}
+				})
 			});
 		});
 	}
@@ -53,7 +59,13 @@ export class MainController {
 				let available = Number(lines.find(line => line.includes('MemAvailable'))?.replaceAll(/\D/g, '')) / 1000000
 				let used = total - available
 
-				resolve({ memory: { used: Number(used.toFixed(2)), available: Number(available.toFixed(2)), total: Number(total.toFixed(2)) } })
+				resolve({
+					memory: {
+						used: Number(used.toFixed(2)),
+						available: Number(available.toFixed(2)),
+						total: Number(total.toFixed(2))
+					}
+				})
 			});
 		})
 	}
