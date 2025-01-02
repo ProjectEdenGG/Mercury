@@ -1,6 +1,6 @@
 <nav>
 	<button class="nav-toggle" (click)="toggleNav()">
-		<i class="bi bi-{{navIcon}}"></i>
+		<i class="bi bi-{{open$.value ? 'x' : 'list'}}"></i>
 	</button>
 	<ul class="nav-list flex-column flex-md-row" #nav>
 		<li class="text-center text-md-left">

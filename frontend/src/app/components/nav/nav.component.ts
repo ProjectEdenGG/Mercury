@@ -1,4 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
 	selector: 'app-nav',
@@ -8,9 +10,23 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class NavComponent {
 	@ViewChild('nav') nav: ElementRef;
-	navIcon: 'list' | 'x' = 'list';
+	public open$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+	constructor(
+		public router: Router,
+	) {
+		this.open$.subscribe(open => {
+			let classList = this.nav.nativeElement.classList;
+			open ? classList.add('active') : classList.remove('active');
+		})
+
+		this.router.events.subscribe(e => {
+			if (e instanceof NavigationEnd)
+				this.open$.next(false)
+		})
+	}
 
 	toggleNav() {
-		this.navIcon = this.nav.nativeElement.classList.toggle('active') ? 'x' : 'list';
+		this.open$.next(!this.open$.value)
 	}
 }
