@@ -8,12 +8,12 @@ import { ApiService } from '../../service/api.service';
 	standalone: false,
 })
 export class VoteComponent {
-	links: any = {};
+	sites: any = {};
 
 	constructor(
 		public apiService: ApiService,
 	) {
-		this.apiService.getVoteLinks().subscribe(result => this.links = result);
+		this.apiService.getVoteSites().subscribe(result => this.sites = result);
 	}
 
 }

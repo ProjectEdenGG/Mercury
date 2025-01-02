@@ -12,15 +12,11 @@ export class ApiService {
 		return this.http.get('/api/timestamp');
 	}
 
-	getServerPlayers() {
-		return this.http.get('/api/server/players');
+	getServerStatus() {
+		return this.http.get('/nexus/status');
 	}
 
-	getServerVersions() {
-		return this.http.get('/api/server/versions');
-	}
-
-	getVoteLinks() {
-		return this.http.get('/api/votes/links');
+	getVoteSites() {
+		return this.http.get('/nexus/votes/sites');
 	}
 }

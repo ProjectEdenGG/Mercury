@@ -9,14 +9,12 @@ import { ApiService } from '../../service/api.service';
 })
 export class HomeComponent {
 	ip = 'projecteden.gg';
-	players: number;
-	versions: string;
+	status: any;
 
 	constructor(
 		public apiService: ApiService,
 	) {
-		this.apiService.getServerPlayers().subscribe((result: any) => this.players = result.players)
-		this.apiService.getServerVersions().subscribe((result: any) => this.versions = result.versions)
+		this.apiService.getServerStatus().subscribe((result: any) => this.status = result)
 	}
 
 	copyIp() {
