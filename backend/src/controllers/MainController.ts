@@ -8,6 +8,16 @@ export class MainController {
 		return { "timestamp": new Date().toISOString() };
 	}
 
+	@Get("/server/players")
+	players() {
+		return { "players": 5 }
+	}
+
+	@Get("/server/versions")
+	versions() {
+		return { "versions": ["1.20.4"] }
+	}
+
 	@Get("/votes/links")
 	getVoteLinks() {
 		// TODO Ask server
