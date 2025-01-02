@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-root',
@@ -13,6 +13,6 @@ export class AppComponent {
 	) { }
 
 	isHomePage() {
-		return this.router.url.startsWith('/home')
+		return this.router.url.split(/[#?]/)[0] === '/'
 	}
 }

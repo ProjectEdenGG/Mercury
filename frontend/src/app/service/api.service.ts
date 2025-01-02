@@ -19,4 +19,8 @@ export class ApiService {
 	getVoteSites() {
 		return this.http.get('/nexus/votes/sites');
 	}
+
+	getStaff() {
+		return this.http.get('/nexus/staff');
+	}
 }
