@@ -10,7 +10,7 @@
 				<img class="skin-image" src="https://crafatar.com/renders/body/{{member.uuidNoDashes}}?overlay">
 				<div class="name-and-rank font-rem-1_5 fw-medium">
 					<span class="nickname">{{member.nickname}}</span>
-					<span class="mt-1 rank-tag rank-tag-{{utils.asCssClass(member.rank)}}">{{member.rank}}</span>
+					<span class="mt-1 rank-tag background-color-{{utils.asCssClass(member.rank)}}">{{member.rank}}</span>
 				</div>
 				<hr>
 				<p *ngIf="member.promotionDate" class="mb-0"><span class="fw-bold">Promotion Date:</span> {{member.promotionDate}}</p>

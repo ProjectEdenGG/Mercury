@@ -27,4 +27,8 @@ export class ApiService {
 	getStaff() {
 		return this.http.get('/nexus/staff');
 	}
+
+	getRanks() {
+		return this.http.get('/nexus/ranks');
+	}
 }
