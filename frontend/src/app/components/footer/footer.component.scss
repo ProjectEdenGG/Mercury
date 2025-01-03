@@ -2,9 +2,12 @@ footer {
 	color: #a4a4a4;
 }
 
-.social-media {
-	font-size: 2rem;
+.social-media-icons > :not(:last-child) {
 	padding-right: 1rem;
+}
+
+.social-media-icon {
+	font-size: 2rem;
 	transition: all .3s ease;
 	background: #bdbdbd;
 	color: #bdbdbd;

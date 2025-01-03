@@ -9,12 +9,15 @@ import { ApiService } from '../../service/api.service';
 })
 export class HomeComponent {
 	ip = 'projecteden.gg';
-	status: any;
+	status: any = {};
 
 	constructor(
 		public apiService: ApiService,
 	) {
-		this.apiService.getMinecraftServerStatus().subscribe((result: any) => this.status = result)
+		this.apiService.getMinecraftServerStatus().subscribe({
+			next: (result: any) => this.status = result,
+			error: () => this.status = null
+		})
 	}
 
 	copyIp() {

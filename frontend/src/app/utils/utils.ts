@@ -12,6 +12,10 @@ export class Utils {
 		return JSON.stringify(obj, null, 2)
 	}
 
+	asCssClass(string: any) {
+		return string.toLowerCase().replace(' ', '-');
+	}
+
 	formatTimespan(seconds: number) {
 		let days = Math.floor(seconds / (24 * 60 * 60));
 		seconds %= 24 * 60 * 60;

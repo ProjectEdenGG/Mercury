@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../service/api.service';
+import { Utils } from '../../utils/utils';
 
 @Component({
 	selector: 'app-staff',
@@ -8,9 +9,10 @@ import { ApiService } from '../../service/api.service';
 	standalone: false,
 })
 export class StaffComponent {
-	public staff: any = {};
+	public staff: any = [];
 
 	constructor(
+		public utils: Utils,
 		public apiService: ApiService,
 	) {
 		this.apiService.getStaff().subscribe({
@@ -18,5 +20,4 @@ export class StaffComponent {
 			error: () => this.staff = null
 		})
 	}
-
 }
