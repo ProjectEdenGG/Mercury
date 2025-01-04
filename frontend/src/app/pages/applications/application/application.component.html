@@ -1,0 +1,25 @@
+<div class="mt-4">
+	<div class="d-flex justify-content-between">
+		<h2 class="color-{{ utils.asCssClass(color ?? app) }} mb-0 fw-bold">
+			{{ app }}
+		</h2>
+		<a
+			href="https://projecteden.gg/apply/{{ app.toLowerCase() }}"
+			hoverBrightness [down]="20"
+			class="
+				py-1
+				px-2
+				rounded
+				fw-medium
+				color-white
+				font-rem-1_125
+				text-decoration-none
+				background-color-{{ utils.asCssClass(color ?? app) }}
+			"
+		>
+			Apply now
+		</a>
+	</div>
+	<hr>
+	<p><ng-content></ng-content></p>
+</div>

@@ -133,6 +133,10 @@ body {
 	border-radius: .5rem;
 }
 
+[hoverBrightness] {
+	transition: background-color 0.3s ease;
+}
+
 .font-rem-0_75 {
 	font-size: 0.75rem;
 }
