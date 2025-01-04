@@ -12,7 +12,7 @@
 		<li class="nav-item"><a routerLink="/vote">Vote</a></li>
 		<li class="nav-item"><a target="_blank" href="https://wiki.projecteden.gg">Wiki</a></li>
 		<li class="nav-item"><a target="_blank" href="https://store.projecteden.gg">Store</a></li>
-		<li class="nav-item"><a target="_blank" href="https://map.projecteden.gg">Map</a></li>
+		<li class="nav-item"><a (click)="map()">Map</a></li>
 		<li class="nav-item"><a routerLink="/titan">Titan</a></li>
 		<li class="nav-item nav-item-dropdown">
 			<a class="d-none d-md-block" href="#"><i class="bi bi-caret-down-fill"></i></a>
@@ -27,3 +27,19 @@
 		</li>
 	</ul>
 </nav>
+
+<modal #mapModal>
+	<div class="d-flex justify-content-end">
+		<button class="no-style float-right font-rem-1_5 mr-3" (click)="newTab()">
+			<i class="bi bi-box-arrow-up-right"></i>
+			Open in new tab
+		</button>
+		<button class="no-style float-right font-rem-1_5" (click)="mapModal.close()">
+			<i class="bi bi-x-lg"></i>
+			Close
+		</button>
+	</div>
+	<div>
+		<iframe src="https://map.projecteden.gg" width="100%" allowtransparency="true" frameborder="0"></iframe>
+	</div>
+</modal>

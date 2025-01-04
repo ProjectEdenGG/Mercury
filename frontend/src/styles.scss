@@ -101,7 +101,7 @@ $grid-breakpoints: (
 	color-scheme: dark;
 }
 
-body {
+body, .modal-content {
 	background: #212529
 }
 
@@ -133,8 +133,25 @@ body {
 	border-radius: .5rem;
 }
 
+.map-modal .modal-dialog {
+	max-width: 97% !important;
+
+	iframe {
+		height: 86vh;
+	}
+}
+
 [hoverBrightness] {
 	transition: background-color 0.3s ease;
+}
+
+button.no-style {
+	background: unset;
+	border: unset;
+
+	&:focus-visible {
+		outline: unset;
+	}
 }
 
 .font-rem-0_75 {
