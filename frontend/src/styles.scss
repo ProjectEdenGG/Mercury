@@ -106,6 +106,8 @@ body, .modal-content {
 }
 
 .spectrum {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 	height: 5px;
 	border-top: 0;
 	background: #c4e17f;
@@ -114,11 +116,30 @@ body, .modal-content {
 }
 
 .color-white {
-	color: white;
+	color: #eaeaea;
 }
 
 .color-black {
 	color: black;
+}
+
+$color-blue: #409ae8;
+$color-gray: #98a6ad;
+
+.color-blue {
+	color: $color-blue
+}
+
+.background-color-blue {
+	background-color: $color-blue
+}
+
+.color-gray {
+	color: $color-gray;
+}
+
+.background-color-gray {
+	background-color: $color-gray;
 }
 
 .color-twitch {
