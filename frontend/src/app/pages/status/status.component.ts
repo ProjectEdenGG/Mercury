@@ -16,10 +16,7 @@ export class StatusComponent {
 		public apiService: ApiService,
 	) {
 		this.apiService.getServerStatus().subscribe({
-			next: result => {
-				console.log('result', result)
-				return this.status = result;
-			},
+			next: result => this.status = result,
 			error: () => this.status = null
 		})
 	}
