@@ -16,6 +16,10 @@ export class ApiService {
 		return this.http.get('/api/status');
 	}
 
+	getShowcase() {
+		return this.http.get('/api/showcase');
+	}
+
 	getMinecraftServerStatus() {
 		return this.http.get('/nexus/status');
 	}
