@@ -1,25 +1,26 @@
+<ng-template #applyButton>
+	<a
+		href="https://projecteden.gg/apply/{{ app.toLowerCase() }}"
+		hoverBrightness [down]="20"
+		[ngClass]="'background-color-' + utils.asCssClass(color ?? app)"
+		class="py-1 px-2 rounded fw-medium color-white font-rem-1_25 text-decoration-none w-100"
+	>
+		Apply now
+	</a>
+</ng-template>
+
 <div class="mt-4">
 	<div class="d-flex justify-content-between">
-		<h2 class="color-{{ utils.asCssClass(color ?? app) }} mb-0 fw-bold">
+		<h2 class="mb-0 fw-bold font-rem-2 font-rem-md-2_5 color-{{ utils.asCssClass(color ?? app) }}">
 			{{ app }}
 		</h2>
-		<a
-			href="https://projecteden.gg/apply/{{ app.toLowerCase() }}"
-			hoverBrightness [down]="20"
-			class="
-				py-1
-				px-2
-				rounded
-				fw-medium
-				color-white
-				font-rem-1_125
-				text-decoration-none
-				background-color-{{ utils.asCssClass(color ?? app) }}
-			"
-		>
-			Apply now
-		</a>
+		<div class="d-none d-md-flex">
+			<ng-container *ngTemplateOutlet="applyButton"></ng-container>
+		</div>
 	</div>
 	<hr>
 	<p><ng-content></ng-content></p>
+	<div class="mt-2 d-flex d-md-none text-center">
+		<ng-container *ngTemplateOutlet="applyButton"></ng-container>
+	</div>
 </div>
