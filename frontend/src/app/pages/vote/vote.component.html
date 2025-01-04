@@ -14,7 +14,7 @@
 			<h2>Links</h2>
 			<ng-container *ngIf="sites">
 				<div *ngFor="let link of sites | keyvalue" class="btn-group d-block vote-button-group mb-2">
-					<a [href]="link.value" target="_blank" role="button" class="btn btn-primary">Vote!&nbsp;</a>
+					<a [href]="link.value" hoverBrightness [down]="30" target="_blank" role="button" class="btn btn-primary">Vote!&nbsp;</a>
 					<button class="btn border-0 vote-button"><strong>{{link.key}}</strong></button>
 				</div>
 			</ng-container>

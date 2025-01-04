@@ -5,7 +5,7 @@ import { AfterViewInit, Directive, ElementRef, Input, Renderer2 } from '@angular
 	standalone: true,
 })
 export class HoverBrightnessDirective implements AfterViewInit {
-	@Input('type') type: 'backgroundColor' | 'color' = 'backgroundColor'
+	@Input('types') types: string[] = ['backgroundColor', 'borderColor']
 	@Input('up') up: number;
 	@Input('down') down: number;
 
@@ -17,22 +17,27 @@ export class HoverBrightnessDirective implements AfterViewInit {
 	ngAfterViewInit() {
 		let element = this.elementRef.nativeElement;
 
-		let originalColor: string
-		let originalHex: string
-		let darkenedColor: string
+		let originalColor: any = {}
+		let originalHex: any = {}
+		let darkenedColor: any = {}
 
 		this.renderer.listen(element, 'mouseover', () => {
-			if (!originalColor) {
-				originalColor = getComputedStyle(element)[this.type];
-				originalHex = this.rgbToHex(originalColor.match(/\d+/g).map(Number));
-				darkenedColor = this.darkenColor(originalHex);
-			}
+			for (let type of this.types) {
+				if (!originalColor[type]) {
+					// @ts-ignore
+					originalColor[type] = getComputedStyle(element)?.[type];
+					originalHex[type] = this.rgbToHex(originalColor[type].match(/\d+/g).map(Number));
+					darkenedColor[type] = this.darkenColor(originalHex[type]);
+				}
 
-			this.renderer.setStyle(element, this.type, darkenedColor);
+				this.renderer.setStyle(element, type, darkenedColor[type]);
+			}
 		});
 
 		this.renderer.listen(element, 'mouseout', () => {
-			this.renderer.setStyle(element, this.type, originalHex);
+			for (let type of this.types) {
+				this.renderer.setStyle(element, type, originalHex[type]);
+			}
 		});
 	}
 
