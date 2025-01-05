@@ -7,18 +7,22 @@
 		</div>
 		<ng-container *ngIf="staff">
 			<ng-container *ngIf="staff.length > 0">
-				<div *ngFor="let member of staff" class="col-12 col-lg-6 pb-5">
-					<img class="skin-image" src="https://crafatar.com/renders/body/{{member.uuidNoDashes}}?overlay">
-					<div class="name-and-rank font-rem-1_5 fw-medium">
-						<span class="nickname">{{member.nickname}}</span>
-						<span class="mt-1 rank-tag background-color-{{utils.asCssClass(member.rank)}}">{{member.rank}}</span>
+				<div *ngFor="let member of staff" class="col-12 col-lg-6 pb-5 d-flex">
+					<div style="min-width: 120px;">
+						<img class="skin-image" src="https://crafatar.com/renders/body/{{member.uuidNoDashes}}?overlay" class="d-none" (load)="fadeIn($event)">
 					</div>
-					<hr>
-					<p *ngIf="member.promotionDate" class="mb-0"><span class="fw-bold">Staff since:</span> {{member.promotionDate}}</p>
-					<p *ngIf="member.birthday" class="mb-0"><span class="fw-bold">Birthday:</span> {{member.birthday}}</p>
-					<p *ngIf="member.preferredName" class="mb-0"><span class="fw-bold">Preferred Name:</span> {{member.preferredName}}</p>
-					<p *ngIf="member.pronouns" class="mb-0"><span class="fw-bold">Pronouns:</span> {{member.pronouns}}</p>
-					<p class="mb-0 mt-2"><span class="fw-bold">About me:</span> {{member.about}}</p>
+					<div class="ml-3">
+						<div class="name-and-rank font-rem-1_5 fw-medium">
+							<span class="nickname">{{member.nickname}}</span>
+							<span class="mt-1 rank-tag background-color-{{utils.asCssClass(member.rank)}}">{{member.rank}}</span>
+						</div>
+						<hr>
+						<p *ngIf="member.promotionDate" class="mb-0"><span class="fw-bold">Staff since:</span> {{member.promotionDate}}</p>
+						<p *ngIf="member.birthday" class="mb-0"><span class="fw-bold">Birthday:</span> {{member.birthday}}</p>
+						<p *ngIf="member.preferredName" class="mb-0"><span class="fw-bold">Preferred Name:</span> {{member.preferredName}}</p>
+						<p *ngIf="member.pronouns" class="mb-0"><span class="fw-bold">Pronouns:</span> {{member.pronouns}}</p>
+						<p class="mb-0 mt-2"><span class="fw-bold">About me:</span> {{member.about}}</p>
+					</div>
 				</div>
 			</ng-container>
 			<ng-container *ngIf="staff.length == 0">

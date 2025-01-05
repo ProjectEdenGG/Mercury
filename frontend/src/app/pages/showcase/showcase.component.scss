@@ -15,25 +15,6 @@ img {
 	object-fit: cover;
 }
 
-@keyframes fadeIn {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
-.fade-in {
-	opacity: 0;
-	animation: fadeIn 1s forwards;
-}
-
-.fade-in-quick {
-	opacity: 0;
-	animation: fadeIn .1s forwards;
-}
-
 .tag {
 	display: inline-block;
 	background: #15181B;

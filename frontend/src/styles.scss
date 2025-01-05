@@ -175,6 +175,20 @@ button.no-style {
 	}
 }
 
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.fade-in {
+	opacity: 0;
+	animation: fadeIn .5s forwards;
+}
+
 .font-rem-0_75 {
 	font-size: 0.75rem;
 }

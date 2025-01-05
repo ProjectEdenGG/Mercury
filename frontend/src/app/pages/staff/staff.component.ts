@@ -20,4 +20,10 @@ export class StaffComponent {
 			error: () => this.staff = null
 		})
 	}
+
+	fadeIn(event: any) {
+		event.target?.classList?.remove('d-none')
+		event.target?.classList?.add('fade-in')
+	}
+
 }
