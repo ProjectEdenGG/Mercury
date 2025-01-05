@@ -75,6 +75,8 @@ export class ShowcaseComponent {
 
 	builders(build: any, length: 'short' | 'all' = 'all') {
 		let builders = build.builders;
+		if (!builders)
+			return 'Someone';
 
 		if (length == 'short' && builders.length > 3)
 			return builders.slice(0, 2).join(', ') + (builders.length > 2 ? `, and ${builders.length - 2} more` : '');

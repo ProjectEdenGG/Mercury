@@ -64,7 +64,7 @@ export class MainController {
 			let name = split[1]
 			let folder = data.find((_folder: any) => _folder.name == name)
 			if (!folder)
-				data.push(folder = config.data[name])
+				data.push(folder = config.data[name] ?? {})
 
 			folder.name = name
 			folder.files = folder.files ?? []
