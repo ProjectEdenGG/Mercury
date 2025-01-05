@@ -29,7 +29,7 @@
 				</span>
 			</div>
 			<ng-container *ngFor="let build of showcase">
-				<div *ngIf="!selectedTag || build.tags.includes(selectedTag)" class="parent col-md-6 col-xl-4 col-xxl-3 px-sm-4 px-md-2 mb-3" [ngClass]="build.tags">
+				<div *ngIf="!selectedTag || build?.tags?.includes(selectedTag)" class="parent col-md-6 col-xl-4 col-xxl-3 px-sm-4 px-md-2 mb-3" [ngClass]="build.tags">
 					<div class="text-center background p-1 rounded">
 						<div class="aspect-ratio">
 							<img [src]="build.thumbnail" class="d-none" (load)="fadeIn(build, $event)">
