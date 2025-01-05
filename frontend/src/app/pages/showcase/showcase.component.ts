@@ -28,7 +28,7 @@ export class ShowcaseComponent {
 		this.apiService.getShowcase().subscribe({
 			next: result => {
 				this.showcase = result;
-				this.tags = [...new Set<string>(this.showcase.map((build: any) => build.tags).flat())]
+				this.tags = [...new Set<string>(this.showcase.map((build: any) => build.tags).flat())].filter(tag => !!tag)
 			},
 			error: () => this.showcase = null
 		})
