@@ -15,6 +15,9 @@ export class ShowcaseComponent {
 	build: string;
 	scrollY: number = 0;
 
+	tags: string[] = []
+	selectedTag: string
+
 	constructor(
 		public utils: Utils,
 		public location: Location,
@@ -23,7 +26,10 @@ export class ShowcaseComponent {
 		public apiService: ApiService,
 	) {
 		this.apiService.getShowcase().subscribe({
-			next: result => this.showcase = result,
+			next: result => {
+				this.showcase = result;
+				this.tags = [...new Set<string>(this.showcase.map((build: any) => build.tags).flat())]
+			},
 			error: () => this.showcase = null
 		})
 
@@ -82,8 +88,13 @@ export class ShowcaseComponent {
 		return builders;
 	}
 
-	fadeIn(event: any) {
+	initialized: string[] = []
+
+	fadeIn(build: any, event: any) {
 		event.target?.classList?.remove('d-none')
-		event.target?.classList?.add('fade-in')
+		if (!this.initialized.includes(build.name))
+			event.target?.classList?.add('fade-in')
+		this.initialized.push(build.name)
 	}
+
 }
