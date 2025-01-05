@@ -37,4 +37,13 @@ export class Utils {
 		).replace(/, (?!.*, )/, "")
 	}
 
+	flagOf(countryCode: string): string {
+		const codePoints = countryCode
+			.toUpperCase()
+			.split('')
+			.map(char => 0x1f1e6 + char.charCodeAt(0) - 0x41);
+
+		return String.fromCodePoint(...codePoints);
+	}
+
 }

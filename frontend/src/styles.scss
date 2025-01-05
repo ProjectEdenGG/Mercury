@@ -189,6 +189,13 @@ button.no-style {
 	animation: fadeIn .5s forwards;
 }
 
+img.emoji {
+	height: 1em;
+	width: 1em;
+	margin: 0 .05em 0 .1em;
+	vertical-align: -0.1em;
+}
+
 .font-rem-0_75 {
 	font-size: 0.75rem;
 }

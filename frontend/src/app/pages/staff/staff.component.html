@@ -13,8 +13,9 @@
 					</div>
 					<div class="ml-3 w-100">
 						<div class="name-and-rank font-rem-1_5 fw-medium">
-							<span class="nickname">{{member.nickname}}</span>
+							<span class="font-rem-2 nickname">{{member.nickname}}</span>
 							<span class="mt-1 rank-tag background-color-{{utils.asCssClass(member.rank)}}">{{member.rank}}</span>
+							<span *ngIf="member.countryCode" class="ml-1 font-rem-2_5" style="vertical-align: -0.05em;" [innerHTML]="utils.flagOf(member.countryCode) | twemoji"></span>
 						</div>
 						<hr>
 						<p *ngIf="member.promotionDate" class="mb-0"><span class="fw-bold">Staff since:</span> {{member.promotionDate}}</p>
