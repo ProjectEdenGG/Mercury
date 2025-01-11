@@ -11,6 +11,9 @@
 					<span class="fw-bold">Builder{{getBuildConfig().builders?.length > 1 ? 's' : ''}}:</span>
 					{{builders(getBuildConfig())}}
 				</div>
+				<div *ngIf="getBuildConfig().map" class="font-rem-1_25 fw-medium mt-2">
+					<a [href]="getBuildConfig().map">View on map</a>
+				</div>
 			</div>
 			<div *ngFor="let file of getBuildConfig().files" class="col-sm-6 col-lg-4 col-md-4 mb-3">
 				<div class="text-center background p-1 rounded aspect-ratio">

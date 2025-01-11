@@ -25,4 +25,7 @@ export class HomeComponent {
 		// TODO Tooltip
 	}
 
+	loadedStatus() {
+		return 'players' in this.status
+	}
 }

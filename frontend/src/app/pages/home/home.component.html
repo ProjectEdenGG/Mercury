@@ -13,11 +13,11 @@
 					</div>
 					<div class="d-flex color-white font-rem-1 font-rem-md-1_5 mb-5 rounded-3 p-2 server-info">
 						<ng-container *ngIf="status">
-							<ng-container *ngIf="status.players">
+							<ng-container *ngIf="loadedStatus()">
 								<span class="px-2">{{status.players}} nerds online</span>
 								<span class="px-2">Java Edition {{ status.version }}</span>
 							</ng-container>
-							<ng-container *ngIf="!status.players">
+							<ng-container *ngIf="!loadedStatus()">
 								<span class="px-2">Loading server status...</span>
 							</ng-container>
 						</ng-container>
