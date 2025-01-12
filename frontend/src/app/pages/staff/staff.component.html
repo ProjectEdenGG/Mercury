@@ -22,7 +22,7 @@
 						<p *ngIf="member.birthday" class="mb-0"><span class="fw-bold">Birthday:</span> {{member.birthday}}</p>
 						<p *ngIf="member.preferredName" class="mb-0"><span class="fw-bold">Preferred Name:</span> {{member.preferredName}}</p>
 						<p *ngIf="member.pronouns" class="mb-0"><span class="fw-bold">Pronouns:</span> {{member.pronouns}}</p>
-						<p class="mb-0 mt-2"><span class="fw-bold">About me:</span> {{member.about}}</p>
+						<p class="mb-0 mt-2"><span class="fw-bold">About me:</span> {{member.about || "I haven't set this, please publicly embarass me until I do"}}</p>
 					</div>
 				</div>
 			</ng-container>
