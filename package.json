@@ -2,5 +2,9 @@
 	"scripts": {
 		"frontend:dev": "cd frontend && npm run dev",
 		"backend:dev": "cd backend && npm run dev"
+	},
+	"devDependencies": {
+		"chokidar": "^4.0.3",
+		"fs-extra": "^11.2.0"
 	}
 }
