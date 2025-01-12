@@ -9,20 +9,23 @@ import { Utils } from '../../utils/utils';
 	standalone: false,
 })
 export class StatusComponent {
-	public status: any = {};
+	status: any
+	loading: boolean = true
 
 	constructor(
 		public utils: Utils,
 		public apiService: ApiService,
 	) {
 		this.apiService.getServerStatus().subscribe({
-			next: result => this.status = result,
-			error: () => this.status = null
+			next: result => {
+				this.status = result;
+				this.loading = false;
+			},
+			error: ex => {
+				console.error(ex)
+				this.loading = false;
+			}
 		})
-	}
-
-	isLoaded() {
-		return 'backups' in this.status;
 	}
 
 }

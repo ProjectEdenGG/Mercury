@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 // https://codepen.io/jkantner/pen/YzoJdeG
@@ -9,4 +9,6 @@ import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstr
 	styleUrl: './spinner.component.scss',
 	standalone: false,
 })
-export class SpinnerComponent {}
+export class SpinnerComponent {
+	@Input() display: string = "block"
+}

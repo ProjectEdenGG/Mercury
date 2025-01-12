@@ -12,14 +12,12 @@
 		</div>
 		<div class="col-12 col-md-5 col-lg-4 order-1 order-md-2">
 			<h2>Links</h2>
-			<ng-container *ngIf="sites">
+			<spinner *ngIf="loading" display="grid"></spinner>
+			<ng-container *ngIf="!loading">
 				<div *ngFor="let link of sites | keyvalue" class="btn-group d-block vote-button-group mb-2">
 					<a [href]="link.value" hoverBrightness [down]="30" target="_blank" role="button" class="btn btn-primary">Vote!&nbsp;</a>
 					<button class="btn border-0 vote-button"><strong>{{link.key}}</strong></button>
 				</div>
-			</ng-container>
-			<ng-container *ngIf="!sites">
-				<p class="text-danger">The server is offline. Please check back later.</p>
 			</ng-container>
 		</div>
 	</div>

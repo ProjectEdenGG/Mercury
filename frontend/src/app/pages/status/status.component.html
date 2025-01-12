@@ -1,9 +1,7 @@
 <div class="container">
 	<div class="row">
-		<div *ngIf="!isLoaded()" class="col-12 d-flex justify-content-center mt-5">
-			<spinner></spinner>
-		</div>
-		<div *ngIf="isLoaded()" class="col-12">
+		<spinner *ngIf="loading" class="mt-5"></spinner>
+		<div *ngIf="!loading" class="col-12">
 			<pre class="ml-1 color-white">{{utils.stringify(status)}}</pre>
 		</div>
 	</div>

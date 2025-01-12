@@ -9,15 +9,22 @@ import { Utils } from '../../utils/utils';
 	standalone: false,
 })
 export class StaffComponent {
-	public staff: any = [];
+	staff: any
+	loading: boolean = true
 
 	constructor(
 		public utils: Utils,
 		public apiService: ApiService,
 	) {
 		this.apiService.getStaff().subscribe({
-			next: result => this.staff = result,
-			error: () => this.staff = null
+			next: result => {
+				this.staff = result;
+				this.loading = false
+			},
+			error: ex => {
+				console.error(ex)
+				this.loading = false
+			}
 		})
 	}
 

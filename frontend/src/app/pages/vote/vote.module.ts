@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { VoteComponent } from './vote.component';
 import { VoteRoutingModule } from './vote-routing.module';
 import { HoverBrightnessDirective } from "../../directive/hover-brightness/hover-brightness.directive";
+import { SpinnerModule } from "../../components/spinner/spinner.module";
 
 @NgModule({
 	declarations: [VoteComponent],
@@ -10,6 +11,7 @@ import { HoverBrightnessDirective } from "../../directive/hover-brightness/hover
 		CommonModule,
 		VoteRoutingModule,
 		HoverBrightnessDirective,
+		SpinnerModule,
 	]
 })
 export class VoteModule {

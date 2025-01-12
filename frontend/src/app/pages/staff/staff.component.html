@@ -2,36 +2,50 @@
 	<div class="row">
 		<div class="col-12 mb-3">
 			<h1 class="mb-2">Meet the Staff</h1>
-			<p>We understand that staff can often be very intimidating, but we don't mean to be! We're all very friendly, normal people just trying to help out and be a part of this awesome community, just like you! You can learn a little about each of us here, and if you see us in-game, dont be afraid to give us a wave!</p>
+			<p>
+				We understand that staff can often be very intimidating, but we don't mean to be! We're all very
+				friendly, normal people just trying to help out and be a part of this awesome community, just like you!
+				You can learn a little about each of us here, and if you see us in-game, dont be afraid to give us a
+				wave!
+			</p>
 			<div class="spectrum"></div>
 		</div>
-		<ng-container *ngIf="staff">
-			<ng-container *ngIf="staff.length > 0">
-				<div *ngFor="let member of staff" class="col-12 col-lg-6 pb-5 d-flex">
-					<div style="min-width: 120px;">
-						<img class="skin-image" src="https://crafatar.com/renders/body/{{member.uuidNoDashes}}?overlay" class="d-none" (load)="fadeIn($event)">
-					</div>
-					<div class="ml-3 w-100">
-						<div class="name-and-rank font-rem-1_5 fw-medium">
-							<span class="font-rem-2 nickname">{{member.nickname}}</span>
-							<span class="mt-1 rank-tag background-color-{{utils.asCssClass(member.rank)}}">{{member.rank}}</span>
-							<span *ngIf="member.countryCode" class="ml-1 font-rem-2_5" style="vertical-align: -0.075em;" [innerHTML]="utils.flagOf(member.countryCode) | twemoji"></span>
-						</div>
-						<hr>
-						<p *ngIf="member.promotionDate" class="mb-0"><span class="fw-bold">Staff since:</span> {{member.promotionDate}}</p>
-						<p *ngIf="member.birthday" class="mb-0"><span class="fw-bold">Birthday:</span> {{member.birthday}}</p>
-						<p *ngIf="member.preferredName" class="mb-0"><span class="fw-bold">Preferred Name:</span> {{member.preferredName}}</p>
-						<p *ngIf="member.pronouns" class="mb-0"><span class="fw-bold">Pronouns:</span> {{member.pronouns}}</p>
-						<p class="mb-0 mt-2"><span class="fw-bold">About me:</span> {{member.about || "I haven't set this, please publicly embarass me until I do"}}</p>
-					</div>
-				</div>
-			</ng-container>
-			<ng-container *ngIf="staff.length == 0">
-				<spinner></spinner>
-			</ng-container>
-		</ng-container>
-		<ng-container *ngIf="!staff">
+
+		<spinner *ngIf="loading"></spinner>
+
+		<ng-container *ngIf="!loading && staff.length == 0">
 			<p class="text-danger">Could not load staff list</p>
+		</ng-container>
+
+		<ng-container *ngIf="staff.length > 0">
+			<div *ngFor="let member of staff" class="col-12 col-lg-6 pb-5 d-flex">
+				<div style="min-width: 120px;">
+					<img class="skin-image d-none" src="https://crafatar.com/renders/body/{{member.uuidNoDashes}}?overlay" (load)="fadeIn($event)">
+				</div>
+				<div class="ml-3 w-100">
+					<div class="name-and-rank font-rem-1_5 fw-medium">
+						<span class="font-rem-2 nickname">{{ member.nickname }}</span>
+						<span class="mt-1 rank-tag background-color-{{utils.asCssClass(member.rank)}}">{{ member.rank }}</span>
+						<span *ngIf="member.countryCode" class="ml-1 font-rem-2_5" style="vertical-align: -0.075em;" [innerHTML]="utils.flagOf(member.countryCode) | twemoji"></span>
+					</div>
+					<hr>
+					<p *ngIf="member.promotionDate" class="mb-0">
+						<span class="fw-bold">Staff since:</span> {{ member.promotionDate }}
+					</p>
+					<p *ngIf="member.birthday" class="mb-0">
+						<span class="fw-bold">Birthday:</span> {{ member.birthday }}
+					</p>
+					<p *ngIf="member.preferredName" class="mb-0">
+						<span class="fw-bold">Preferred Name:</span> {{ member.preferredName }}
+					</p>
+					<p *ngIf="member.pronouns" class="mb-0">
+						<span class="fw-bold">Pronouns:</span> {{ member.pronouns }}
+					</p>
+					<p class="mb-0 mt-2">
+						<span class="fw-bold">About me:</span> {{ member.about || "I haven't set this, please publicly embarass me until I do" }}
+					</p>
+				</div>
+			</div>
 		</ng-container>
 	</div>
 </div>
