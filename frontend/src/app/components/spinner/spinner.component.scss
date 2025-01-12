@@ -1,0 +1,162 @@
+@use "sass:map";
+
+@mixin animation-timing($function) {
+	$timings: (
+		"ease-in-out-sine": cubic-bezier(0.37,0,0.63,1),
+		"ease-in-sine": cubic-bezier(0.12,0,0.39,0),
+		"ease-out-sine": cubic-bezier(0.61,1,0.88,1),
+		"ease-in-out-cubic": cubic-bezier(0.65,0,0.35,1),
+		"ease-in-cubic": cubic-bezier(0.33,0,0.67,0),
+		"ease-out-cubic": cubic-bezier(0.33,1,0.67,1),
+		"linear": linear,
+		"step-start": steps(1,start),
+		"step-end": steps(1,end)
+	);
+	animation-timing-function: map.get($timings, $function);
+}
+
+main {
+	font-size: calc(14px + 16 * (100vw - 280px) / 3560);
+}
+
+.pl {
+	$dur: 1.25s;
+	display: block;
+	margin: auto;
+	width: 8em;
+	height: 8em;
+
+	&__layer {
+		stroke: hsl(220, 73%, 46%);
+	}
+	&__layer + &__layer {
+		stroke: hsl(193, 79%, 63%);
+	}
+
+	&__ring,
+	&__ring-move {
+		animation: {
+			duration: $dur;
+			iteration-count: infinite;
+		}
+		@include animation-timing("ease-in-out-cubic");
+	}
+	@for $pl from 1 through 6 {
+		@if $pl == 4 {
+			&--#{$pl} &__ring,
+			&--#{$pl} &__ring-move {
+				@include animation-timing("ease-in-out-sine");
+			}
+			&--#{$pl} &__ring {
+				animation-name: ring#{$pl}-4;
+			}
+			&--#{$pl} &__ring-move {
+				animation-name: ring#{$pl}-1;
+
+				&:nth-child(2) {
+					animation-name: ring#{$pl}-2;
+				}
+				&:nth-child(3) {
+					animation-name: ring#{$pl}-3;
+				}
+			}
+			&--#{$pl} &__ring-move:nth-child(2) &__ring {
+				animation-name: ring#{$pl}-5;
+			}
+			&--#{$pl} &__ring-move:nth-child(3) &__ring {
+				animation-name: ring#{$pl}-6;
+			}
+		} @else {
+			&--#{$pl} &__ring {
+				// 1, 3, and 6 will have multiple animations
+				@if $pl == 1 {
+					animation-name: ring#{$pl}-1;
+					@include animation-timing("ease-in-out-sine");
+					transform-origin: 7.75px 12px;
+
+					&:nth-child(2) {
+						animation-name: ring#{$pl}-2;
+					}
+					&:nth-child(n + 3) {
+						animation-name: ring#{$pl}-3;
+						transform-origin: 16.25px 12px;
+					}
+					&:nth-child(4) {
+						animation-name: ring#{$pl}-4;
+					}
+				} @else if $pl == 3 or $pl == 6 {
+					animation-name: ring#{$pl}-1;
+
+					&:nth-child(2) {
+						animation-name: ring#{$pl}-2;
+					}
+					&:nth-child(3) {
+						animation-name: ring#{$pl}-3;
+					}
+				} @else {
+					animation-name: ring#{$pl};
+				}
+			}
+		}
+	}
+	@for $eighth from 2 through 8 {
+		&--2 g:nth-child(#{$eighth}) > &__ring,
+		&--5 g:nth-child(#{$eighth}) > &__ring {
+			animation-delay: $dur * -0.125 * ($eighth - 1);
+		}
+	}
+}
+
+/* Beyond mobile */
+@media (min-width: 375px) {
+	main {
+		grid-template-columns: repeat(2,1fr);
+	}
+}
+@media (min-width: 768px) {
+	main {
+		grid-template-columns: repeat(3,1fr);
+	}
+}
+
+/* Animations */
+@keyframes ring1-1 {
+	from {
+		transform: rotate(90deg) translate(0,4.25px);
+		visibility: visible;
+	}
+	50%,
+	to {
+		transform: rotate(-90deg) translate(0,4.25px);
+		visibility: hidden;
+	}
+}
+@keyframes ring1-2 {
+	from {
+		transform: rotate(-90deg) translate(0,4.25px);
+	}
+	50%,
+	to {
+		transform: rotate(-270deg) translate(0,4.25px);
+	}
+}
+@keyframes ring1-3 {
+	from,
+	50% {
+		transform: rotate(90deg) translate(0,4.25px);
+		visibility: hidden;
+	}
+	to {
+		transform: rotate(270deg) translate(0,4.25px);
+		visibility: visible;
+	}
+}
+@keyframes ring1-4 {
+	from,
+	50% {
+		transform: rotate(-90deg) translate(0,4.25px);
+	}
+	to {
+		transform: rotate(90deg) translate(0,4.25px);
+	}
+}

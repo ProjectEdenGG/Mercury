@@ -11,11 +11,11 @@ import { Location } from '@angular/common';
 	standalone: false,
 })
 export class ShowcaseComponent {
-	showcase: any;
+	showcase: any = [];
+	tags: string[] = []
+
 	build: string;
 	scrollY: number = 0;
-
-	tags: string[] = []
 	selectedTag: string
 
 	constructor(
@@ -50,6 +50,10 @@ export class ShowcaseComponent {
 			this.build = params.get('build');
 			this.scrollTo(0)
 		});
+	}
+
+	isLoaded() {
+		return this.showcase.length > 0
 	}
 
 	navigateToBuild(build: string) {

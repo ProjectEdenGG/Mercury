@@ -21,4 +21,8 @@ export class StatusComponent {
 		})
 	}
 
+	isLoaded() {
+		return 'backups' in this.status;
+	}
+
 }
