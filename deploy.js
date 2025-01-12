@@ -13,7 +13,7 @@ async function copyFileOnChange(sourcePath, targetDirectory) {
 
 		// Copy the file
 		await fs.copy(sourcePath, targetPath);
-		console.log(`File modified: ${path.basename(sourcePath)}. Copied to ${targetDirectory}`);
+		console.log(`${new Date().toISOString()} File modified: ${path.basename(sourcePath)}. Copied to ${targetDirectory}`);
 	} catch (error) {
 		console.error(`Error copying file: ${error.message}`);
 	}
