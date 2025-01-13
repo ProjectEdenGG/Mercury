@@ -9,7 +9,9 @@ export class BackupsService {
 	constructor(public githubService: GitHubService) { }
 
 	worlds() {
-		return JSON.parse(fs.readFileSync('/home/minecraft/servers/backups/smp/worlds.json').toString());
+		let worlds: any[] = JSON.parse(fs.readFileSync('/home/minecraft/servers/backups/smp/worlds.json').toString());
+		worlds.map(world => world.timestamp = new Date(world.timestamp).toISOString())
+		return worlds
 	}
 
 	async git() {
@@ -29,7 +31,7 @@ export class BackupsService {
 					.map(response => {
 						response.data.stats.sha = response.data.sha
 						response.data.stats.files = response.data.files.length
-						response.data.stats.timestamp = response.data.commit.author.date
+						response.data.stats.timestamp = new Date(response.data.commit.author.date).toISOString()
 						return response.data.stats
 					})
 			}
@@ -58,6 +60,10 @@ export class BackupsService {
 				})
 			}
 		})
+
+		for (let database of Object.keys(databases)) {
+			databases[database].sort((a: any, b: any) => b.timestamp - a.timestamp)
+		}
 
 		return databases
 	}

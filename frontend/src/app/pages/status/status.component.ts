@@ -3,6 +3,7 @@ import { ApiService } from '../../service/api.service';
 import { Utils } from '../../utils/utils';
 import { combineLatest } from 'rxjs';
 import { ResponsiveUtil } from '../../utils/responsive-util.component';
+import * as datefns from 'date-fns';
 
 @Component({
 	selector: 'app-status',
@@ -27,7 +28,9 @@ export class StatusComponent {
 			next: result => {
 				this.data.status = result[0];
 				this.data.backups = result[1];
+				console.log('data', this.data);
 				this.loading = false;
+				this.intervalIds.push(setInterval(() => ++this.data.status.uptime, 1000))
 			},
 			error: ex => {
 				console.error(ex)
@@ -46,7 +49,6 @@ export class StatusComponent {
 			})
 		}, 5000))
 
-		this.intervalIds.push(setInterval(() => ++this.data.status.uptime, 1000))
 	}
 
 	ngOnDestroy() {
@@ -57,4 +59,7 @@ export class StatusComponent {
 		return this.data.status.loadAverage.map((average: number) => average.toFixed(2))
 	}
 
+	date(timestamp: any, format?: string) {
+		return datefns.format(new Date(timestamp), format)
+	}
 }

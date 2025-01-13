@@ -1,0 +1,11 @@
+.page-link {
+	background-color: #3B3B3C;
+	border-color: #3B3B3C;
+	color: white;
+
+	&.disabled {
+		background-color: #2f2f32 !important;
+		border-color: #2f2f32 !important;
+		color: #3B3B3C !important;
+	}
+}

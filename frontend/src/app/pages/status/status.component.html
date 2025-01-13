@@ -1,11 +1,15 @@
 <div class="container color-white font-rem-1_125 font-rem-xl-1_25">
 	<div class="row">
 		<div class="col-12">
-			<h1>Server Status</h1>
-			<div class="spectrum"></div>
 			<spinner *ngIf="loading" classes="mt-5"></spinner>
 			<ng-container *ngIf="!loading">
 				<div class="row">
+					<div class="col-12">
+						<h1>System Info</h1>
+						<div class="spectrum"></div>
+					</div>
+				</div>
+				<div class="row mt-2">
 					<div class="col-12 col-xl-6 pr-xl-3">
 						<div class="d-flex justify-content-between">
 							<span class="fw-bold">Uptime</span>
@@ -44,7 +48,27 @@
 						<progress-bar class="mt-1" [percentage]="data.status.diskspace.percentage"></progress-bar>
 					</div>
 				</div>
-				<pre class="ml-1 mt-10 color-white">{{ utils.stringify(data) }}</pre>
+				<div class="row mt-5">
+					<div class="col-12 mb-2">
+						<h1>Backups</h1>
+						<div class="spectrum"></div>
+					</div>
+					<div class="col-12 mb-4">
+						<paginated-table title="Worlds" [headers]="{ timestamp: 'Time', size: 'Size' }" [rows]="data.backups.worlds"></paginated-table>
+					</div>
+					<div class="col-12 col-lg-6 mb-4">
+						<paginated-table title="MySQL" [headers]="{ timestamp: 'Time', size: 'Size' }" [rows]="data.backups.databases.mysql"></paginated-table>
+					</div>
+					<div class="col-12 col-lg-6 mb-4">
+						<paginated-table title="MongoDB" [headers]="{ timestamp: 'Time', size: 'Size' }" [rows]="data.backups.databases.mongodb"></paginated-table>
+					</div>
+					<div class="col-12 col-lg-6 mb-4">
+						<paginated-table title="Config Files" [headers]="{ timestamp: 'Time', files: 'Files' }" [rows]="data.backups.git.server"></paginated-table>
+					</div>
+					<div class="col-12 col-lg-6 mb-4">
+						<paginated-table title="Player Data" [headers]="{ timestamp: 'Time', files: 'Files' }" [rows]="data.backups.git.storage"></paginated-table>
+					</div>
+				</div>
 			</ng-container>
 		</div>
 	</div>

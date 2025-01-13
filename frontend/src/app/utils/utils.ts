@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable({providedIn: 'root'})
 export class Utils {
 
+	originalOrder = () => 0;
+
 	log(obj: any) {
 		console.log(obj)
 		return true;
