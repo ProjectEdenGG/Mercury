@@ -8,15 +8,25 @@ import { ApiService } from '../../service/api.service';
 	standalone: false,
 })
 export class HomeComponent {
-	ip = 'projecteden.gg';
-	status: any = {};
+	ip = 'projecteden.gg'
+
+	status: any
+	loading: boolean = true
+	offline: boolean
 
 	constructor(
 		public apiService: ApiService,
 	) {
 		this.apiService.getMinecraftServerStatus().subscribe({
-			next: (result: any) => this.status = result,
-			error: () => this.status = null
+			next: result => {
+				this.status = result;
+				this.loading = false;
+			},
+			error: ex => {
+				console.error(ex)
+				this.offline = true;
+				this.loading = false;
+			}
 		})
 	}
 
