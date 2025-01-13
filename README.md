@@ -9,7 +9,8 @@ Project Eden's website
 		- Uptime
 		- MSPT
 		- RAM
-		- Players
+		- Players online
+		- Worlds
 		- /nexus stats
 		- Players joined
 	- System info
