@@ -27,24 +27,32 @@ async function copyFileOnChange(sourcePath, targetDirectory) {
 	}
 }
 
-function watchDirectory(targetDir) {
-	console.log(`Watching for changes in: ${__dirname}`);
+function watchDirectory(sourceDir, targetDir) {
+	let source = path.join(__dirname, sourceDir)
+	console.log(`Watching for changes in: ${source}`);
 
-	const watcher = chokidar.watch('.', {
+	const watcher = chokidar.watch(source, {
 		persistent: true,
 		ignoreInitial: true
 	});
 
-	watcher.on('change', (filePath) => copyFileOnChange(filePath, targetDir));
+	watcher.on('change', (filePath) => copyFileOnChange(filePath.replace(__dirname + '\\', ''), targetDir.replace(sourceDir, '')));
 	watcher.on('error', (error) => console.error(`Watcher error: ${error.message}`));
 }
 
-const targetDirectory = process.argv[2];
+let sourceDirectory = '.'
+let targetDirectory
+if (process.argv.length === 4) {
+	sourceDirectory = process.argv[2];
+	targetDirectory = process.argv[3];
+} else {
+	targetDirectory = process.argv[2];
+}
 
 if (!targetDirectory) {
-	console.log("Usage: node deploy.js <targetDirectory>");
+	console.log("Usage: node deploy.js [sourceDirectory] <targetDirectory>");
 	process.exit(1);
 }
 
 // Start watching the source directory
-watchDirectory(targetDirectory);
+watchDirectory(sourceDirectory, targetDirectory);
