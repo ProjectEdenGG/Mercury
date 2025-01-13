@@ -11,8 +11,9 @@ import { Location } from '@angular/common';
 	standalone: false,
 })
 export class ShowcaseComponent {
-	showcase: any = [];
+	showcase: any = []
 	tags: string[] = []
+	loading: boolean = true
 
 	build: string;
 	scrollY: number = 0;
@@ -27,10 +28,14 @@ export class ShowcaseComponent {
 	) {
 		this.apiService.getShowcase().subscribe({
 			next: result => {
-				this.showcase = result;
+				this.showcase = result
 				this.tags = [...new Set<string>(this.showcase.map((build: any) => build.tags).flat())].filter(tag => !!tag).sort()
+				this.loading = false
 			},
-			error: () => this.showcase = null
+			error: ex => {
+				console.error(ex)
+				this.loading = false
+			}
 		})
 
 		this.router.events.subscribe(e => {
@@ -50,10 +55,6 @@ export class ShowcaseComponent {
 			this.build = params.get('build');
 			this.scrollTo(0)
 		});
-	}
-
-	isLoaded() {
-		return this.showcase.length > 0
 	}
 
 	navigateToBuild(build: string) {

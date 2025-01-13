@@ -15,7 +15,7 @@ export class Utils {
 	}
 
 	asCssClass(string: any) {
-		return string.toLowerCase().replace(' ', '-');
+		return string.toLowerCase().replaceAll(' ', '-');
 	}
 
 	formatTimespan(seconds: number, format: 'long' | 'short' = 'long'): string {
