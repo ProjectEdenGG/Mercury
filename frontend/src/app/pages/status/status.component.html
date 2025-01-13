@@ -1,8 +1,51 @@
-<div class="container">
+<div class="container color-white font-rem-1_125 font-rem-xl-1_25">
 	<div class="row">
-		<spinner *ngIf="loading" class="mt-5"></spinner>
-		<div *ngIf="!loading" class="col-12">
-			<pre class="ml-1 color-white">{{utils.stringify(status)}}</pre>
+		<div class="col-12">
+			<h1>Server Status</h1>
+			<div class="spectrum"></div>
+			<spinner *ngIf="loading" classes="mt-5"></spinner>
+			<ng-container *ngIf="!loading">
+				<div class="row">
+					<div class="col-12 col-xl-6 pr-xl-3">
+						<div class="d-flex justify-content-between">
+							<span class="fw-bold">Uptime</span>
+							{{ utils.formatTimespan(data.status.uptime) }}
+						</div>
+					</div>
+					<div class="col-12 col-xl-6 mt-3 mt-xl-0 pl-xl-3">
+						<div class="d-flex justify-content-between">
+							<span class="fw-bold">Load Average</span>
+							{{ loadAverage().join('&nbsp; ') }}
+						</div>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="col-12 col-xl-6 pr-xl-3">
+						<div class="d-flex justify-content-between">
+							<span class="fw-bold">RAM Usage</span>
+							{{ (data.status.memory.used / GB).toFixed(2) }} GB &nbsp;/&nbsp; {{ (data.status.memory.total / GB).toFixed(2) }} GB
+						</div>
+						<progress-bar class="mt-1" [percentage]="data.status.memory.percentage"></progress-bar>
+					</div>
+					<div class="col-12 col-xl-6 mt-3 mt-xl-0 pl-xl-3">
+						<div class="d-flex justify-content-between">
+							<span class="fw-bold">CPU Usage</span>
+							{{ data.status.cpu }}%
+						</div>
+						<progress-bar class="mt-1" [percentage]="data.status.cpu"></progress-bar>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="col-12">
+						<div class="d-flex justify-content-between">
+							<span class="fw-bold">Disk Usage</span>
+							{{ (data.status.diskspace.used / GB).toFixed(2) }} GB &nbsp;/&nbsp; {{ (data.status.diskspace.total / GB).toFixed(2) }} GB
+						</div>
+						<progress-bar class="mt-1" [percentage]="data.status.diskspace.percentage"></progress-bar>
+					</div>
+				</div>
+				<pre class="ml-1 mt-10 color-white">{{ utils.stringify(data) }}</pre>
+			</ng-container>
 		</div>
 	</div>
 </div>

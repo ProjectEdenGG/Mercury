@@ -16,6 +16,10 @@ export class ApiService {
 		return this.http.get('/api/status');
 	}
 
+	getBackups() {
+		return this.http.get('/api/backups');
+	}
+
 	getShowcase() {
 		return this.http.get('/api/showcase');
 	}

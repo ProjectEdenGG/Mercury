@@ -11,4 +11,5 @@ import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstr
 })
 export class SpinnerComponent {
 	@Input() display: string = "block"
+	@Input() classes: string
 }

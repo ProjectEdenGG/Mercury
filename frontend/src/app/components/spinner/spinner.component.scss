@@ -15,7 +15,7 @@
 	animation-timing-function: map.get($timings, $function);
 }
 
-main {
+div {
 	font-size: calc(14px + 16 * (100vw - 280px) / 3560);
 }
 

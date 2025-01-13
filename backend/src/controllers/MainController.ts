@@ -1,16 +1,16 @@
 import { Controller, Get } from "@tsed/common"
-import * as si from 'systeminformation'
 import * as os from 'node:os'
-import axios from 'axios'
-import { ConfigService } from "../service/ConfigService"
-import * as fs from 'node:fs'
-import path from 'node:path'
+import { SystemService } from '../service/SystemService';
+import { BackupsService } from '../service/BackupsService';
+import { GitHubService } from '../service/GitHubService';
 
 @Controller('/api')
 export class MainController {
 
 	constructor(
-		public configService: ConfigService
+		public systemService: SystemService,
+		public backupsService: BackupsService,
+		public githubService: GitHubService,
 	) { }
 
 	@Get('/timestamp')
@@ -21,99 +21,32 @@ export class MainController {
 	@Get('/status')
 	async status() {
 		return {
-			server: {
-				loadAverage: os.loadavg(),
-				uptime: os.uptime(),
-				memory: {
-					total: os.totalmem(),
-					free: os.freemem(),
-					used: os.totalmem() - os.freemem()
-				},
-				diskspace: await this.diskspace()
+			diskspace: await this.systemService.diskspace(),
+			loadAverage: os.loadavg(),
+			uptime: Number(os.uptime().toFixed(0)),
+			memory: {
+				total: os.totalmem(),
+				free: os.freemem(),
+				used: os.totalmem() - os.freemem(),
+				percentage: ((os.totalmem() - os.freemem()) / os.totalmem()) * 100,
 			},
-			backups: {
-				worlds: this.worlds(),
-				git: await this.git(),
-				databases: this.databases()
-			}
+			cpu: this.systemService.cpuUsage
 		}
 	}
 
-	private diskspace() {
-		return new Promise<any>(async resolve => {
-			si.fsSize(os.platform() === 'win32' ? 'C:' : '/dev/md2').then((result: any) => {
-				resolve({
-					total: result[0].size,
-					used: result[0].used,
-					free: result[0].available
-				})
-			})
-		});
-	}
-
-	private worlds() {
-		return JSON.parse(fs.readFileSync('/home/minecraft/servers/backups/smp/worlds.json').toString());
-	}
-
-	private async git() {
-		let git: any = {}
-		let repos: { [key: string]: string } = {
-			server: 'ProjectEdenGG/Server',
-			storage: 'ProjectEdenGG/Server-Storage',
+	@Get('/backups')
+	async backups() {
+		return {
+			worlds: this.backupsService.worlds(),
+			git: await this.backupsService.git(),
+			databases: this.backupsService.databases()
 		}
-
-		for (let repo of Object.keys(repos)) {
-			let commits = await this.github(`https://api.github.com/repos/${repos[repo]}/commits`)
-			let commitsDetail = await Promise.all(commits.data.map((commit: any) => this.github(commit.url)))
-			git[repo] = commitsDetail
-				.filter(response => response.data.stats.total !== 0)
-				.map(response => {
-					response.data.stats.sha = response.data.sha
-					response.data.stats.files = response.data.files.length
-					response.data.stats.timestamp = response.data.commit.author.date
-					return response.data.stats
-				})
-		}
-
-		return git
-	}
-
-	private databases() {
-		let directoryPath: string = '/home/minecraft/servers/backups/smp/databases'
-
-		let databases: any = {
-			mysql: [],
-			mongodb: []
-		}
-
-		fs.readdirSync(directoryPath).forEach(file => {
-			let stats = fs.statSync(path.join(directoryPath, file))
-			if (stats.isFile()) {
-				let type: string = Object.keys(databases).filter(key => file.startsWith(key))[0] ?? 'other';
-				(databases[type] ??= []).push({
-					size: stats.size,
-					timestamp: stats.mtime,
-				})
-			}
-		})
-
-		return databases
-	}
-
-	private async github(url: string) {
-		return await axios.get(url, {
-			headers: {
-				'Accept': 'application/vnd.github+json',
-				'Authorization': `Bearer ${this.configService.secrets.github.token}`,
-				'X-GitHub-Api-Version': '2022-11-28'
-			}
-		})
 	}
 
 	@Get('/showcase')
 	async showcase() {
-		let tree = await this.github('https://api.github.com/repos/ProjectEdenGG/CMS/git/trees/master?recursive=true')
-		let config = await this.github('https://raw.githubusercontent.com/ProjectEdenGG/CMS/master/showcase/config.json')
+		let tree = await this.githubService.get('https://api.github.com/repos/ProjectEdenGG/CMS/git/trees/master?recursive=true')
+		let config = await this.githubService.get('https://raw.githubusercontent.com/ProjectEdenGG/CMS/master/showcase/config.json')
 
 		let data: any = []
 

@@ -1,0 +1,14 @@
+.progress-bar-container {
+	width: 100%;
+	height: 30px;
+	background-color: rgba(98, 98, 100, 0.65);
+	overflow: hidden;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+	height: 100%;
+	width: 0%;
+	background-color: #4caf50;
+	transition: width .5s ease;
+}

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StatusComponent } from './status.component';
 import { StatusRoutingModule } from './status-routing.module';
 import { SpinnerModule } from "../../components/spinner/spinner.module";
+import { ProgressBarModule } from '../../components/progress-bar/progress-bar.module';
 
 @NgModule({
 	declarations: [StatusComponent],
@@ -10,6 +11,7 @@ import { SpinnerModule } from "../../components/spinner/spinner.module";
 		CommonModule,
 		StatusRoutingModule,
 		SpinnerModule,
+		ProgressBarModule,
 	]
 })
 export class StatusModule {
