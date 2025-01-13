@@ -9,7 +9,7 @@
 					<div class="col-12 col-xl-6 pr-xl-3">
 						<div class="d-flex justify-content-between">
 							<span class="fw-bold">Uptime</span>
-							{{ utils.formatTimespan(data.status.uptime) }}
+							{{ utils.formatTimespan(data.status.uptime, responsiveUtil.eq('xs') ? 'short' : 'long') }}
 						</div>
 					</div>
 					<div class="col-12 col-xl-6 mt-3 mt-xl-0 pl-xl-3">

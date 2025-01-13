@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { Utils } from '../../utils/utils';
 import { combineLatest } from 'rxjs';
+import { ResponsiveUtil } from '../../utils/responsive-util.component';
 
 @Component({
 	selector: 'app-status',
@@ -20,6 +21,7 @@ export class StatusComponent {
 	constructor(
 		public utils: Utils,
 		public apiService: ApiService,
+		public responsiveUtil: ResponsiveUtil,
 	) {
 		combineLatest([this.apiService.getServerStatus(), this.apiService.getBackups()]).subscribe({
 			next: result => {

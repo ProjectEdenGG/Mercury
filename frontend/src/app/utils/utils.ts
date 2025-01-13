@@ -16,7 +16,7 @@ export class Utils {
 		return string.toLowerCase().replace(' ', '-');
 	}
 
-	formatTimespan(seconds: number) {
+	formatTimespan(seconds: number, format: 'long' | 'short' = 'long'): string {
 		let days = Math.floor(seconds / (24 * 60 * 60));
 		seconds %= 24 * 60 * 60;
 
@@ -26,14 +26,21 @@ export class Utils {
 		let minutes = Math.floor(seconds / 60);
 		seconds = Math.floor(seconds % 60);
 
-		let format = (value: number, label: string) =>
-			value == 0 ? '' : `${value} ${label}${value == 1 ? '' : 's'}, `;
+		let formatter = (value: number, label: string) => {
+			let finalLabel: string;
+			if (format == 'long')
+				finalLabel = ` ${label}${value == 1 ? '' : 's'}, `;
+			else
+				finalLabel = label.substring(0, 1) + ' ';
+
+			return value == 0 ? '' : `${value}${finalLabel}`;
+		};
 
 		return (
-			format(days, 'day') +
-			format(hours, 'hour') +
-			format(minutes, 'minute') +
-			format(seconds, 'second')
+			formatter(days, 'day') +
+			formatter(hours, 'hour') +
+			formatter(minutes, 'minute') +
+			formatter(seconds, 'second')
 		).replace(/, (?!.*, )/, "")
 	}
 
