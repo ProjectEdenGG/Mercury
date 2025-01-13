@@ -5,13 +5,26 @@ Project Eden's website
 ### TODO
 
 - Status
-	- Show backups
-		- git/Server and git/Server-Storage
-		- Worlds (rdiff)
-		- Mongo
-		- MySQL
+	- Minecraft server
+		- Uptime
+		- MSPT
+		- RAM
+		- Players
+		- /nexus stats
+		- Players joined
+	- System info
+		- Processor
+		- Cores/Threads
+		- Frequency
+		- RAM
+		- RAID
+		- OS
+		- Location
 - Vote
-	- Vote party info
+	- Top voter tables
+		- Weekly
+		- Monthly
+		- All time
 - Titan
 	- Description
 	- Link
