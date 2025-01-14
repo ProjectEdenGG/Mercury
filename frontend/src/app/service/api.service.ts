@@ -28,8 +28,8 @@ export class ApiService {
 		return this.http.get('/nexus/status');
 	}
 
-	getVoteSites() {
-		return this.http.get('/nexus/votes/sites');
+	getVoteData() {
+		return this.http.get('/nexus/votes');
 	}
 
 	getStaff() {

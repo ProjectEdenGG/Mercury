@@ -8,15 +8,16 @@ import { ApiService } from '../../service/api.service';
 	standalone: false,
 })
 export class VoteComponent {
-	sites: any
+	voteData: any
 	loading: boolean = true
 
 	constructor(
 		public apiService: ApiService,
 	) {
-		this.apiService.getVoteSites().subscribe({
+		this.apiService.getVoteData().subscribe({
 			next: result => {
-				this.sites = result;
+				this.voteData = result;
+				console.log('voteData', this.voteData)
 				this.loading = false;
 			},
 			error: ex => {

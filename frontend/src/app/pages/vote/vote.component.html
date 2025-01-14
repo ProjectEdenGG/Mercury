@@ -91,7 +91,7 @@
 			<h2>Links</h2>
 			<spinner *ngIf="loading" display="grid"></spinner>
 			<ng-container *ngIf="!loading">
-				<div *ngFor="let link of sites | keyvalue" class="btn-group d-block vote-button-group mb-2">
+				<div *ngFor="let link of voteData.sites | keyvalue" class="btn-group d-block vote-button-group mb-2">
 					<a [href]="link.value" hoverBrightness [down]="30" target="_blank" role="button" class="btn btn-primary">Vote!&nbsp;</a>
 					<button class="btn border-0 vote-button"><strong>{{link.key}}</strong></button>
 				</div>
