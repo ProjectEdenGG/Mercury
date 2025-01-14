@@ -11,6 +11,8 @@ export class VoteComponent {
 	voteData: any
 	loading: boolean = true
 
+	headers = { name: { name: 'Name' }, count: { name: 'Votes', classes: 'text-end' } };
+
 	constructor(
 		public apiService: ApiService,
 	) {

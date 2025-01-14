@@ -4,6 +4,7 @@ import { VoteComponent } from './vote.component';
 import { VoteRoutingModule } from './vote-routing.module';
 import { HoverBrightnessDirective } from "../../directive/hover-brightness/hover-brightness.directive";
 import { SpinnerModule } from "../../components/spinner/spinner.module";
+import { PaginatedTableModule } from "../../components/paginated-table/paginated-table.module";
 
 @NgModule({
 	declarations: [VoteComponent],
@@ -12,6 +13,7 @@ import { SpinnerModule } from "../../components/spinner/spinner.module";
 		VoteRoutingModule,
 		HoverBrightnessDirective,
 		SpinnerModule,
+		PaginatedTableModule,
 	]
 })
 export class VoteModule {

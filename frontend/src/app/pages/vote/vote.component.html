@@ -4,7 +4,7 @@
 			<h1>Voting</h1>
 			<div class="spectrum"></div>
 		</div>
-		<div class="col-12 col-md-7 col-lg-8 order-2 order-md-1 color-white mt-3 mt-md-0 pr-lg-4">
+		<div class="col-12 col-md-7 col-lg-8 col-xl-9 order-2 order-md-1 color-white mt-3 mt-md-0 pr-lg-4">
 			<div class="mb-4">
 				<h2>Why vote?</h2>
 				<hr>
@@ -87,7 +87,7 @@
 				<p class="font-rem-0_75 mt-3 color-gray">* Everything is subject to change at the discretion of the staff.</p>
 			</div>
 		</div>
-		<div class="col-12 col-md-5 col-lg-4 order-1 order-md-2">
+		<div class="col-12 col-md-5 col-lg-4 col-xl-3 order-1 order-md-2">
 			<h2>Links</h2>
 			<spinner *ngIf="loading" display="grid"></spinner>
 			<ng-container *ngIf="!loading">
@@ -96,6 +96,17 @@
 					<button class="btn border-0 vote-button"><strong>{{link.key}}</strong></button>
 				</div>
 			</ng-container>
+			<hr class="my-4">
+			<h2 class="mb-3">Top Voters</h2>
+			<div class="mb-5">
+				<paginated-table title="Vote Party" [headers]="headers" [rows]="voteData.topVoters.voteParty"></paginated-table>
+			</div>
+			<div class="mb-5">
+				<paginated-table title="Monthly" [headers]="headers" [rows]="voteData.topVoters.monthly"></paginated-table>
+			</div>
+			<div class="mb-5">
+				<paginated-table title="All Time" [headers]="headers" [rows]="voteData.topVoters.allTime"></paginated-table>
+			</div>
 		</div>
 	</div>
 </div>

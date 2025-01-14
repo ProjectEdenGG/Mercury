@@ -9,7 +9,7 @@ import { Utils } from '../../utils/utils';
 })
 export class PaginatedTableComponent {
 	@Input() title: string
-	@Input() headers: { [key: string]: string } = {}
+	@Input() headers: { [key: string]: any } = {}
 	@Input() rows: any[]
 	@Input() perPage: number = 5
 
