@@ -29,6 +29,7 @@ export class StatusComponent {
 				this.data.status = result[0];
 				this.data.backups = result[1];
 				console.log('data', this.data);
+				this.formatData();
 				this.loading = false;
 				this.intervalIds.push(setInterval(() => ++this.data.status.uptime, 1000))
 			},
@@ -49,6 +50,25 @@ export class StatusComponent {
 			})
 		}, 5000))
 
+	}
+
+	private formatData() {
+		Object.values(this.data.backups.databases).forEach((backups: any) => this.formatTimestamps(backups))
+		Object.values(this.data.backups.git).forEach((backups: any) => this.formatTimestamps(backups))
+		this.formatTimestamps(this.data.backups.worlds);
+
+		Object.values(this.data.backups.databases).forEach((backups: any) => {
+			for (let backup of backups) {
+				backup.size = (backup.size / 1024 ** 2).toFixed(2) + " MB";
+			}
+		})
+	}
+
+	formatTimestamps(backups: any[]) {
+		for (let backup of backups) {
+			// @ts-ignore
+			backup.timestamp = new Date(backup.timestamp).toLocaleString() + " (" + this.utils.formatTimespan((Date.now() - new Date(backup.timestamp)) / 1000, 'short') + " ago)";
+		}
 	}
 
 	ngOnDestroy() {
