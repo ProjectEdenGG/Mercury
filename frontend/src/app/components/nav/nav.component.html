@@ -45,7 +45,7 @@
 <modal #loginModal>
 	<div class="container color-white">
 		<div class="row">
-			<div class="col-12 col-lg-8 offset-lg-2 pt-3 px-md-5 pt-md-10 pb-md-{{loginFormMessage ? 5 : 10}}">
+			<div class="col-12 col-lg-8 offset-lg-2 pt-3 px-md-2 pt-md-7 pb-md-{{loginFormMessage ? 2 : 6}}">
 				<div class="text-center">
 					<h1>Log In</h1>
 				</div>
@@ -65,7 +65,7 @@
 	</div>
 </modal>
 
-<modal #mapModal>
+<modal #mapModal [closeButton]="false">
 	<div class="d-flex justify-content-end">
 		<button class="no-style float-right font-rem-1_5 mr-3" (click)="newTab()">
 			<i class="bi bi-box-arrow-up-right"></i>

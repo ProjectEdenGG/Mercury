@@ -1,0 +1,13 @@
+.close-container {
+	margin-right: .25rem;
+	position: absolute;
+	right: 0;
+}
+
+.close {
+	transition: transform .2s ease;
+
+	&:hover {
+		transform: scale(1.4);
+	}
+}

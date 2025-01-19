@@ -1,3 +1,8 @@
 <ng-template #modal let-modal>
+	<div *ngIf="closeButton" class="close-container">
+		<button class="no-style close" (click)="close()" hoverBrightness [down]="50">
+			<i class="bi bi-x font-rem-2"></i>
+		</button>
+	</div>
 	<ng-content></ng-content>
 </ng-template>

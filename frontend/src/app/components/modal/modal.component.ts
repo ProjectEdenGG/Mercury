@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,6 +8,8 @@ import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstr
 	standalone: false,
 })
 export class ModalComponent {
+	@Input() closeButton: boolean = true
+
 	@ViewChild('modal') modal: TemplateRef<any>;
 	private modalRef: NgbModalRef = null;
 

@@ -28,7 +28,7 @@
 						<span class="mt-1 rank-tag background-color-{{utils.asCssClass(member.rank)}}">{{ member.rank }}</span>
 						<span *ngIf="member.countryCode" class="ml-1 font-rem-2_5" style="vertical-align: -0.075em;" [innerHTML]="utils.flagOf(member.countryCode) | twemoji"></span>
 					</div>
-					<hr>
+					<hr class="mt-1">
 					<p *ngIf="member.promotionDate" class="mb-0">
 						<span class="fw-bold">Staff since:</span> {{ member.promotionDate }}
 					</p>
