@@ -1,7 +1,7 @@
 <ng-template #applyButton>
 	<ng-container *ngIf="!this.utils.nerd.rank">
 		<a
-			(click)="this.utils.openLoginModal()"
+			(click)="this.utils.openLoginModal({ centered: this.responsiveUtil.gte('md') })"
 			hoverBrightness [up]="30"
 			class="py-1 px-2 rounded fw-medium font-rem-1_25 w-100 btn btn-primary"
 		>
@@ -39,7 +39,7 @@
 		<ng-content></ng-content>
 	</p>
 	<p *ngIf="requiredRank" class="mb-2">
-		You must be <span [ngClass]="'color-' + requiredRank">{{utils.camelCase(requiredRank)}}</span> rank or above to apply
+		You must be <span [ngClass]="'color-' + requiredRank">{{ utils.camelCase(requiredRank) }}</span> rank or above to apply
 	</p>
 	<div class="mt-3 d-flex d-md-none text-center">
 		<ng-container *ngTemplateOutlet="applyButton"></ng-container>

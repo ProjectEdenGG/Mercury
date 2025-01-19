@@ -46,7 +46,12 @@ export class NavComponent {
 			open ? classList.add('active') : classList.remove('active');
 		})
 
-		this.utils.openLoginModal$.subscribe(() => this.loginModal.open())
+		this.utils.openLoginModal$.subscribe({
+			next: options => {
+				if (options != null)
+					this.loginModal.open(options)
+			}
+		})
 	}
 
 	toggleNav() {

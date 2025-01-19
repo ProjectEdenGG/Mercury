@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 export type Nerd = {
 	uuid: string;
@@ -12,10 +13,10 @@ export type Nerd = {
 export class Utils {
 	originalOrder = () => 0;
 
-	public openLoginModal$: Subject<void> = new Subject();
+	public openLoginModal$: BehaviorSubject<NgbModalOptions> = new BehaviorSubject(null);
 
-	public openLoginModal() {
-		this.openLoginModal$.next()
+	public openLoginModal(options?: NgbModalOptions) {
+		this.openLoginModal$.next(options ?? {})
 	}
 
 	public get nerd() {
