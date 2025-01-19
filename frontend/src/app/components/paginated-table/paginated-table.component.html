@@ -4,6 +4,9 @@
 		<div class="page-item user-select-none cursor-pointer" (click)="firstPage() ? null : changePage(currentPage - 1)">
 			<a [class.disabled]="firstPage()" class="page-link">&laquo;</a>
 		</div>
+		<div class="page-item user-select-none cursor-pointer">
+			<a disabled class="page-link">{{ currentPage }}</a>
+		</div>
 		<div class="page-item user-select-none cursor-pointer" (click)="lastPage() ? null : changePage(currentPage + 1)">
 			<a [class.disabled]="lastPage()" class="page-link">&raquo;</a>
 		</div>
@@ -19,8 +22,8 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let row of paginatedRows">
-			<td *ngFor="let header of headers | keyvalue:utils.originalOrder" [ngClass]="header.value?.classes" >
-				<span [attr.data-tooltip]="row[header.key].tooltip">{{ row[header.key]?.text ?? row[header.key]  }}</span>
+			<td *ngFor="let header of headers | keyvalue:utils.originalOrder" [ngClass]="header.value?.classes">
+				<span [attr.data-tooltip]="row[header.key].tooltip">{{ row[header.key]?.text ?? row[header.key] }}</span>
 			</td>
 		</tr>
 	</tbody>
