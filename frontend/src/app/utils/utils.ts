@@ -35,7 +35,7 @@ export class Utils {
 		return string.toLowerCase().replaceAll(' ', '-');
 	}
 
-	formatTimespan(seconds: number, format: 'long' | 'short' = 'long'): string {
+	formatTimespan(seconds: number, format: 'long' | 'short' = 'long', exclude?: string[]): string {
 		let days = Math.floor(seconds / (24 * 60 * 60));
 		seconds %= 24 * 60 * 60;
 
@@ -46,6 +46,9 @@ export class Utils {
 		seconds = Math.floor(seconds % 60);
 
 		let formatter = (value: number, label: string) => {
+			if (exclude?.includes(label))
+				return ''
+
 			let finalLabel: string;
 			if (format == 'long')
 				finalLabel = ` ${label}${value == 1 ? '' : 's'}, `;

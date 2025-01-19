@@ -19,8 +19,8 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let row of paginatedRows">
-			<td *ngFor="let header of headers | keyvalue:utils.originalOrder" [ngClass]="header.value?.classes">
-				{{ row[header.key] }}
+			<td *ngFor="let header of headers | keyvalue:utils.originalOrder" [ngClass]="header.value?.classes" >
+				<span [attr.data-tooltip]="row[header.key].tooltip">{{ row[header.key]?.text ?? row[header.key]  }}</span>
 			</td>
 		</tr>
 	</tbody>

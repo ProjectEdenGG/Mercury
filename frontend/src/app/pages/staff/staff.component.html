@@ -17,7 +17,7 @@
 			<p class="text-danger">Could not load staff list</p>
 		</ng-container>
 
-		<ng-container *ngIf="staff.length > 0">
+		<ng-container *ngIf="!loading && staff.length > 0">
 			<div *ngFor="let member of staff" class="col-12 col-lg-6 pb-5 d-flex">
 				<div style="min-width: 120px;">
 					<img class="skin-image d-none" src="https://crafatar.com/renders/body/{{member.uuidNoDashes}}?overlay" (load)="fadeIn($event)">

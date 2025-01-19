@@ -3,7 +3,7 @@ import { ApiService } from '../../service/api.service';
 import { Utils } from '../../utils/utils';
 import { combineLatest } from 'rxjs';
 import { ResponsiveUtil } from '../../utils/responsive-util.component';
-import * as datefns from 'date-fns';
+import { MercuryComponent } from '../../lifecycle/MercuryComponent';
 
 @Component({
 	selector: 'app-status',
@@ -11,11 +11,9 @@ import * as datefns from 'date-fns';
 	styleUrl: './status.component.scss',
 	standalone: false,
 })
-export class StatusComponent {
+export class StatusComponent extends MercuryComponent {
 	data: any = {}
 	loading: boolean = true
-
-	intervalIds: any[] = [];
 
 	GB: number = 1024 ** 3;
 
@@ -24,6 +22,8 @@ export class StatusComponent {
 		public apiService: ApiService,
 		public responsiveUtil: ResponsiveUtil,
 	) {
+		super()
+
 		combineLatest([this.apiService.getServerStatus(), this.apiService.getBackups()]).subscribe({
 			next: result => {
 				this.data.status = result[0];
@@ -31,7 +31,7 @@ export class StatusComponent {
 				console.log('data', this.data);
 				this.formatData();
 				this.loading = false;
-				this.intervalIds.push(setInterval(() => ++this.data.status.uptime, 1000))
+				this.repeat(1000, () => ++this.data.status.uptime)
 			},
 			error: ex => {
 				console.error(ex)
@@ -39,7 +39,7 @@ export class StatusComponent {
 			}
 		})
 
-		this.intervalIds.push(setInterval(() => {
+		this.repeat(5000, () => {
 			this.apiService.getServerStatus().subscribe({
 				next: result => {
 					this.data.status = result;
@@ -48,8 +48,7 @@ export class StatusComponent {
 					console.error(ex)
 				}
 			})
-		}, 5000))
-
+		})
 	}
 
 	private formatData() {
@@ -66,20 +65,15 @@ export class StatusComponent {
 
 	formatTimestamps(backups: any[]) {
 		for (let backup of backups) {
-			// @ts-ignore
-			backup.timestamp = new Date(backup.timestamp).toLocaleString() + " (" + this.utils.formatTimespan((Date.now() - new Date(backup.timestamp)) / 1000, 'short') + " ago)";
+			let timestamp: string = backup.timestamp;
+			backup.timestamp = {}
+			backup.timestamp.tooltip = new Date(timestamp).toLocaleString()
+			let ago = this.utils.formatTimespan((Date.now() - new Date(timestamp).valueOf()) / 1000, 'short', ['second', 'minute']);
+			backup.timestamp.text = ago ? ago + ' ago' : 'now'
 		}
-	}
-
-	ngOnDestroy() {
-		this.intervalIds.forEach(id => clearInterval(id))
 	}
 
 	loadAverage() {
 		return this.data.status.loadAverage.map((average: number) => average.toFixed(2))
-	}
-
-	date(timestamp: any, format?: string) {
-		return datefns.format(new Date(timestamp), format)
 	}
 }

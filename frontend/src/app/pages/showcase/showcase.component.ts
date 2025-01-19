@@ -3,6 +3,7 @@ import { ApiService } from '../../service/api.service';
 import { Utils } from '../../utils/utils';
 import { ActivatedRoute, NavigationEnd, NavigationSkipped, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { MercuryComponent } from '../../lifecycle/MercuryComponent';
 
 @Component({
 	selector: 'app-showcase',
@@ -10,7 +11,7 @@ import { Location } from '@angular/common';
 	styleUrl: './showcase.component.scss',
 	standalone: false,
 })
-export class ShowcaseComponent {
+export class ShowcaseComponent extends MercuryComponent {
 	showcase: any = []
 	tags: string[] = []
 	loading: boolean = true
@@ -26,6 +27,8 @@ export class ShowcaseComponent {
 		public route: ActivatedRoute,
 		public apiService: ApiService,
 	) {
+		super()
+
 		this.apiService.getShowcase().subscribe({
 			next: result => {
 				this.showcase = result

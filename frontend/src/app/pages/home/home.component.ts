@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../service/api.service';
+import { MercuryComponent } from '../../lifecycle/MercuryComponent';
 
 @Component({
 	selector: 'app-home',
@@ -7,7 +8,7 @@ import { ApiService } from '../../service/api.service';
 	styleUrl: './home.component.scss',
 	standalone: false,
 })
-export class HomeComponent {
+export class HomeComponent extends MercuryComponent {
 	ip = 'projecteden.gg'
 
 	status: any
@@ -17,6 +18,8 @@ export class HomeComponent {
 	constructor(
 		public apiService: ApiService,
 	) {
+		super()
+
 		this.apiService.getMinecraftServerStatus().subscribe({
 			next: result => {
 				this.status = result;

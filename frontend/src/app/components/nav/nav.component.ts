@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ModalComponent } from '../modal/modal.component';
@@ -70,9 +70,7 @@ export class NavComponent {
 			console.log("invalid", this.loginForm.value)
 		} else {
 			this.loginFormLoading = true;
-			let username = this.loginForm.value.username
-			console.log(username)
-			this.apiService.getNerd(username).subscribe({
+			this.apiService.getNerd(this.loginForm.value.username).subscribe({
 				next: (response: any) => {
 					this.utils.nerd = response as Nerd;
 					this.loginFormLoading = false;

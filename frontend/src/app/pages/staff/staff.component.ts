@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { Utils } from '../../utils/utils';
+import { MercuryComponent } from '../../lifecycle/MercuryComponent';
 
 @Component({
 	selector: 'app-staff',
@@ -8,7 +9,7 @@ import { Utils } from '../../utils/utils';
 	styleUrl: './staff.component.scss',
 	standalone: false,
 })
-export class StaffComponent {
+export class StaffComponent extends MercuryComponent {
 	staff: any
 	loading: boolean = true
 
@@ -16,6 +17,8 @@ export class StaffComponent {
 		public utils: Utils,
 		public apiService: ApiService,
 	) {
+		super()
+
 		this.apiService.getStaff().subscribe({
 			next: result => {
 				this.staff = result;

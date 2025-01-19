@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MercuryComponent } from '../../lifecycle/MercuryComponent';
 
 @Component({
 	selector: 'app-applications',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
 	styleUrl: './applications.component.scss',
 	standalone: false,
 })
-export class ApplicationsComponent { }
+export class ApplicationsComponent extends MercuryComponent {
+
+	constructor() {
+		super()
+	}
+
+}
