@@ -32,4 +32,6 @@ Project Eden's website
 	- etc
 - Showcase
 	- Full screen image
-- Diversity
+- Accounts on mobile
+- Diversity on mobile
+- More mobile testing
