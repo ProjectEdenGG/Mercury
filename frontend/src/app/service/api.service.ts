@@ -39,4 +39,8 @@ export class ApiService {
 	getRanks() {
 		return this.http.get('/nexus/ranks');
 	}
+
+	getNerd(username: string) {
+		return this.http.get(`/nexus/nerd/${username}`);
+	}
 }

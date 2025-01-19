@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../service/api.service';
+import { Utils } from '../../utils/utils';
 
 @Component({
 	selector: 'app-vote',
@@ -14,6 +15,7 @@ export class VoteComponent {
 	headers = { name: { name: 'Name' }, count: { name: 'Votes', classes: 'text-end' } };
 
 	constructor(
+		public utils: Utils,
 		public apiService: ApiService,
 	) {
 		this.apiService.getVoteData().subscribe({
@@ -29,4 +31,7 @@ export class VoteComponent {
 		})
 	}
 
+	replaceUsername(value: any) {
+		return value.replaceAll("{{USERNAME}}", this.utils.nerd.username)
+	}
 }

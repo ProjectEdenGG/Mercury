@@ -88,25 +88,25 @@
 			</div>
 		</div>
 		<div class="col-12 col-md-5 col-lg-4 col-xl-3 order-1 order-md-2">
-			<h2>Links</h2>
 			<spinner *ngIf="loading" display="grid"></spinner>
 			<ng-container *ngIf="!loading">
+				<h2>Links</h2>
 				<div *ngFor="let link of voteData.sites | keyvalue" class="btn-group d-block vote-button-group mb-2">
-					<a [href]="link.value" hoverBrightness [down]="30" target="_blank" role="button" class="btn btn-primary">Vote!&nbsp;</a>
+					<a [href]="replaceUsername(link.value)" hoverBrightness [down]="30" target="_blank" role="button" class="btn btn-primary">Vote!&nbsp;</a>
 					<button class="btn border-0 vote-button"><strong>{{link.key}}</strong></button>
 				</div>
+				<hr class="my-4">
+				<h2 class="mb-3">Top Voters</h2>
+				<div class="mb-5">
+					<paginated-table title="Vote Party" [headers]="headers" [rows]="voteData.topVoters.voteParty"></paginated-table>
+				</div>
+				<div class="mb-5">
+					<paginated-table title="Monthly" [headers]="headers" [rows]="voteData.topVoters.monthly"></paginated-table>
+				</div>
+				<div class="mb-5">
+					<paginated-table title="All Time" [headers]="headers" [rows]="voteData.topVoters.allTime"></paginated-table>
+				</div>
 			</ng-container>
-			<hr class="my-4">
-			<h2 class="mb-3">Top Voters</h2>
-			<div class="mb-5">
-				<paginated-table title="Vote Party" [headers]="headers" [rows]="voteData.topVoters.voteParty"></paginated-table>
-			</div>
-			<div class="mb-5">
-				<paginated-table title="Monthly" [headers]="headers" [rows]="voteData.topVoters.monthly"></paginated-table>
-			</div>
-			<div class="mb-5">
-				<paginated-table title="All Time" [headers]="headers" [rows]="voteData.topVoters.allTime"></paginated-table>
-			</div>
 		</div>
 	</div>
 </div>

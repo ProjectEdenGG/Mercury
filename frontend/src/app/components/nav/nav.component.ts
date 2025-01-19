@@ -3,6 +3,10 @@ import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ModalComponent } from '../modal/modal.component';
 import { ResponsiveUtil } from '../../utils/responsive-util.component';
+import { Nerd, Utils } from '../../utils/utils';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../../service/api.service';
+import { FormMessage } from '../../utils/form-util';
 
 @Component({
 	selector: 'app-nav',
@@ -12,12 +16,22 @@ import { ResponsiveUtil } from '../../utils/responsive-util.component';
 })
 export class NavComponent {
 	@ViewChild('nav') nav: ElementRef;
+	@ViewChild('loginModal') loginModal: ModalComponent;
 	@ViewChild('mapModal') mapModal: ModalComponent;
 
 	public open$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
+	public loginFormLoading: boolean;
+	public loginFormMessage: FormMessage;
+
+	public loginForm = new FormGroup({
+		username: new FormControl('', [Validators.required, Validators.maxLength(16)]),
+	})
+
 	constructor(
+		public utils: Utils,
 		public router: Router,
+		public apiService: ApiService,
 		public responsiveUtil: ResponsiveUtil,
 	) {
 		this.router.events.subscribe(e => {
@@ -46,5 +60,36 @@ export class NavComponent {
 
 	newTab() {
 		window.open('https://map.projecteden.gg', '_blank')
+	}
+
+	login() {
+		this.loginFormMessage = null
+		this.loginFormLoading = false
+
+		if (this.loginForm.invalid) {
+			console.log("invalid", this.loginForm.value)
+		} else {
+			this.loginFormLoading = true;
+			let username = this.loginForm.value.username
+			console.log(username)
+			this.apiService.getNerd(username).subscribe({
+				next: (response: any) => {
+					this.utils.nerd = response as Nerd;
+					this.loginFormLoading = false;
+					this.loginModal.close();
+				},
+				error: ex => {
+					console.error(ex);
+					this.loginFormLoading = false;
+					this.loginFormMessage = { type: 'danger', message: 'Player not found' }
+					this.loginForm.controls.username.setErrors({"username": false})
+				}
+			})
+		}
+	}
+
+	logout() {
+		this.utils.nerd = null
+		this.loginForm.controls.username.patchValue('')
 	}
 }

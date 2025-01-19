@@ -45,11 +45,16 @@ nav {
 	}
 }
 
-.nav-item a {
+.nav-item {
+	width: 100%;
+}
+
+.nav-item span,
+.nav-item a, {
+	display: block;
+	padding: 8px 12px;
 	text-decoration: none;
 	color: #fff;
-	padding: 8px 12px;
-	display: block;
 	transition: background-color 0.3s ease;
 }
 
@@ -83,14 +88,22 @@ nav {
 	/* Dropdown Menu Styling */
 	.nav-item-dropdown-menu {
 		position: absolute;
-		top: 45px;
-		left: 0;
 		width: max-content;
 		background-color: #00000022;
 		backdrop-filter: blur(15px);
 		border-radius: 4px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 		overflow: hidden;
+
+		&.right {
+			left: 0;
+			top: 45px;
+		}
+
+		&.left {
+			right: 0;
+			top: 66px;
+		}
 
 		/* Initially hidden */
 		opacity: 0;
@@ -102,7 +115,8 @@ nav {
 	}
 }
 
-.nav-item-dropdown-menu a {
+.nav-item-dropdown-menu a,
+.nav-item-dropdown-menu span {
 	color: #fff;
 	text-decoration: none;
 

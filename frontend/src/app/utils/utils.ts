@@ -1,7 +1,24 @@
 import { Injectable } from '@angular/core';
 
+export type Nerd = {
+	uuid: string;
+	username: string;
+	nickname: string;
+}
+
 @Injectable({providedIn: 'root'})
 export class Utils {
+
+	public get nerd() {
+		return JSON.parse(localStorage.getItem('nerd') ?? '{}');
+	}
+
+	public set nerd(nerd: Nerd) {
+		if (nerd == null)
+			localStorage.removeItem('nerd')
+		else
+			localStorage.setItem('nerd', JSON.stringify(nerd))
+	}
 
 	originalOrder = () => 0;
 

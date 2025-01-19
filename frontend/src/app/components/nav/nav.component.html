@@ -1,32 +1,70 @@
-<nav>
-	<button class="nav-toggle" (click)="toggleNav()">
-		<i class="bi bi-{{open$.value ? 'x' : 'list'}}"></i>
-	</button>
-	<ul class="nav-list flex-column flex-md-row" #nav>
-		<li class="text-center text-md-left mb-2 mb-md-0">
-			<a routerLink="/home">
-				<img class="logo" src="assets/images/logo_small.png">
-			</a>
-		</li>
-		<li class="nav-item"><a target="_blank" href="https://discord.projecteden.gg">Discord</a></li>
-		<li class="nav-item"><a routerLink="/vote">Vote</a></li>
-		<li class="nav-item"><a target="_blank" href="https://wiki.projecteden.gg">Wiki</a></li>
-		<li class="nav-item"><a target="_blank" href="https://store.projecteden.gg">Store</a></li>
-		<li class="nav-item"><a (click)="map()">Map</a></li>
-		<li class="nav-item"><a routerLink="/titan">Titan</a></li>
-		<li class="nav-item nav-item-dropdown">
-			<a class="d-none d-md-block" href="#"><i class="bi bi-caret-down-fill"></i></a>
-			<ul class="nav-item-dropdown-menu">
-				<li><a routerLink="/status">Status</a></li>
-				<li><a routerLink="/applications">Applications</a></li>
-				<li><a target="_blank" href="https://projecteden.gg/appeal">Ban Appeal</a></li>
-				<li><a routerLink="/staff">Staff</a></li>
-				<li><a routerLink="/showcase">Build Showcase</a></li>
-				<li><a routerLink="/diversity">Diversity</a></li>
+<nav class="d-flex justify-content-between">
+	<div>
+		<button class="nav-toggle" (click)="toggleNav()">
+			<i class="bi bi-{{open$.value ? 'x' : 'list'}}"></i>
+		</button>
+		<ul class="nav-list flex-column flex-md-row" #nav>
+			<li class="text-center text-md-left mb-2 mb-md-0">
+				<a routerLink="/home">
+					<img class="logo" src="assets/images/logo_small.png">
+				</a>
+			</li>
+			<li class="nav-item"><a target="_blank" href="https://discord.projecteden.gg">Discord</a></li>
+			<li class="nav-item"><a routerLink="/vote">Vote</a></li>
+			<li class="nav-item"><a target="_blank" href="https://wiki.projecteden.gg">Wiki</a></li>
+			<li class="nav-item"><a target="_blank" href="https://store.projecteden.gg">Store</a></li>
+			<li class="nav-item"><a (click)="map()">Map</a></li>
+			<li class="nav-item"><a routerLink="/titan">Titan</a></li>
+			<li class="nav-item nav-item-dropdown">
+				<a class="d-none d-md-block" href="#"><i class="bi bi-caret-down-fill"></i></a>
+				<ul class="nav-item-dropdown-menu right">
+					<li><a routerLink="/status">Status</a></li>
+					<li><a routerLink="/applications">Applications</a></li>
+					<li><a target="_blank" href="https://projecteden.gg/appeal">Ban Appeal</a></li>
+					<li><a routerLink="/staff">Staff</a></li>
+					<li><a routerLink="/showcase">Build Showcase</a></li>
+					<li><a routerLink="/diversity">Diversity</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<ul class="nav-list flex-column flex-md-row">
+		<li *ngIf="utils.nerd.uuid" class="nav-item nav-item-dropdown me-0">
+			<img class="center" style="border-radius: 12px; height: 56px" src="https://crafatar.com/avatars/{{ utils.nerd.uuid }}?overlay">
+			<ul class="nav-item-dropdown-menu left">
+				<li><span>{{utils.nerd.nickname}}</span></li>
+				<li><a (click)="logout()">Log Out</a></li>
 			</ul>
+		</li>
+		<li *ngIf="!utils.nerd.uuid" class="nav-item me-0">
+			<a (click)="loginModal.open()">Log In</a>
 		</li>
 	</ul>
 </nav>
+
+<modal #loginModal>
+	<div class="container color-white">
+		<div class="row">
+			<div class="col-8 offset-2 px-5 pt-10 pb-{{loginFormMessage ? 5 : 10}}">
+				<div class="text-center">
+					<h1>Log In</h1>
+				</div>
+				<form (ngSubmit)="login()">
+					<div class="my-4">
+						<input [formControl]="loginForm.controls.username" placeholder="Minecraft Nickname or Username" type="text" class="form-control" id="username" autocomplete="off">
+					</div>
+					<div class="d-flex justify-content-center">
+						<loading-button [loading]="loginFormLoading" type="submit" classes="btn btn-primary">Submit</loading-button>
+					</div>
+					<div class="mt-4 d-flex justify-content-center">
+						<form-message [message]="loginFormMessage"></form-message>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</modal>
 
 <modal #mapModal>
 	<div class="d-flex justify-content-end">

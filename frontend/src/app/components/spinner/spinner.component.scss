@@ -23,14 +23,13 @@ div {
 	$dur: 1.25s;
 	display: block;
 	margin: auto;
-	width: 8em;
-	height: 8em;
 
-	&__layer {
-		stroke: hsl(220, 73%, 46%);
+	& .blue {
+		stroke: #11adad;
 	}
-	&__layer + &__layer {
-		stroke: hsl(193, 79%, 63%);
+
+	& .white {
+		stroke: hsl(0, 0%, 100%);
 	}
 
 	&__ring,

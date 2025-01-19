@@ -22,6 +22,7 @@ export class ModalComponent {
 
 		let opts = {
 			size: 'lg',
+			centered: true,
 			...options,
 		}
 

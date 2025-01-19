@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav.component';
 import { RouterLink } from "@angular/router";
 import { ModalModule } from "../modal/modal.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { LoadingButtonModule } from '../loading-button/loading-button.module';
+import { FormMessageModule } from "../form-message/form-message.module";
 
 @NgModule({
 	declarations: [NavComponent],
@@ -10,6 +13,10 @@ import { ModalModule } from "../modal/modal.module";
 		CommonModule,
 		RouterLink,
 		ModalModule,
+		FormsModule,
+		LoadingButtonModule,
+		ReactiveFormsModule,
+		FormMessageModule,
 	],
 	exports: [NavComponent]
 })

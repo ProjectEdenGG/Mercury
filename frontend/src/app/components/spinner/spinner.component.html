@@ -1,5 +1,5 @@
 <div class="d-{{display}}" [ngClass]="classes">
-	<svg class="pl pl--1" viewBox="0 0 24 24" width="24px" height="24px">
+	<svg class="pl pl--1" viewBox="0 0 24 24" [ngStyle]="{'height.em': size}">
 		<defs>
 			<linearGradient id="pl-grad" x1="0" y1="0" x2="0" y2="1">
 				<stop offset="0%" stop-color="#000" />
@@ -9,7 +9,7 @@
 				<rect x="0" y="0" width="24" height="24" fill="url(#pl-grad)" />
 			</mask>
 		</defs>
-		<g class="pl__layer">
+		<g [ngClass]="color">
 			<g fill="none" stroke-width="1">
 				<circle class="pl__ring" r="2.5" cx="7.75" cy="12" />
 				<circle class="pl__ring" r="2.5" cx="7.75" cy="12" />
@@ -17,7 +17,7 @@
 				<circle class="pl__ring" r="2.5" cx="16.25" cy="12" />
 			</g>
 		</g>
-		<g class="pl__layer" mask="url(#pl-mask)">
+		<g [ngClass]="color" mask="url(#pl-mask)">
 			<g fill="none" stroke-width="1">
 				<circle class="pl__ring" r="2.5" cx="7.75" cy="12" />
 				<circle class="pl__ring" r="2.5" cx="7.75" cy="12" />
