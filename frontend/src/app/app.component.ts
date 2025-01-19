@@ -18,6 +18,7 @@ export class AppComponent {
 		public renderer: Renderer2,
 		public apiService: ApiService,
 	) {
+		// TODO guard with canActivate until success
 		this.apiService.getRanks().subscribe({
 			next: (ranks: any) => {
 				for (let rank of ranks) {

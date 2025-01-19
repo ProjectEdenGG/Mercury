@@ -45,6 +45,8 @@ export class NavComponent {
 			let classList = this.nav.nativeElement.classList;
 			open ? classList.add('active') : classList.remove('active');
 		})
+
+		this.utils.openLoginModal$.subscribe(() => this.loginModal.open())
 	}
 
 	toggleNav() {

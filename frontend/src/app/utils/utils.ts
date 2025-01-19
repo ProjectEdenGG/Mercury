@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 export type Nerd = {
 	uuid: string;
 	username: string;
 	nickname: string;
+	rank: string;
 }
 
 @Injectable({providedIn: 'root'})
 export class Utils {
+	originalOrder = () => 0;
+
+	public openLoginModal$: Subject<void> = new Subject();
+
+	public openLoginModal() {
+		this.openLoginModal$.next()
+	}
 
 	public get nerd() {
 		return JSON.parse(localStorage.getItem('nerd') ?? '{}');
@@ -20,7 +29,17 @@ export class Utils {
 			localStorage.setItem('nerd', JSON.stringify(nerd))
 	}
 
-	originalOrder = () => 0;
+	camelCase(text: string | null): string | null {
+		if (!text || text.trim() === "") {
+			return text;
+		}
+
+		return text
+			.replace(/_/g, " ")
+			.split(" ")
+			.map((word) => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase())
+			.join(" ");
+	}
 
 	log(obj: any) {
 		console.log(obj)
