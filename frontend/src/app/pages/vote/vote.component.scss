@@ -1,7 +1,17 @@
 .vote-button-group {
 	a {
-		background-color: #375a7f;
-		border-color: #375a7f;
+		&.btn-primary {
+			background-color: #375a7f;
+			border-color: #375a7f;
+		}
+		&.btn-success {
+			background-color: #136d52;
+			border-color: #136d52;
+		}
+
+		&.btn {
+			width: 68px;
+		}
 	}
 	button {
 		background-color: #f8f8f8;
