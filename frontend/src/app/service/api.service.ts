@@ -47,4 +47,8 @@ export class ApiService {
 	getNerd(username: string) {
 		return this.http.get(`/nexus/nerd/${username}`);
 	}
+
+	getModrinthVersions(mod: string) {
+		return this.http.get(`https://api.modrinth.com/v2/project/${mod}/version`);
+	}
 }
