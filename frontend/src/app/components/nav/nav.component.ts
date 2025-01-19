@@ -48,8 +48,13 @@ export class NavComponent {
 
 		this.utils.openLoginModal$.subscribe({
 			next: options => {
-				if (options != null)
-					this.loginModal.open(options)
+				if (options == null)
+					return;
+
+				this.loginModal.open({
+					centered: this.responsiveUtil.gte('md'),
+					...options
+				})
 			}
 		})
 	}

@@ -1,7 +1,7 @@
 <ng-template #applyButton>
 	<ng-container *ngIf="!this.utils.nerd.rank">
 		<a
-			(click)="this.utils.openLoginModal({ centered: this.responsiveUtil.gte('md') })"
+			(click)="this.utils.openLoginModal()"
 			hoverBrightness [up]="30"
 			class="py-1 px-2 rounded fw-medium font-rem-1_25 w-100 btn btn-primary"
 		>
