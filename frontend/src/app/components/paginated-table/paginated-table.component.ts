@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import { Utils } from '../../utils/utils';
 
 @Component({
@@ -13,9 +13,15 @@ export class PaginatedTableComponent {
 	@Input() rows: any[]
 	@Input() perPage: number = 5
 
-	currentPage: number = 1
+	@ViewChild('tableContainer') tableContainer: ElementRef
 
-	constructor(public utils: Utils) {}
+	currentPage: number = 1
+	height: number;
+
+	constructor(
+		public utils: Utils,
+		public renderer: Renderer2,
+	) {}
 
 	get paginatedRows() {
 		const startIndex = (this.currentPage - 1) * this.perPage
@@ -24,9 +30,15 @@ export class PaginatedTableComponent {
 
 	changePage(page: number) {
 		this.currentPage = page
+		this.setFixedHeight();
 	}
 
-	protected readonly Math = Math
+	setFixedHeight() {
+		if (!this.height) {
+			this.height = this.tableContainer.nativeElement.offsetHeight;
+			this.renderer.setStyle(this.tableContainer.nativeElement, 'height', `${this.height}px`);
+		}
+	}
 
 	firstPage() {
 		return this.currentPage === 1

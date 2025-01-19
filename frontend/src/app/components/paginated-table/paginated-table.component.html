@@ -12,19 +12,21 @@
 		</div>
 	</ul>
 </div>
-<table class="table table-dark">
-	<thead>
-		<tr>
-			<th *ngFor="let header of headers | keyvalue:utils.originalOrder" [ngClass]="header.value?.classes">
-				{{ header.value?.name ?? header.value }}
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let row of paginatedRows">
-			<td *ngFor="let header of headers | keyvalue:utils.originalOrder" [ngClass]="header.value?.classes">
-				<span [attr.data-tooltip]="row[header.key].tooltip">{{ row[header.key]?.text ?? row[header.key] }}</span>
-			</td>
-		</tr>
-	</tbody>
-</table>
+<div #tableContainer>
+	<table class="table table-dark">
+		<thead>
+			<tr>
+				<th *ngFor="let header of headers | keyvalue:utils.originalOrder" [ngClass]="header.value?.classes">
+					{{ header.value?.name ?? header.value }}
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let row of paginatedRows">
+				<td *ngFor="let header of headers | keyvalue:utils.originalOrder" [ngClass]="header.value?.classes">
+					<span [attr.data-tooltip]="row[header.key].tooltip">{{ row[header.key]?.text ?? row[header.key] }}</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
