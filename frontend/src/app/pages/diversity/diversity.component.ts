@@ -1,6 +1,5 @@
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ApiService } from '../../service/api.service';
-import { Utils } from '../../utils/utils';
 import { MercuryComponent } from '../../lifecycle/MercuryComponent';
 import svgMap from 'svgmap';
 
@@ -51,11 +50,13 @@ export class DiversityComponent extends MercuryComponent {
 						name: 'Number of players',
 						format: '{0}',
 						thresholdMax: 100,
+						thousandSeparator: ',',
 					},
 					hours: {
 						name: 'Hours played',
 						format: '{0}',
 						thresholdMax: 5000,
+						thousandSeparator: ',',
 					}
 				},
 				applyData: this.type,
@@ -67,8 +68,7 @@ export class DiversityComponent extends MercuryComponent {
 		if (!element || !element.firstChild)
 			return;
 
-		while (element.childNodes.length > 1) {
+		while (element.childNodes.length > 1)
 			element.removeChild(element.lastChild);
-		}
 	}
 }

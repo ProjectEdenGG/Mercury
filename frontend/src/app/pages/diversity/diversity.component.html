@@ -1,9 +1,13 @@
 <div class="container">
 	<div class="row">
-		<div class="col-12 mb-2 text-center">
+		<div class="col-12">
+			<h1>Diversity</h1>
+			<div class="spectrum"></div>
+		</div>
+		<div class="col-12 mt-2 mb-3 text-center">
 			<div class="btn-group">
 				<button (click)="this.type = 'players'; updateMap();" class="btn" [class.btn-primary]="type == 'players'">By number of players</button>
-				<button (click)="this.type = 'hours'; updateMap();" class="btn" [class.btn-primary]="type == 'hours'">By number of hours</button>
+				<button (click)="this.type = 'hours'; updateMap();" class="btn" [class.btn-primary]="type == 'hours'">By hours played</button>
 			</div>
 		</div>
 		<div class="col-12">
