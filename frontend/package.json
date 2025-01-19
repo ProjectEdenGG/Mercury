@@ -27,6 +27,7 @@
 		"bootstrap-icons": "^1.11.3",
 		"date-fns": "^4.1.0",
 		"rxjs": "~7.8.0",
+		"svgmap": "^2.12.2",
 		"tslib": "^2.3.0",
 		"zone.js": "~0.15.0"
 	},

@@ -40,6 +40,10 @@ export class ApiService {
 		return this.http.get('/nexus/ranks');
 	}
 
+	getDiversity() {
+		return this.http.get('/nexus/diversity');
+	}
+
 	getNerd(username: string) {
 		return this.http.get(`/nexus/nerd/${username}`);
 	}

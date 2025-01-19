@@ -1,0 +1,14 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12 mb-2 text-center">
+			<div class="btn-group">
+				<button (click)="this.type = 'players'; updateMap();" class="btn" [class.btn-primary]="type == 'players'">By number of players</button>
+				<button (click)="this.type = 'hours'; updateMap();" class="btn" [class.btn-primary]="type == 'hours'">By number of hours</button>
+			</div>
+		</div>
+		<div class="col-12">
+			<spinner *ngIf="loading" class="mt-7"></spinner>
+			<div #map id="map"></div>
+		</div>
+	</div>
+</div>

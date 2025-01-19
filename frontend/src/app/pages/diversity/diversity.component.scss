@@ -1,0 +1,28 @@
+.btn {
+	outline: #156464 1px solid !important;
+}
+
+:host ::ng-deep {
+	.svgMap-map-wrapper {
+		background: #111112 !important;
+		border-radius: 30px !important;
+	}
+
+	.svgMap-map-wrapper .svgMap-country {
+		stroke: #5b5b5f;
+	}
+
+	.svgMap-map-wrapper .svgMap-map-controls-zoom,
+	.svgMap-map-wrapper .svgMap-control-button {
+		background: #101010;
+	}
+
+	.svgMap-map-wrapper .svgMap-control-button {
+		background: #101010;
+	}
+
+	.svgMap-map-wrapper .svgMap-control-button:hover {
+		color: #fff;
+	}
+
+}
