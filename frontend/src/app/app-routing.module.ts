@@ -1,9 +1,11 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { MercuryGuard } from './guard/mercury.guard';
 
 export const routes: Routes = [
 	{
 		path: '',
+		canActivate: [MercuryGuard],
 		children: [
 			{ path: 'vote', loadChildren: () => import('./pages/vote/vote.module').then(m => m.VoteModule) },
 			{ path: 'titan', loadChildren: () => import('./pages/titan/titan.module').then(m => m.TitanModule) },

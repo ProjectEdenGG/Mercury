@@ -51,10 +51,6 @@ export class Utils {
 		return JSON.stringify(obj, null, 2)
 	}
 
-	asCssClass(string: any) {
-		return string.toLowerCase().replaceAll(' ', '-');
-	}
-
 	formatTimespan(seconds: number, format: 'long' | 'short' = 'long', exclude?: string[]): string {
 		let days = Math.floor(seconds / (24 * 60 * 60));
 		seconds %= 24 * 60 * 60;
@@ -93,6 +89,32 @@ export class Utils {
 			.map(char => 0x1f1e6 + char.charCodeAt(0) - 0x41);
 
 		return String.fromCodePoint(...codePoints);
+	}
+
+	private styleElement: any
+
+	createRankCss(rank: any) {
+		let cssified = this.asCssClass(rank.name)
+		let variable = `--color-${cssified}`
+		this.createCssVariable(variable, rank.color)
+		this.createCssClass(`.color-${cssified} { color: var(${variable}); }`)
+		this.createCssClass(`.background-color-${cssified} { background-color: var(${variable}); }`)
+	}
+
+	asCssClass(string: any) {
+		return string.toLowerCase().replaceAll(' ', '-');
+	}
+
+	createCssVariable(variable: string, value: any) {
+		document.documentElement.style.setProperty(variable, value)
+	}
+
+	createCssClass(style: string) {
+		if (!this.styleElement) {
+			this.styleElement = document.createElement('style')
+			document.head.appendChild(this.styleElement)
+		}
+		this.styleElement.textContent = this.styleElement.textContent + style
 	}
 
 }
