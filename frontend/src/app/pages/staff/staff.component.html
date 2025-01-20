@@ -20,7 +20,7 @@
 		<ng-container *ngIf="!loading && staff.length > 0">
 			<div *ngFor="let member of staff" class="col-12 col-lg-6 pb-5 d-flex">
 				<div style="min-width: 120px;">
-					<img class="skin-image d-none" src="https://crafatar.com/renders/body/{{member.uuidNoDashes}}?overlay" (load)="fadeIn($event)">
+					<img class="skin-image d-none" src="https://crafatar.com/renders/body/{{member.uuid}}?overlay" (load)="fadeIn($event)">
 				</div>
 				<div class="ml-3 w-100">
 					<div class="name-and-rank font-rem-1_5 fw-medium">

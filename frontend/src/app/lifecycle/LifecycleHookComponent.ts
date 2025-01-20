@@ -31,8 +31,8 @@ export class LifecycleHookComponent implements OnChanges, OnInit, AfterContentIn
 	}
 
 	private debug(...obj: any[]) {
-		if (this.name()?.includes('Component'))
-			console.log(`LifecycleHook(${this.name()})`, ...obj, this.component)
+		// if (this.name()?.includes('Component'))
+		// 	console.log(`LifecycleHook(${this.name()})`, ...obj, this.component)
 	}
 
 	ngOnChanges(): void {
