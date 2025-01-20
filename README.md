@@ -35,3 +35,4 @@ Project Eden's website
 - Accounts on mobile
 - Diversity on mobile
 - More mobile testing
+- Move all images to CMS
