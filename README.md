@@ -36,3 +36,4 @@ Project Eden's website
 - Diversity on mobile
 - More mobile testing
 - Move all images to CMS
+- Add numbers to ranking paginated tables
