@@ -1,5 +1,9 @@
 .btn {
-	outline: #156464 1px solid !important;
+	//outline: #156464 1px solid !important;
+}
+
+.btn-primary:not(.active) {
+	background: transparent !important;
 }
 
 :host ::ng-deep {

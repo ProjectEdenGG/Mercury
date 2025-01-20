@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Utils } from '../../../utils/utils';
 import { MercuryComponent } from '../../../lifecycle/MercuryComponent';
-import { ResponsiveUtil } from '../../../utils/responsive-util.component';
 
 @Component({
 	selector: 'application',
@@ -16,7 +15,6 @@ export class ApplicationComponent extends MercuryComponent {
 
 	constructor(
 		public utils: Utils,
-		public responsiveUtil: ResponsiveUtil,
 	) {
 		super()
 	}

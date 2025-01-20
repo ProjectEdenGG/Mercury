@@ -6,8 +6,9 @@
 		</div>
 		<div class="col-12 mt-2 mb-3 text-center">
 			<div class="btn-group">
-				<button (click)="this.type = 'players'; updateMap();" class="btn" [class.btn-primary]="type == 'players'">By number of players</button>
-				<button (click)="this.type = 'hours'; updateMap();" class="btn" [class.btn-primary]="type == 'hours'">By hours played</button>
+				<button (click)="this.type = 'players'; updateMap();" class="btn btn-primary" [class.active]="type == 'players'">By number of players</button>
+				<button (click)="this.type = 'hours'; updateMap();" class="btn btn-primary" [class.active]="type == 'hours'">By hours played</button>
+				<button (click)="this.type = 'average'; updateMap();" class="btn btn-primary" [class.active]="type == 'average'">By average hours played</button>
 			</div>
 		</div>
 		<div class="col-12">

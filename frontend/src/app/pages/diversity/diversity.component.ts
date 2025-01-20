@@ -12,7 +12,7 @@ import svgMap from 'svgmap';
 export class DiversityComponent extends MercuryComponent {
 	loading: boolean
 	values: any
-	type: 'players' | 'hours' = 'players'
+	type: 'players' | 'hours' | 'average' = 'players'
 
 	@ViewChild('map') map: ElementRef;
 
@@ -27,6 +27,11 @@ export class DiversityComponent extends MercuryComponent {
 		this.apiService.getDiversity().subscribe({
 			next: (result: any) => {
 				this.values = result
+
+				for (let country of Object.keys(this.values))
+					this.values[country].average = (this.values[country].hours / this.values[country].players).toFixed(0)
+
+				console.log(this.values)
 				this.updateMap()
 				this.loading = false;
 			},
@@ -56,6 +61,12 @@ export class DiversityComponent extends MercuryComponent {
 						name: 'Hours played',
 						format: '{0}',
 						thresholdMax: 5000,
+						thousandSeparator: ',',
+					},
+					average: {
+						name: 'Average hours played',
+						format: '{0}',
+						thresholdMax: 150,
 						thousandSeparator: ',',
 					}
 				},
