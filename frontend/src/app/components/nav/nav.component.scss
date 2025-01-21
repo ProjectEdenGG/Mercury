@@ -1,4 +1,5 @@
-/* General Navbar Styling */
+@import "bootstrap/scss/bootstrap-utilities";
+
 nav {
 	background-color: #00000022;
 	position: fixed;
@@ -8,7 +9,6 @@ nav {
 
 .logo {
 	width: 3rem;
-	margin-right: 1rem;
 }
 
 .nav-toggle {
@@ -26,12 +26,20 @@ nav {
 .nav-list {
 	padding: 10px 20px;
 	display: flex;
-	list-style: none;
 	margin: 0;
+
+	& ul {
+		padding-left: 0;
+		list-style: none;
+	}
 
 	@media (min-width: 768px) {
 		align-items: center;
 	}
+}
+
+ul {
+	margin-bottom: 0;
 }
 
 .nav-item {
@@ -40,9 +48,6 @@ nav {
 	margin-right: 15px;
 	cursor: pointer;
 
-	@media (max-width: 768px) {
-		margin-right: 35px;
-	}
 }
 
 .nav-item {
@@ -139,12 +144,13 @@ nav {
 /* Responsive Styles */
 @media (max-width: 768px) {
 	.nav-list {
+		position: fixed;
+		top: 0;
+		left: 0;
 		width: 100%;
-		position: absolute;
+		height: 100%;
 		backdrop-filter: blur(40px);
 		background-color: #00000033;
-		top: 100%;
-		left: 0;
 		z-index: 1000;
 		transition: all 0.3s ease;
 
@@ -162,5 +168,10 @@ nav {
 
 	.nav-toggle {
 		display: block; /* Show the toggle button */
+	}
+}
+.nav-container {
+	@include media-breakpoint-only(sm) {
+		max-width: 550px;
 	}
 }

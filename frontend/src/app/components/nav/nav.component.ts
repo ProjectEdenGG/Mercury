@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ModalComponent } from '../modal/modal.component';
@@ -31,6 +31,7 @@ export class NavComponent {
 	constructor(
 		public utils: Utils,
 		public router: Router,
+		public renderer: Renderer2,
 		public apiService: ApiService,
 		public responsiveUtil: ResponsiveUtil,
 	) {
@@ -41,9 +42,23 @@ export class NavComponent {
 	}
 
 	ngAfterViewInit() {
+		let element = this.nav.nativeElement;
+		let classList = element.classList;
 		this.open$.subscribe(open => {
-			let classList = this.nav.nativeElement.classList;
-			open ? classList.add('active') : classList.remove('active');
+			if (open) {
+				classList.remove("d-none")
+				classList.remove("d-md-flex")
+				setTimeout(() => classList.add('active'))
+			} else {
+				classList.remove('active')
+			}
+		})
+
+		this.renderer.listen(element, 'transitionend', () => {
+			if (!this.open$.value) {
+				classList.add("d-none")
+				classList.add("d-md-flex")
+			}
 		})
 
 		this.utils.openLoginModal$.subscribe({
@@ -60,7 +75,13 @@ export class NavComponent {
 	}
 
 	toggleNav() {
-		this.open$.next(!this.open$.value)
+		let open = !this.open$.value
+		this.open$.next(open)
+
+		if (open)
+			this.renderer.addClass(document.body, 'disable-scroll')
+		else
+			this.renderer.removeClass(document.body, 'disable-scroll')
 	}
 
 	map() {

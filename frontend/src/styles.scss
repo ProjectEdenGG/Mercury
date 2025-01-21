@@ -127,6 +127,10 @@ body {
 	overflow: unset !important;
 }
 
+body.disable-scroll {
+	overflow: hidden !important;
+}
+
 .spectrum {
 	margin-top: 1rem;
 	margin-bottom: 1rem;
