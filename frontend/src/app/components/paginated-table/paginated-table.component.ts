@@ -12,6 +12,7 @@ export class PaginatedTableComponent {
 	@Input() headers: { [key: string]: any } = {}
 	@Input() rows: any[]
 	@Input() perPage: number = 5
+	@Input() ranked: boolean
 
 	@ViewChild('tableContainer') tableContainer: ElementRef
 
@@ -48,4 +49,7 @@ export class PaginatedTableComponent {
 		return this.currentPage === Math.ceil(this.rows.length / this.perPage)
 	}
 
+	getRank(i: number) {
+		return this.perPage * (this.currentPage - 1) + i + 1;
+	}
 }

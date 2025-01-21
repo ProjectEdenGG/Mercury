@@ -98,13 +98,13 @@
 				<hr class="my-4">
 				<h2 class="mb-3">Top Voters</h2>
 				<div class="mb-5">
-					<paginated-table title="Vote Party" [headers]="headers" [rows]="voteData.topVoters.voteParty"></paginated-table>
+					<paginated-table title="Vote Party" [ranked]="true" [headers]="headers" [rows]="voteData.topVoters.voteParty"></paginated-table>
 				</div>
 				<div class="mb-5">
-					<paginated-table title="Monthly" [headers]="headers" [rows]="voteData.topVoters.monthly"></paginated-table>
+					<paginated-table title="Monthly" [ranked]="true" [headers]="headers" [rows]="voteData.topVoters.monthly"></paginated-table>
 				</div>
 				<div class="mb-5">
-					<paginated-table title="All Time" [headers]="headers" [rows]="voteData.topVoters.allTime"></paginated-table>
+					<paginated-table title="All Time" [ranked]="true" [headers]="headers" [rows]="voteData.topVoters.allTime"></paginated-table>
 				</div>
 			</ng-container>
 		</div>

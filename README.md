@@ -5,7 +5,6 @@ Project Eden's website
 ## To Do
 
 ### Before release
-- Add numbers to ranking paginated tables
 
 ### Soon
 - Home page
