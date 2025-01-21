@@ -2,8 +2,23 @@
 
 Project Eden's website
 
-### TODO
+## To Do
 
+### Before release
+- Move all images to CMS
+- Add numbers to ranking paginated tables
+
+### Soon
+- Home page
+	- About us
+	- Features
+	- etc
+- Showcase
+	- Full screen image
+- Diversity
+	- Tables
+
+### Later
 - Status
 	- Minecraft server
 		- Uptime
@@ -21,19 +36,3 @@ Project Eden's website
 		- RAID
 		- OS
 		- Location
-- Titan
-	- Description
-	- Link
-- Applications
-	- Description
-- Home page
-	- About us
-	- Features
-	- etc
-- Showcase
-	- Full screen image
-- Accounts on mobile
-- Diversity on mobile
-- More mobile testing
-- Move all images to CMS
-- Add numbers to ranking paginated tables
