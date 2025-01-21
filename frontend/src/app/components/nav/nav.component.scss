@@ -1,4 +1,6 @@
-@import "bootstrap/scss/bootstrap-utilities";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
 
 nav {
 	background-color: #00000022;
@@ -170,6 +172,7 @@ ul {
 		display: block; /* Show the toggle button */
 	}
 }
+
 .nav-container {
 	@include media-breakpoint-only(sm) {
 		max-width: 550px;
