@@ -38,7 +38,7 @@
 						</ul>
 					</li>
 					<li *ngIf="!utils.nerd.uuid" class="nav-item me-0">
-						<a (click)="loginModal.open()">Log In</a>
+						<a (click)="utils.openLoginModal()">Log In</a>
 					</li>
 				</ul>
 			</div>
@@ -55,7 +55,7 @@
 				</div>
 				<form (ngSubmit)="login()">
 					<div class="my-4">
-						<input [formControl]="loginForm.controls.username" placeholder="Minecraft Nickname or Username" type="text" class="form-control" id="username" autocomplete="off">
+						<input ngbAutoFocus [formControl]="loginForm.controls.username" placeholder="Minecraft Nickname or Username" type="text" class="form-control" id="username" autocomplete="off">
 					</div>
 					<div class="d-flex justify-content-center">
 						<loading-button [loading]="loginFormLoading" type="submit" classes="btn btn-primary">Submit</loading-button>
