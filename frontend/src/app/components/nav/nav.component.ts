@@ -46,10 +46,12 @@ export class NavComponent {
 		let classList = element.classList;
 		this.open$.subscribe(open => {
 			if (open) {
+				this.renderer.addClass(document.body, 'disable-scroll')
 				classList.remove("d-none")
 				classList.remove("d-md-flex")
 				setTimeout(() => classList.add('active'))
 			} else {
+				this.renderer.removeClass(document.body, 'disable-scroll')
 				classList.remove('active')
 			}
 		})
@@ -77,11 +79,6 @@ export class NavComponent {
 	toggleNav() {
 		let open = !this.open$.value
 		this.open$.next(open)
-
-		if (open)
-			this.renderer.addClass(document.body, 'disable-scroll')
-		else
-			this.renderer.removeClass(document.body, 'disable-scroll')
 	}
 
 	map() {
