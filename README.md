@@ -5,7 +5,6 @@ Project Eden's website
 ## To Do
 
 ### Before release
-- Move all images to CMS
 - Add numbers to ranking paginated tables
 
 ### Soon

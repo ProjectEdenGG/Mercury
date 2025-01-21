@@ -4,7 +4,7 @@
 			<div class="d-flex align-items-center align-content-center justify-content-center flex-column">
 				<div class="h-100 w-100 d-flex flex-column align-items-center pt-5 pt-md-9">
 					<a class="pb-6" routerLink="/home">
-						<img class="banner w-100 px-2 px-sm-5" src="assets/images/logo.png" alt="logo">
+						<img class="banner w-100 px-2 px-sm-5" [src]="'logo.png' | cmsImage" alt="logo">
 					</a>
 					<div class="mb-2">
 						<button class="ip border-0 rounded-3 p-2 px-3" (click)="copyIp()" type="button">

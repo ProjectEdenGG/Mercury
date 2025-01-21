@@ -6,7 +6,7 @@
 		<div #nav class="nav-list d-none d-md-flex flex-column flex-md-row">
 			<div class="text-center text-md-left mb-2 mb-md-0 mr-md-2">
 				<a routerLink="/home">
-					<img class="logo" src="assets/images/logo_small.png">
+					<img class="logo" [src]="'logo_small.png' | cmsImage">
 				</a>
 			</div>
 			<div class="nav-container d-flex w-100 justify-content-between mx-sm-auto mx-md-0">
