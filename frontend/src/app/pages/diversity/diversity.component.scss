@@ -6,7 +6,7 @@
 	background: transparent !important;
 }
 
-:host ::ng-deep {
+::ng-deep {
 	.svgMap-map-wrapper {
 		background: #111112 !important;
 		border-radius: 30px !important;
@@ -29,4 +29,7 @@
 		color: #fff;
 	}
 
+	.svgMap-tooltip-title {
+		color: #000 !important;
+	}
 }
