@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PluralPipe implements PipeTransform {
 
-	transform(value: string, amount: number): string {
-		return amount == 1 ? value : value + 's'
+	transform(value: string, amount: any): string {
+		return (amount.length ?? amount) == 1 ? value : value + 's'
 	}
 
 }

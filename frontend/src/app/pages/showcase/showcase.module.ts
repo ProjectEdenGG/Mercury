@@ -4,6 +4,7 @@ import { ShowcaseComponent } from './showcase.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { HoverBrightnessDirective } from '../../directive/hover-brightness/hover-brightness.directive';
 import { SpinnerModule } from "../../components/spinner/spinner.module";
+import { PluralPipe } from "../../pipes/plural-pipe";
 
 @NgModule({
 	declarations: [ShowcaseComponent],
@@ -12,6 +13,7 @@ import { SpinnerModule } from "../../components/spinner/spinner.module";
 		ShowcaseRoutingModule,
 		HoverBrightnessDirective,
 		SpinnerModule,
+		PluralPipe,
 	]
 })
 export class ShowcaseModule {

@@ -10,8 +10,12 @@
 				<div class="col-12 text-center mb-3 color-white">
 					<h2>{{ getBuildConfig().name }}</h2>
 					<div class="font-rem-1_25">
-						<span class="fw-bold">Builder{{ getBuildConfig().builders?.length > 1 ? 's' : '' }}:</span>
+						<span class="fw-bold">{{ 'Builder' | plural:getBuildConfig().builders }}:</span>
 						{{ builders(getBuildConfig()) }}
+					</div>
+					<div class="font-rem-1_125 mt-1" *ngIf="getBuildConfig().tags">
+						<span class="fw-bold">{{ 'Tag' | plural:getBuildConfig().tags }}:</span>
+						{{ getBuildConfig().tags.join(', ') }}
 					</div>
 					<div *ngIf="getBuildConfig().map" class="font-rem-1_25 fw-medium mt-2">
 						<a [href]="getBuildConfig().map">View on map</a>
