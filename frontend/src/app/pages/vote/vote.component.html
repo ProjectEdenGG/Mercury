@@ -96,6 +96,12 @@
 					<button class="btn border-0 vote-button"><strong>{{site.name}}</strong></button>
 				</div>
 				<hr class="my-4">
+				<h2 class="mb-2">Vote Party</h2>
+				<progress-bar [percentage]="(voteData.voteParty.current / voteData.voteParty.target) * 100"></progress-bar>
+				<div class="d-flex justify-content-end mt-1">
+					{{ voteData.voteParty.current }} / {{ voteData.voteParty.target }}
+				</div>
+				<hr class="my-4">
 				<h2 class="mb-3">Top Voters</h2>
 				<div class="mb-5">
 					<paginated-table title="Vote Party" [ranked]="true" [headers]="headers" [rows]="voteData.topVoters.voteParty"></paginated-table>
