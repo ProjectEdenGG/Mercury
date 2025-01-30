@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class ApiService {
@@ -50,10 +50,6 @@ export class ApiService {
 
 	getModrinthVersions(mod: string) {
 		return this.http.get(`https://api.modrinth.com/v2/project/${mod}/version`);
-	}
-
-	currentPlayerSong() {
-		return this.http.get('/nexus/blockparty/current');
 	}
 
 }
