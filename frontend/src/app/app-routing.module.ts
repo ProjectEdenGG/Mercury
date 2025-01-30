@@ -7,6 +7,7 @@ export const routes: Routes = [
 		path: '',
 		canActivate: [MercuryGuard],
 		children: [
+			{ path: 'blockparty', loadChildren: () => import('./pages/blockparty/blockparty.module').then(m => m.BlockpartyModule) },
 			{ path: 'vote', loadChildren: () => import('./pages/vote/vote.module').then(m => m.VoteModule) },
 			{ path: 'titan', loadChildren: () => import('./pages/titan/titan.module').then(m => m.TitanModule) },
 			{ path: 'status', loadChildren: () => import('./pages/status/status.module').then(m => m.StatusModule) },
