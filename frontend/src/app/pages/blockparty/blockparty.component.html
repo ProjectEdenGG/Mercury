@@ -1,10 +1,45 @@
+<audio #audioPlayer [src]="currentSong?.url" [volume]="volume"></audio>
+
 <div class="container font-rem-1_25">
 	<div class="row">
-		<div class="col-12 color-white text-center mt-10">
-			<button *ngIf="!joined" (click)="join()" class="btn btn-primary">Join!</button>
-			<audio #audioPlayer [src]="currentSong?.url"></audio>
-			<h1 *ngIf="currentSong && joined">{{currentSong.title}}</h1>
-			<h2 *ngIf="currentSong && joined">{{currentSong.artist}}</h2>
+		<div class="col-12 color-white">
+			<h1>Block Party</h1>
+			<div class="spectrum"></div>
+			<div class="mt-4 background-color-gray px-4 py-3 rounded">
+				<div class="row position-relative">
+					<div class="col-12 background-color-gray play-button-container" #playButtonContainer [ngStyle]="{'opacity': joined ? 0 : 1}" style="">
+						<div class="mt-4 mb-3 d-flex justify-content-center flex-column align-items-center">
+							<div class="bg-primary font-rem-4_75 ratio ratio-1x1 icon-container" [ngClass]="{'cursor-pointer': !joined}">
+								<i class="bi bi-play-fill d-flex justify-content-center align-items-center pl-1" (click)="join()"></i>
+							</div>
+							<div class="font-rem-2_25 mt-3 fw-medium">Click to start the music!</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-7 d-flex align-items-center">
+						<div class="w-100">
+							<div *ngIf="!currentSong">
+								<div class="font-rem-2_5 fw-bold">Not currently playing...</div>
+								<div class="font-rem-1_75 mt-2">Waiting for the game to start,<br class="d-none d-lg-block"> prepare your feet</div>
+							</div>
+							<div *ngIf="currentSong">
+								<div class="font-rem-3 fw-bold">{{currentSong.title}}</div>
+								<div class="font-rem-2_5 fw-medium">{{currentSong.artist}}</div>
+							</div>
+
+							<div class="mt-3 mt-lg-5">
+								<label for="volume">Volume</label>
+								<div class="background-color-dark-gray px-2 py-1 mt-1" style="border-radius: 20px">
+									<input #volumeControl id="volume" type="range" min="0" max="1" [value]="volume" step=".01" (change)="updateVolume()">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-5 p-4 px-md-8 px-lg-4 mt-2 mt-lg-0">
+						<img *ngIf="!block" class="w-100" src="https://minecraft.wiki/images/Gray_Concrete_Powder.png">
+						<img *ngIf="block" class="w-100" src="https://minecraft.wiki/images/{{block}}.png">
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

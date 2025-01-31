@@ -1,5 +1,5 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Component } from '@angular/core';
+import { Utils } from '../../utils/utils';
 
 @Component({
 	selector: 'app-footer',
@@ -8,6 +8,11 @@ import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstr
 	standalone: false,
 })
 export class FooterComponent {
+
+	constructor(
+		public utils: Utils,
+	) { }
+
 	currentYear() {
 		return new Date().getFullYear();
 	}

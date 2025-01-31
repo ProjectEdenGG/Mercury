@@ -22,7 +22,7 @@
 					</div>
 				</div>
 				<div *ngFor="let file of getBuildConfig().files" class="col-sm-6 col-lg-4 col-md-4 mb-3">
-					<div class="text-center background p-1 rounded aspect-ratio">
+					<div class="text-center background-color-gray p-1 rounded aspect-ratio">
 						<img [src]="file" class="d-none" (load)="fadeIn(build, $event)">
 					</div>
 				</div>
@@ -36,13 +36,13 @@
 			<spinner *ngIf="loading" class="mt-5"></spinner>
 			<ng-container *ngIf="!loading">
 				<div class="mb-2">
-				<span *ngFor="let tag of tags" (click)="selectedTag = selectedTag == tag ? null : tag" class="tag color-gray rounded user-select-none" [ngClass]="{'selected': selectedTag == tag}">
+				<span *ngFor="let tag of tags" (click)="selectedTag = selectedTag == tag ? null : tag" class="tag color-light-gray rounded user-select-none" [ngClass]="{'selected': selectedTag == tag}">
 					{{ tag }}
 				</span>
 				</div>
 				<ng-container *ngFor="let build of showcase">
 					<div *ngIf="!selectedTag || build?.tags?.includes(selectedTag)" class="parent col-md-6 col-xl-4 col-xxl-3 px-sm-4 px-md-2 mb-3" [ngClass]="build.tags">
-						<div class="text-center background p-1 rounded">
+						<div class="text-center background-color-gray p-1 rounded">
 							<div class="aspect-ratio">
 								<img [src]="build.thumbnail" class="d-none" (load)="fadeIn(build, $event)">
 							</div>
@@ -54,7 +54,7 @@
 							<div class="d-flex justify-content-center text-center mx-auto">
 								<div class="rounded mt-1 mb-2 background-color-blue" style="height: 4px; width: 12%;"></div>
 							</div>
-							<div class="color-gray mb-1">{{ builders(build, 'short') }}</div>
+							<div class="color-light-gray mb-1">{{ builders(build, 'short') }}</div>
 						</div>
 					</div>
 				</ng-container>

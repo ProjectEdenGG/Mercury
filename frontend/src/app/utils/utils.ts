@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { DOCUMENT } from '@angular/common';
 
 export type Nerd = {
 	uuid: string;
@@ -14,6 +15,10 @@ export class Utils {
 	originalOrder = () => 0;
 
 	public openLoginModal$: BehaviorSubject<NgbModalOptions> = new BehaviorSubject(null);
+
+	constructor(
+		@Inject(DOCUMENT) private document: Document
+	) { }
 
 	public openLoginModal(options?: NgbModalOptions) {
 		this.openLoginModal$.next(options ?? {})
@@ -115,6 +120,10 @@ export class Utils {
 			document.head.appendChild(this.styleElement)
 		}
 		this.styleElement.textContent = this.styleElement.textContent + style
+	}
+
+	getEnvironment(): 'development' | 'production' {
+		return this.document.location.hostname.includes('localhost') ? 'development' : 'production';
 	}
 
 }

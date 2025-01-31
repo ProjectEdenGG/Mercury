@@ -118,10 +118,6 @@ $grid-breakpoints: (
 	color-scheme: dark;
 }
 
-body, .modal-content {
-	background: #212529
-}
-
 body {
 	padding-right: 0 !important;
 	overflow: unset !important;
@@ -155,7 +151,13 @@ body.disable-scroll {
 }
 
 $color-blue: #409ae8;
-$color-gray: #98a6ad;
+$color-light-gray: #98a6ad;
+$color-dark-gray: #212529;
+$color-gray: #2c3238;
+
+body, .modal-content {
+	background: $color-dark-gray;
+}
 
 .color-blue {
 	color: $color-blue
@@ -165,12 +167,20 @@ $color-gray: #98a6ad;
 	background-color: $color-blue
 }
 
-.color-gray {
-	color: $color-gray;
+.color-light-gray {
+	color: $color-light-gray;
+}
+
+.background-color-light-gray {
+	background-color: $color-light-gray;
 }
 
 .background-color-gray {
 	background-color: $color-gray;
+}
+
+.background-color-dark-gray {
+	background-color: $color-dark-gray;
 }
 
 .color-twitch {
