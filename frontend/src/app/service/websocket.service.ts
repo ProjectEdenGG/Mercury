@@ -7,8 +7,8 @@ import {WebSocketSubject} from 'rxjs/webSocket';
 export class WebsocketService {
   private socket$: WebSocketSubject<any>;
 
-  constructor() {
-    this.socket$ = new WebSocketSubject('wss://projecteden.gg/nexus/ws');
+  connect(uuid: String) {
+    this.socket$ = new WebSocketSubject(`wss://projecteden.gg/nexus/ws?uuid=${uuid}`);
   }
 
   sendMessage(message: any) {

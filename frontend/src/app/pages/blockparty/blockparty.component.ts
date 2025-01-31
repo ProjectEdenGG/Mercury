@@ -1,9 +1,11 @@
-import { ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import {Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
 import {MercuryComponent} from '../../lifecycle/MercuryComponent';
 import {takeUntil} from 'rxjs';
 import {WebsocketService} from '../../service/websocket.service';
 import {ActivatedRoute} from '@angular/router';
-import { Utils } from '../../utils/utils';
+import {Utils} from '../../utils/utils';
+
+const UUID_ZERO = '00000000-0000-0000-0000-000000000000';
 
 type Song = {
 	url?: string;
@@ -24,7 +26,6 @@ export class BlockPartyComponent extends MercuryComponent {
 	@ViewChild('playButtonContainer') playButtonContainer!: ElementRef<HTMLElement>;
 	joined = false;
 	currentSong: Song;
-	id: String;
 	block: String
 	volume: number = .2;
 	lastMessageWithTime: number;
@@ -40,19 +41,29 @@ export class BlockPartyComponent extends MercuryComponent {
 	}
 
 	override ngOnInit() {
+		let uuid = this.utils.nerd?.uuid ?? UUID_ZERO;
+
 		this.route.paramMap.subscribe(params => {
 			let paramId = params.get('id');
-			this.id = paramId && paramId.trim() !== '' ? paramId : 'test';
+			if (paramId === "test")
+				uuid = UUID_ZERO;
 		});
 
 		this.volume = Number(localStorage.getItem('blockparty-volume')) ?? .2
 
-		let uuid = this.utils.nerd?.uuid;
+		this.wsService.connect(uuid);
+		this.wsService.getMessages().pipe(takeUntil(this.lifecycle().unsubscriber$)).subscribe(socketMessage => {
+			let messages = Array.isArray(socketMessage) ? socketMessage : [socketMessage];
 
-		this.wsService.getMessages().pipe(takeUntil(this.lifecycle().unsubscriber$)).subscribe(messages => {
+			messagesLoop:
 			for (let message of messages) {
-				if (message.id !== this.id)
-					continue;
+				if (message.uuids) { // .includes wasn't working here...
+					for (let msgUuid of message.uuids) {
+						if (msgUuid === uuid)
+							break;
+						continue messagesLoop;
+					}
+				}
 
 				if (message.song) {
 					this.lastMessageWithTime = Date.now()
@@ -102,7 +113,9 @@ export class BlockPartyComponent extends MercuryComponent {
 			this.audioPlayer.nativeElement.play().then(() => this.joined = true);
 		} else {
 			let unlisten = this.renderer.listen(this.audioPlayer.nativeElement, 'canplay', () => {
-				this.audioPlayer.nativeElement.play().then(() => this.joined = true);
+				this.audioPlayer.nativeElement.play()
+					.then(() => this.joined = true)
+					.catch(() => {});
 				unlisten();
 			})
 		}
