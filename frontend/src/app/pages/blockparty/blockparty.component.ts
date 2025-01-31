@@ -55,14 +55,13 @@ export class BlockPartyComponent extends MercuryComponent {
 		this.wsService.getMessages().pipe(takeUntil(this.lifecycle().unsubscriber$)).subscribe(socketMessage => {
 			let messages = Array.isArray(socketMessage) ? socketMessage : [socketMessage];
 
-			messagesLoop:
 			for (let message of messages) {
 				if (message.uuids) { // .includes wasn't working here...
 					for (let msgUuid of message.uuids) {
 						if (msgUuid === uuid)
 							break;
-						continue messagesLoop;
 					}
+					continue;
 				}
 
 				if (message.song) {
