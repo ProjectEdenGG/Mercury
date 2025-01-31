@@ -57,11 +57,15 @@ export class BlockPartyComponent extends MercuryComponent {
 
 			for (let message of messages) {
 				if (message.uuids) { // .includes wasn't working here...
+					let found = false;
 					for (let msgUuid of message.uuids) {
-						if (msgUuid === uuid)
+						if (msgUuid === uuid) {
+							found = true;
 							break;
+						}
 					}
-					continue;
+					if (!found)
+						continue;
 				}
 
 				if (message.song) {
