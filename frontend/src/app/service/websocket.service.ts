@@ -49,6 +49,6 @@ export class WebsocketService {
 	}
 
 	isConnected() {
-		return this.socket$ !== null;
+		return this.socket$ !== undefined;
 	}
 }

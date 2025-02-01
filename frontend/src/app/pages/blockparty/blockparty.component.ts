@@ -22,7 +22,7 @@ type Song = {
 	standalone: false,
 	animations: [
 		trigger('fadeInOut', [
-			state('void', style({ opacity: 0 })),
+			state('void', style({ opacity: 0, 'z-index': -1 })),
 			state('visible', style({ opacity: 1 })),
 			transition('visible => void', [
 				animate('.5s ease')
