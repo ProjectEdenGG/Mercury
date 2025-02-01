@@ -41,7 +41,7 @@ export class BlockPartyComponent extends MercuryComponent {
 	}
 
 	override ngOnInit() {
-		let uuid = this.utils.nerd?.uuid ?? UUID_ZERO;
+		let uuid = this.utils.nerd?.uuid;
 
 		this.route.paramMap.subscribe(params => {
 			let paramId = params.get('id');
@@ -51,6 +51,20 @@ export class BlockPartyComponent extends MercuryComponent {
 
 		this.volume = Number(localStorage.getItem('blockparty-volume')) ?? .2
 
+		if (!uuid) {
+			return;
+		}
+
+		this.initWebsocket(uuid);
+	}
+
+	override ngAfterViewInit() {
+		this.renderer.listen(this.playButtonContainer.nativeElement, 'transitionend', () => {
+			this.playButtonContainer.nativeElement.remove()
+		})
+	}
+
+	initWebsocket(uuid: string) {
 		this.wsService.connect(uuid);
 		this.wsService.getMessages().pipe(takeUntil(this.lifecycle().unsubscriber$)).subscribe(socketMessage => {
 			let messages = Array.isArray(socketMessage) ? socketMessage : [socketMessage];
@@ -91,12 +105,6 @@ export class BlockPartyComponent extends MercuryComponent {
 		});
 	}
 
-	override ngAfterViewInit() {
-		this.renderer.listen(this.playButtonContainer.nativeElement, 'transitionend', () => {
-			this.playButtonContainer.nativeElement.remove()
-		})
-	}
-
 	join() {
 		this.joined = true;
 		this.play();
@@ -109,8 +117,10 @@ export class BlockPartyComponent extends MercuryComponent {
 		if (!this.playing)
 			return
 
-		if (this.currentSong.time)
+		if (this.currentSong.time) {
 			this.audioPlayer.nativeElement.currentTime = this.currentSong.time + ((Date.now() - this.lastMessageWithTime) / 1000);
+			this.currentSong.time = null;
+		}
 
 		if (this.audioPlayer.nativeElement.readyState >= 3) {
 			this.audioPlayer.nativeElement.play().then(() => this.joined = true);
