@@ -186,6 +186,7 @@ export class BlockPartyComponent extends MercuryComponent {
 
 	stop() {
 		this.currentSong = null;
+		this.block = null;
 	}
 
 	updateVolume() {
