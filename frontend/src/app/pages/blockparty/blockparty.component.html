@@ -7,7 +7,7 @@
 			<div class="spectrum"></div>
 			<div class="mt-4 background-color-gray px-4 py-3 rounded">
 				<div class="row position-relative">
-					<div #overlayContainer [@fadeInOut]="overlay ? 'visible' : 'void'" class="col-12 background-color-gray overlay-container">
+					<div #overlayContainer [@fadeInOut]="overlay() ? 'visible' : 'void'" class="col-12 background-color-gray overlay-container d-flex justify-content-center">
 						<div class="mt-4 mb-3 d-flex justify-content-center flex-column align-items-center">
 							<ng-container *ngIf="!joined">
 								<div class="bg-primary font-rem-4_75 ratio ratio-1x1 icon-container" [ngClass]="{'cursor-pointer': !joined}">

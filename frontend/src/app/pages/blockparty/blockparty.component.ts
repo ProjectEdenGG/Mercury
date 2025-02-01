@@ -7,7 +7,6 @@ import { Utils } from '../../utils/utils';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
-
 type Song = {
 	url?: string;
 	title?: string;
@@ -38,10 +37,8 @@ export class BlockPartyComponent extends MercuryComponent {
 	joined = false
 	reconnecting: boolean
 
-	lastMessageWithTime: number
-	overlay: boolean = true
-
 	currentSong: Song
+	lastMessageWithTime: number
 	block: String
 	volume: number = .2
 	playing: boolean
@@ -49,10 +46,10 @@ export class BlockPartyComponent extends MercuryComponent {
 	idParam: string
 
 	constructor(
-		private utils: Utils,
-		private wsService: WebsocketService,
-		private route: ActivatedRoute,
-		private renderer: Renderer2,
+		public utils: Utils,
+		public websocket: WebsocketService,
+		public route: ActivatedRoute,
+		public renderer: Renderer2,
 	) {
 		super()
 	}
@@ -74,18 +71,18 @@ export class BlockPartyComponent extends MercuryComponent {
 		this.volume = Number(localStorage.getItem('blockparty-volume')) ?? .2
 
 		this.utils.nerd$.pipe(skip(1), takeUntil(this.lifecycle().unsubscriber$)).subscribe(() => this.ensureLoggedIn());
-	}
 
-	setReconnecting() {
-		this.reconnecting = true
-		this.overlay = true
+		this.websocket.reconnecting$.pipe(skip(1)).subscribe(reconnecting => {
+			if (reconnecting) {
+				this.reconnecting = true
+				this.currentSong = null
+				this.block = null
+				this.playing = false
+			} else {
+				this.reconnecting = false
+			}
+		})
 	}
-
-	reconnected() {
-		this.reconnecting = false
-		this.overlay = false
-	}
-
 	override ngAfterViewInit() {
 		this.ensureLoggedIn();
 	}
@@ -97,7 +94,7 @@ export class BlockPartyComponent extends MercuryComponent {
 			this.currentSong = null
 			this.block = null
 			this.playing = false
-			this.wsService.disconnect()
+			this.websocket.disconnect()
 
 			this.utils.openLoginModal({
 				keyboard: false,
@@ -111,11 +108,14 @@ export class BlockPartyComponent extends MercuryComponent {
 	}
 
 	initWebsocket() {
-		if (this.wsService.isConnected())
+		if (this.websocket.isConnected()) {
+			console.log("Aborting connection attempt, already connected")
 			return
+		}
 
-		this.wsService.connect(this.getUuid());
-		this.wsService.getMessages().pipe(takeUntil(this.lifecycle().unsubscriber$)).subscribe(socketMessage => {
+		this.websocket.connect(this.getUuid());
+
+		this.websocket.getMessages().pipe(takeUntil(this.lifecycle().unsubscriber$)).subscribe(socketMessage => {
 			if (socketMessage === true)
 				return
 
@@ -149,9 +149,12 @@ export class BlockPartyComponent extends MercuryComponent {
 		});
 	}
 
+	overlay() {
+		return !this.joined || this.reconnecting
+	}
+
 	join() {
 		this.joined = true
-		this.overlay = false
 		this.play();
 	}
 
@@ -160,10 +163,6 @@ export class BlockPartyComponent extends MercuryComponent {
 			return
 
 		if (!this.playing)
-			return
-
-		// TODO Remove
-		if (!this.joined)
 			return
 
 		if (this.currentSong.time) {
