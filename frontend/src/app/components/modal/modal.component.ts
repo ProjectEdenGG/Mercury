@@ -1,6 +1,11 @@
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
+export type ModalOptions = NgbModalOptions & {
+	title?: string,
+	onDismiss?: () => void,
+};
+
 @Component({
 	selector: 'modal',
 	templateUrl: './modal.component.html',
@@ -12,28 +17,36 @@ export class ModalComponent {
 
 	@ViewChild('modal') modal: TemplateRef<any>;
 	private modalRef: NgbModalRef = null;
+	private options: ModalOptions
 
 	constructor(
 		public modalService: NgbModal,
 	) {
 	}
 
-	open(options?: NgbModalOptions) {
+	open(options?: ModalOptions) {
 		if (this.modalRef)
 			this.modalRef.dismiss()
 
-		let opts = {
+		this.options = {
 			size: 'lg',
 			centered: true,
 			...options,
 		}
 
-		this.modalRef = this.modalService.open(this.modal, opts)
+		this.modalRef = this.modalService.open(this.modal, this.options)
+
+		if (this.options.onDismiss)
+			this.onDismiss(this.options.onDismiss)
 	}
 
 	close() {
 		this.modalRef?.dismiss()
 		this.modalRef = null
+	}
+
+	onDismiss(onDismiss: () => void) {
+		this.modalRef.dismissed.subscribe(() => onDismiss());
 	}
 
 	hasOpenModals(): boolean {

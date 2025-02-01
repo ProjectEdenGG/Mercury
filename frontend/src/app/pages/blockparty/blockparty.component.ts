@@ -1,11 +1,12 @@
-import {Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
-import {MercuryComponent} from '../../lifecycle/MercuryComponent';
-import {takeUntil} from 'rxjs';
-import {WebsocketService} from '../../service/websocket.service';
-import {ActivatedRoute} from '@angular/router';
-import {Utils} from '../../utils/utils';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { MercuryComponent } from '../../lifecycle/MercuryComponent';
+import { skip, takeUntil } from 'rxjs';
+import { WebsocketService } from '../../service/websocket.service';
+import { ActivatedRoute } from '@angular/router';
+import { Utils } from '../../utils/utils';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
-const UUID_ZERO = '00000000-0000-0000-0000-000000000000';
+
 
 type Song = {
 	url?: string;
@@ -19,17 +20,33 @@ type Song = {
 	templateUrl: './blockparty.component.html',
 	styleUrl: './blockparty.component.scss',
 	standalone: false,
+	animations: [
+		trigger('fadeInOut', [
+			state('void', style({ opacity: 0 })),
+			state('visible', style({ opacity: 1 })),
+			transition('visible => void', [
+				animate('.5s ease')
+			]),
+		]),
+	]
 })
 export class BlockPartyComponent extends MercuryComponent {
 	@ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 	@ViewChild('volumeControl') volumeControl!: ElementRef<HTMLInputElement>;
-	@ViewChild('playButtonContainer') playButtonContainer!: ElementRef<HTMLElement>;
-	joined = false;
-	currentSong: Song;
+	@ViewChild('overlayContainer') overlayContainer!: ElementRef<HTMLElement>;
+
+	joined = false
+	reconnecting: boolean
+
+	lastMessageWithTime: number
+	overlay: boolean = true
+
+	currentSong: Song
 	block: String
-	volume: number = .2;
-	lastMessageWithTime: number;
+	volume: number = .2
 	playing: boolean
+
+	idParam: string
 
 	constructor(
 		private utils: Utils,
@@ -40,47 +57,74 @@ export class BlockPartyComponent extends MercuryComponent {
 		super()
 	}
 
-	override ngOnInit() {
-		let uuid = this.utils.nerd?.uuid;
+	getUuid() {
+		if (this.idParam)
+			return this.idParam;
 
+		return this.utils.nerd?.uuid;
+	}
+
+	override ngOnInit() {
 		this.route.paramMap.subscribe(params => {
 			let paramId = params.get('id');
 			if (paramId === "test")
-				uuid = UUID_ZERO;
+				this.idParam = this.utils.UUID_ZERO;
 		});
 
 		this.volume = Number(localStorage.getItem('blockparty-volume')) ?? .2
 
-		if (!uuid) {
-			return;
-		}
+		this.utils.nerd$.pipe(skip(1), takeUntil(this.lifecycle().unsubscriber$)).subscribe(() => this.ensureLoggedIn());
+	}
 
-		this.initWebsocket(uuid);
+	setReconnecting() {
+		this.reconnecting = true
+		this.overlay = true
+	}
+
+	reconnected() {
+		this.reconnecting = false
+		this.overlay = false
 	}
 
 	override ngAfterViewInit() {
-		this.renderer.listen(this.playButtonContainer.nativeElement, 'transitionend', () => {
-			this.playButtonContainer.nativeElement.remove()
-		})
+		this.ensureLoggedIn();
 	}
 
-	initWebsocket(uuid: string) {
-		this.wsService.connect(uuid);
+	private ensureLoggedIn() {
+		if (this.getUuid())
+			this.initWebsocket()
+		else {
+			this.currentSong = null
+			this.block = null
+			this.playing = false
+			this.wsService.disconnect()
+
+			this.utils.openLoginModal({
+				keyboard: false,
+				backdrop: 'static',
+				title: 'You must be logged in',
+				onDismiss: () => {
+					this.ensureLoggedIn()
+				}
+			})
+		}
+	}
+
+	initWebsocket() {
+		if (this.wsService.isConnected())
+			return
+
+		this.wsService.connect(this.getUuid());
 		this.wsService.getMessages().pipe(takeUntil(this.lifecycle().unsubscriber$)).subscribe(socketMessage => {
+			if (socketMessage === true)
+				return
+
 			let messages = Array.isArray(socketMessage) ? socketMessage : [socketMessage];
 
 			for (let message of messages) {
-				if (message.uuids) { // .includes wasn't working here...
-					let found = false;
-					for (let msgUuid of message.uuids) {
-						if (msgUuid === uuid) {
-							found = true;
-							break;
-						}
-					}
-					if (!found)
+				if (message.uuids)
+					if (!message.uuids.find((uuid: string) => uuid === this.getUuid()))
 						continue;
-				}
 
 				if (message.song) {
 					this.lastMessageWithTime = Date.now()
@@ -100,13 +144,14 @@ export class BlockPartyComponent extends MercuryComponent {
 					this.playing = false
 					this.stop();
 				} else if (message.action === 'block')
-					this.block = message.block
+					this.block = this.utils.camelCase(message.block).replace(/ /g, '_')
 			}
 		});
 	}
 
 	join() {
-		this.joined = true;
+		this.joined = true
+		this.overlay = false
 		this.play();
 	}
 
@@ -115,6 +160,10 @@ export class BlockPartyComponent extends MercuryComponent {
 			return
 
 		if (!this.playing)
+			return
+
+		// TODO Remove
+		if (!this.joined)
 			return
 
 		if (this.currentSong.time) {
@@ -126,9 +175,7 @@ export class BlockPartyComponent extends MercuryComponent {
 			this.audioPlayer.nativeElement.play().then(() => this.joined = true);
 		} else {
 			let unlisten = this.renderer.listen(this.audioPlayer.nativeElement, 'canplay', () => {
-				this.audioPlayer.nativeElement.play()
-					.then(() => this.joined = true)
-					.catch(() => {});
+				this.audioPlayer.nativeElement.play().then(() => this.joined = true)
 				unlisten();
 			})
 		}

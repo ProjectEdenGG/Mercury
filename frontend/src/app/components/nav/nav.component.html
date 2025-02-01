@@ -46,12 +46,12 @@
 	</div>
 </nav>
 
-<modal #loginModal>
+<modal #loginModal [closeButton]="loginModalOptions?.keyboard">
 	<div class="container color-white">
 		<div class="row">
 			<div class="col-12 col-lg-8 offset-lg-2 pt-3 px-md-2 pt-md-7 pb-md-{{loginFormMessage ? 2 : 6}}">
 				<div class="text-center">
-					<h1>Log In</h1>
+					<h1>{{loginModalOptions?.title ?? 'Log In'}}</h1>
 				</div>
 				<form (ngSubmit)="login()">
 					<div class="my-4">

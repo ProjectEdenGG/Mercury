@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterModule } from './components/footer/footer.module';
 import { NavModule } from './components/nav/nav.module';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 		NgbModule,
 		FooterModule,
 		NavModule,
+		BrowserAnimationsModule,
 		HttpClientModule,
 	],
 	bootstrap: [AppComponent]

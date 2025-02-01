@@ -7,12 +7,18 @@
 			<div class="spectrum"></div>
 			<div class="mt-4 background-color-gray px-4 py-3 rounded">
 				<div class="row position-relative">
-					<div class="col-12 background-color-gray play-button-container" #playButtonContainer [ngStyle]="{'opacity': joined ? 0 : 1}" style="">
+					<div #overlayContainer [@fadeInOut]="overlay ? 'visible' : 'void'" class="col-12 background-color-gray overlay-container">
 						<div class="mt-4 mb-3 d-flex justify-content-center flex-column align-items-center">
-							<div class="bg-primary font-rem-4_75 ratio ratio-1x1 icon-container" [ngClass]="{'cursor-pointer': !joined}">
-								<i class="bi bi-play-fill d-flex justify-content-center align-items-center pl-1" (click)="join()"></i>
-							</div>
-							<div class="font-rem-2_25 mt-3 fw-medium">Click to start the music!</div>
+							<ng-container *ngIf="!joined">
+								<div class="bg-primary font-rem-4_75 ratio ratio-1x1 icon-container" [ngClass]="{'cursor-pointer': !joined}">
+									<i class="bi bi-play-fill d-flex justify-content-center align-items-center pl-1" (click)="join()"></i>
+								</div>
+								<div class="font-rem-2_25 mt-3 fw-medium">Click to start the music!</div>
+							</ng-container>
+							<ng-container *ngIf="joined && reconnecting">
+								<spinner></spinner>
+								<div class="font-rem-2_25 mt-3 fw-medium">Reconnecting...</div>
+							</ng-container>
 						</div>
 					</div>
 					<div class="col-12 col-lg-7 d-flex align-items-center">

@@ -1,21 +1,54 @@
-import {Injectable} from '@angular/core';
-import {WebSocketSubject} from 'rxjs/webSocket';
+import { Injectable } from '@angular/core';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class WebsocketService {
-  private socket$: WebSocketSubject<any>;
+	private socket$: WebSocketSubject<any>;
 
-  connect(uuid: String) {
-    this.socket$ = new WebSocketSubject(`wss://projecteden.gg/nexus/ws?uuid=${uuid}`);
-  }
+	connect(uuid: String) {
+		this.socket$ = webSocket({
+			url: `wss://projecteden.gg/nexus/ws?uuid=${uuid}`,
+			openObserver: {
+				next: () => {
+					console.log('websocket connection established');
+				},
+			},
+			closeObserver: {
+				next: () => {
+					console.log('websocket connection closed');
+				},
+			},
+		});
 
-  sendMessage(message: any) {
-    this.socket$.next(message);
-  }
+		this.socket$.subscribe({
+			next: next => {
+				console.log('websocket next', next)
+			},
+			error: (error: any) => {
+				console.error("websocket error", error)
+			},
+			complete: () => {
+				console.log('websocket complete')
+			}
+		})
+	}
 
-  getMessages() {
-    return this.socket$;
-  }
+	disconnect() {
+		this.socket$?.unsubscribe()
+		this.socket$ = null;
+	}
+
+	sendMessage(message: any) {
+		this.socket$.next(message);
+	}
+
+	getMessages() {
+		return this.socket$;
+	}
+
+	isConnected() {
+		return this.socket$ !== null;
+	}
 }

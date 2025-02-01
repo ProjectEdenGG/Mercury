@@ -1,7 +1,7 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { ModalComponent } from '../modal/modal.component';
+import { BehaviorSubject, skip } from 'rxjs';
+import { ModalComponent, ModalOptions } from '../modal/modal.component';
 import { ResponsiveUtil } from '../../utils/responsive-util.component';
 import { Nerd, Utils } from '../../utils/utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -23,6 +23,7 @@ export class NavComponent {
 
 	public loginFormLoading: boolean;
 	public loginFormMessage: FormMessage;
+	public loginModalOptions: ModalOptions
 
 	public loginForm = new FormGroup({
 		username: new FormControl('', [Validators.required, Validators.maxLength(16)]),
@@ -63,15 +64,15 @@ export class NavComponent {
 			}
 		})
 
-		this.utils.openLoginModal$.subscribe({
-			next: options => {
-				if (options == null)
-					return;
-
-				this.loginModal.open({
+		this.utils.openLoginModal$.pipe(skip(1)).subscribe({
+			next: (options: ModalOptions) => {
+				this.loginModalOptions = {
 					centered: this.responsiveUtil.gte('md'),
+					title: 'Log In',
 					...options
-				})
+				};
+
+				this.loginModal.open(this.loginModalOptions)
 			}
 		})
 	}

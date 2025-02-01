@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, skip } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
+import { ModalOptions } from '../components/modal/modal.component';
 
 export type Nerd = {
 	uuid: string;
@@ -13,14 +13,25 @@ export type Nerd = {
 @Injectable({providedIn: 'root'})
 export class Utils {
 	originalOrder = () => 0;
+	UUID_ZERO = '00000000-0000-0000-0000-000000000000';
 
-	public openLoginModal$: BehaviorSubject<NgbModalOptions> = new BehaviorSubject(null);
+	public openLoginModal$: BehaviorSubject<ModalOptions> = new BehaviorSubject(null);
+	public nerd$: BehaviorSubject<Nerd> = new BehaviorSubject(null);
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document
-	) { }
+	) {
+		this.nerd$.pipe(skip(1)).subscribe({
+			next: nerd => {
+				if (nerd == null)
+					localStorage.removeItem('nerd')
+				else
+					localStorage.setItem('nerd', JSON.stringify(nerd))
+			}
+		})
+	}
 
-	public openLoginModal(options?: NgbModalOptions) {
+	public openLoginModal(options?: ModalOptions) {
 		this.openLoginModal$.next(options ?? {})
 	}
 
@@ -29,10 +40,7 @@ export class Utils {
 	}
 
 	public set nerd(nerd: Nerd) {
-		if (nerd == null)
-			localStorage.removeItem('nerd')
-		else
-			localStorage.setItem('nerd', JSON.stringify(nerd))
+		this.nerd$.next(nerd);
 	}
 
 	camelCase(text: string | null): string | null {
