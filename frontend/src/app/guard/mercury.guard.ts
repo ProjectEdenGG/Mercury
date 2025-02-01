@@ -1,5 +1,5 @@
 import { Injectable, Renderer2 } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { catchError, combineLatest, map, Observable } from 'rxjs';
 import { ApiService } from '../service/api.service';
 import { Utils } from '../utils/utils';
@@ -13,10 +13,12 @@ export class MercuryGuard implements CanActivate {
 		public apiService: ApiService,
 	) { }
 
-	canActivate(): Observable<boolean> {
+	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+		let uuid = (route.queryParamMap as any)?.params?.uuid ?? this.utils.nerd?.uuid;
+
 		let requests = {
 			ranks: this.apiService.getRanks(),
-			...this.utils.nerd?.uuid && { nerd: this.apiService.getNerd(this.utils.nerd?.uuid) }
+			...uuid && { nerd: this.apiService.getNerd(uuid) }
 		}
 
 		return combineLatest(requests).pipe(
