@@ -144,7 +144,7 @@ export class BlockPartyComponent extends MercuryComponent {
 					this.playing = false
 					this.stop();
 				} else if (message.action === 'block')
-					this.block = this.utils.camelCase(message.block).replace(/ /g, '_')
+					this.block = message.block
 			}
 		});
 	}

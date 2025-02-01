@@ -41,8 +41,10 @@
 						</div>
 					</div>
 					<div class="col-12 col-lg-5 p-4 px-md-8 px-lg-4 mt-2 mt-lg-0">
-						<img *ngIf="!block" class="w-100" src="https://minecraft.wiki/images/Gray_Concrete_Powder.png">
-						<img *ngIf="block" class="w-100" src="https://minecraft.wiki/images/{{block}}.png">
+						<div class="image-container">
+							<img class="w-100" [src]="'blockparty/GRAY_CONCRETE_POWDER.png' | cmsImage">
+							<img *ngIf="block" class="w-100" [src]="'blockparty/' + block + '.png' | cmsImage">
+						</div>
 					</div>
 				</div>
 			</div>
