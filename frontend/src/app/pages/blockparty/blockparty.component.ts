@@ -80,6 +80,7 @@ export class BlockPartyComponent extends MercuryComponent {
 				this.playing = false
 			} else {
 				this.reconnecting = false
+				this.subscribe()
 			}
 		})
 	}
@@ -115,9 +116,15 @@ export class BlockPartyComponent extends MercuryComponent {
 
 		this.websocket.connect(this.getUuid());
 
+		this.subscribe()
+	}
+
+	subscribe() {
 		this.websocket.getMessages().pipe(takeUntil(this.lifecycle().unsubscriber$)).subscribe(socketMessage => {
 			if (socketMessage === true)
 				return
+
+			console.log("Processing message...")
 
 			let messages = Array.isArray(socketMessage) ? socketMessage : [socketMessage];
 
