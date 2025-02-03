@@ -31,6 +31,7 @@ type Song = {
 })
 export class BlockPartyComponent extends MercuryComponent {
 	@ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+	@ViewChild('scratchAudio') scratchAudio!: ElementRef<HTMLAudioElement>;
 	@ViewChild('volumeControl') volumeControl!: ElementRef<HTMLInputElement>;
 	@ViewChild('overlayContainer') overlayContainer!: ElementRef<HTMLElement>;
 
@@ -189,6 +190,8 @@ export class BlockPartyComponent extends MercuryComponent {
 
 	pause() {
 		this.audioPlayer.nativeElement.pause();
+		this.scratchAudio.nativeElement.currentTime = 0;
+		this.scratchAudio.nativeElement.play();
 	}
 
 	stop() {
