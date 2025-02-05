@@ -203,4 +203,8 @@ export class BlockPartyComponent extends MercuryComponent {
 		this.volume = Number(this.volumeControl.nativeElement.value);
 		localStorage.setItem('blockparty-volume', this.volume.toString());
 	}
+
+	ended() {
+		this.audioPlayer.nativeElement.currentTime = 0
+	}
 }

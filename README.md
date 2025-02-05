@@ -4,8 +4,6 @@ Project Eden's website
 
 ## To Do
 
-### Before release
-
 ### Soon
 - Home page
 	- About us
