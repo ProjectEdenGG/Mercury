@@ -11,7 +11,7 @@ type Song = {
 	url?: string;
 	title?: string;
 	artist?: string;
-	time?: number;
+	startTime?: number;
 }
 
 @Component({
@@ -138,10 +138,6 @@ export class BlockPartyComponent extends MercuryComponent {
 					this.lastMessageWithTime = Date.now()
 					this.currentSong = message.song as Song;
 				}
-				if (message.time) {
-					this.lastMessageWithTime = Date.now()
-					this.currentSong.time = message.time;
-				}
 				if (message.action === 'play') {
 					this.playing = true
 					this.play();
@@ -173,9 +169,10 @@ export class BlockPartyComponent extends MercuryComponent {
 		if (!this.playing)
 			return
 
-		if (this.currentSong.time) {
-			this.audioPlayer.nativeElement.currentTime = this.currentSong.time + ((Date.now() - this.lastMessageWithTime) / 1000);
-			this.currentSong.time = null;
+		if (this.currentSong.startTime) {
+			console.log(this.currentSong.startTime);
+			this.audioPlayer.nativeElement.currentTime = this.currentSong.startTime + ((Date.now() - this.lastMessageWithTime) / 1000);
+			this.currentSong.startTime = null;
 		}
 
 		if (this.audioPlayer.nativeElement.readyState >= 3) {
