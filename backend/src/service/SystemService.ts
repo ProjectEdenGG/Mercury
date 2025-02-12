@@ -50,11 +50,12 @@ export class SystemService {
 	diskspace() {
 		return new Promise<any>(async resolve => {
 			si.fsSize(os.platform() === 'win32' ? 'C:' : '/dev/md2').then((result: any) => {
+				let total = result[0].size * .95; // linux has 5% buffer
 				resolve({
-					total: result[0].size,
+					total: total,
 					used: result[0].used,
 					free: result[0].available,
-					percentage: (result[0].used / result[0].size) * 100,
+					percentage: (result[0].used / total) * 100,
 				})
 			})
 		});
