@@ -1,0 +1,39 @@
+<div style="padding: 16px; max-width: 600px; margin: auto;">
+	<h2>Minigame Statistics</h2>
+
+	<div style="margin-bottom: 16px;">
+		<label for="mechanics" class="pr-1">Mechanic:</label>
+		<select (change)="onChangeSelectedMechanic($event)" id="mechanics">
+			<option *ngFor="let entry of mechanics | keyvalue" [value]="entry.key" [selected]="entry.key == selectedMechanic">{{ entry.value }}</option>
+		</select>
+	</div>
+
+	<div style="margin-bottom: 16px;">
+		<label for="statistics" class="pr-1">Statistic:</label>
+		<select (change)="onChangeSelectedStatistic($event)" id="statistics">
+			<option *ngFor="let entry of statisticsEntries | keyvalue" [value]="entry.key" [selected]="entry.key == selectedStatistic">{{ entry.value }}</option>
+		</select>
+	</div>
+
+	<div style="margin-bottom: 24px;">
+		<label for="date-range" class="pr-1">Date Range</label>
+		<select (change)="onChangeSelectedDateRange($event)" id="date-range">
+			<option *ngFor="let entry of dateRanges | keyvalue: utils.originalOrder" [value]="entry.key" [selected]="entry.key == selectedDateRange">{{ entry.value }}</option>
+		</select>
+	</div>
+
+	<table border="1" cellpadding="8" cellspacing="0" style="width: 100%; text-align: left;">
+		<thead>
+		<tr>
+			<th>Player</th>
+			<th>Value</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr *ngFor="let row of tableData">
+			<td>{{ row.col1 }}</td>
+			<td>{{ row.col2 }}</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

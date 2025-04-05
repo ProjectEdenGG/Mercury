@@ -52,4 +52,12 @@ export class ApiService {
 		return this.http.get(`https://api.modrinth.com/v2/project/${mod}/version`);
 	}
 
+	getMinigameStats() {
+		return this.http.get('/nexus/minigames/stats')
+	}
+
+	getMinigameStatsForStat(mechanic: string, stat_key: string, date: string, uuid: string) {
+		return this.http.get(`/nexus/minigames/stats/${mechanic}/${stat_key}/${date}/${uuid}`)
+	}
+
 }

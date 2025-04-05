@@ -1,6 +1,6 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { MercuryGuard } from './guard/mercury.guard';
+import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {MercuryGuard} from './guard/mercury.guard';
 
 export const routes: Routes = [
 	{
@@ -8,6 +8,7 @@ export const routes: Routes = [
 		canActivate: [MercuryGuard],
 		children: [
 			{ path: 'blockparty', loadChildren: () => import('./pages/blockparty/blockparty.module').then(m => m.BlockpartyModule) },
+			{ path: 'minigames', loadChildren: () => import('./pages/minigames/minigames.module').then(m => m.MinigamesModule) },
 			{ path: 'vote', loadChildren: () => import('./pages/vote/vote.module').then(m => m.VoteModule) },
 			{ path: 'titan', loadChildren: () => import('./pages/titan/titan.module').then(m => m.TitanModule) },
 			{ path: 'status', loadChildren: () => import('./pages/status/status.module').then(m => m.StatusModule) },
