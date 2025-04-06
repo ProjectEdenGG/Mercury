@@ -8,6 +8,10 @@
 	justify-content: center;
 	width: 32px;
 	height: 32px;
+	@media (max-width: 768px) {
+		width: 24px;
+		height: 24px;
+	}
 	border-radius: 6px;
 	font-weight: bold;
 	font-size: 16px;
@@ -71,9 +75,10 @@ tbody tr:hover {
 	border-radius: 0;
 }
 
-.left-column-width {
-	@include media-breakpoint-up(md) {
-		max-width: 300px;
+.table-player-head {
+	border-radius: 8px;
+	height: 48px;
+	@Media (max-width: 768px) {
+		height: 28px;
 	}
 }
-

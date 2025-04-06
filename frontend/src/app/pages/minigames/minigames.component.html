@@ -1,104 +1,111 @@
-<div style="padding: 16px; max-width: 1000px; margin: auto;">
-	<h1 class="mb-2">Minigame Leaderboards</h1>
-	<div class="spectrum"></div>
+<div class="container-fluid container-md">
+	<div class="row">
+		<div class="col-12">
+			<h1 class="mb-2">Minigame Leaderboards</h1>
+			<div class="spectrum"></div>
 
-	<button type="button" (click)="onClickBackButton()" class="bi-arrow-left btn btn-outline-primary mb-2" style="border-radius: 0.375rem">
-		Gamemodes
-	</button>
-
-	<div *ngIf="selectedMechanic" class="d-md-flex justify-content-md-between" style="gap: 32px;">
-		<div class="d-flex flex-column align-items-start left-column-width">
-			<h1>{{ mechanics[this.selectedMechanic] }}</h1>
-			<span class="mt-2 mb-2">{{ descriptions[this.selectedMechanic] }}</span>
-
-			<table style="width: 100%; text-align: left;" class="mb-3">
-				<thead style="background-color: #669AE1;">
-				<tr>
-					<th style="text-align: left; border-bottom: 2px solid; padding-bottom: 4px;" class="pl-1">Global Statistics</th>
-					<th style="text-align: left; border-bottom: 2px solid; padding-bottom: 4px;" class="pl-1"></th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr *ngFor="let row of globalStats;">
-					<td class="p-1">{{ row.stat }}</td>
-					<td style="text-align: right;" class="pr-1">{{ row.value }}</td>
-				</tr>
-				</tbody>
-			</table>
-
-			<table style="width: 100%; text-align: left;" class="mb-3" *ngIf="this.utils.nerd">
-				<thead style="background-color: #669AE1;">
-				<tr>
-					<th style="text-align: left; border-bottom: 2px solid; padding-bottom: 4px;" class="pl-1">Your Statistics</th>
-					<th style="text-align: left; border-bottom: 2px solid; padding-bottom: 4px;" class="pl-1"></th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr *ngFor="let row of userAggregateStats;">
-					<td class="p-1">{{ row.stat }}</td>
-					<td style="text-align: right;" class="pr-1">{{ row.value }}</td>
-				</tr>
-				</tbody>
-			</table>
+			<button type="button" (click)="onClickBackButton()" class="bi-arrow-left btn btn-outline-primary mb-2" style="border-radius: 0.375rem">
+				Gamemodes
+			</button>
 		</div>
+		<div class="col-12 col-md-5 col-lg-4">
+			<div class="d-flex flex-column align-items-start">
+				<h1>{{ mechanics[this.selectedMechanic] }}</h1>
+				<span class="mt-2 mb-2">{{ descriptions[this.selectedMechanic] }}</span>
 
-		<div class="d-flex flex-column align-items-end" style="flex: 1;">
-			<div style="width: 100%">
-				<div class="d-sm-flex justify-content-between align-items-start" style="margin-bottom: 16px;">
-					<div class="d-flex flex-column align-items-md-start pb-2 pb-md-0 align-items-center">
-						<select (change)="onChangeSelectedStatistic($event)" id="statistics" class="form-select" [ngClass]="{ 'custom-dropdown': true }" style="width: 220px;">
-							<option *ngFor="let entry of statisticsEntries | keyvalue" [value]="entry.key" [selected]="entry.key == selectedStatistic">
-								{{ entry.value }}
-							</option>
-						</select>
-					</div>
-
-					<div class="d-flex flex-column align-items-md-end align-items-center">
-						<div class="d-flex" style="gap: 3px;" id="buttons">
-							<button
-								type="button"
-								*ngFor="let entry of dateRangeEntries; let i = index"
-								(click)="onClickDateRange(entry.key)"
-								[ngClass]="getButtonClass(entry.key, i)">
-								{{ entry.value }}
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<table style="width: 100%; text-align: left;">
+				<table class="text-start w-100 mb-3">
 					<thead style="background-color: #669AE1;">
-					<tr>
-						<th style="text-align: left; border-bottom: 2px solid; padding-bottom: 4px;" class="pl-3">Rank</th>
-						<th style="border-bottom: 2px solid; padding-bottom: 4px;">Player</th>
-						<th style="text-align: right; border-bottom: 2px solid; padding-bottom: 4px;" class="pr-3">Value</th>
-					</tr>
+						<tr>
+							<th style="border-bottom: 2px solid; padding-bottom: 4px;" class="text-start pl-1">Global Statistics</th>
+							<th style="border-bottom: 2px solid; padding-bottom: 4px;" class="text-start pl-1"></th>
+						</tr>
 					</thead>
 					<tbody>
-					<tr *ngFor="let row of tableData;" [ngClass]="{ 'border-top': !row.uuid }">
-						<ng-container *ngIf="row.name; else mergedRow">
-							<td style="text-align: center;">
-								<span [ngClass]="{ 'gold': row.rank === 1, 'silver': row.rank === 2, 'bronze': row.rank === 3 }" class="rank-badge">
-									{{ row.rank }}
-								 </span>
-							</td>
-							<td>
-								<div style="display: flex; align-items: center; gap: 8px;">
-									<img *ngIf="row.uuid" style="border-radius: 8px; height: 48px;" class="mb-1 mt-1" src="https://crafatar.com/avatars/{{ row.uuid }}?overlay">
-									<span class="fw-bold font-rem-1_25 pl-1">{{ row.name }}</span>
-								</div>
-							</td>
-							<td style="text-align: right;" class="pr-3">{{ row.value }}</td>
-						</ng-container>
+						<tr *ngFor="let row of globalStats;">
+							<td class="p-1">{{ row.stat }}</td>
+							<td style="text-align: right;" class="text-end pr-1">{{ row.value }}</td>
+						</tr>
+					</tbody>
+				</table>
 
-						<ng-template #mergedRow>
-							<td colspan="2" class="pl-3 fw-bold">{{ row.rank }}</td>
-							<td></td>
-						</ng-template>
-					</tr>
+				<table class="text-start w-100 mb-3" *ngIf="this.utils.nerd">
+					<thead style="background-color: #669AE1;">
+						<tr>
+							<th style="border-bottom: 2px solid; padding-bottom: 4px;" class="text-start pl-1">Your Statistics</th>
+							<th style="border-bottom: 2px solid; padding-bottom: 4px;" class="text-start pl-1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let row of userAggregateStats;">
+							<td class="p-1">{{ row.stat }}</td>
+							<td class="text-end pr-1">{{ row.value }}</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
+		</div>
+
+		<div class="col-12 col-md-7 col-lg-8">
+			<div class="d-flex flex-column align-items-end" style="flex: 1;">
+				<div class="w-100">
+					<div class="d-sm-flex d-md-block d-lg-flex justify-content-between align-items-start" style="margin-bottom: 16px;">
+						<div class="d-flex flex-column align-items-center align-items-sm-start align-items-md-start pb-2 pb-md-2 pb-lg-0">
+							<select (change)="onChangeSelectedStatistic($event)" id="statistics" class="form-select" [ngClass]="{ 'custom-dropdown': true }" style="width: 220px;">
+								<option *ngFor="let entry of statisticsEntries | keyvalue" [value]="entry.key" [selected]="entry.key == selectedStatistic">
+									{{ entry.value }}
+								</option>
+							</select>
+						</div>
+
+						<div class="d-flex flex-column align-items-center align-items-sm-end align-items-md-start align-items-lg-end ">
+							<div class="d-flex" style="gap: 3px;" id="buttons">
+								<button
+									type="button"
+									*ngFor="let entry of dateRangeEntries; let i = index"
+									(click)="onClickDateRange(entry.key)"
+									[ngClass]="getButtonClass(entry.key, i)">
+									{{ entry.value }}
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<table class="text-start w-100">
+						<thead style="background-color: #669AE1;">
+							<tr>
+								<th style="border-bottom: 2px solid; padding-bottom: 4px;" class="text-center">Rank</th>
+								<th style="border-bottom: 2px solid; padding-bottom: 4px;">Player</th>
+								<th style="border-bottom: 2px solid; padding-bottom: 4px;" class="text-end pr-3">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let row of tableData;" [ngClass]="{ 'border-top': !row.uuid }">
+								<ng-container *ngIf="row.name; else mergedRow">
+									<td class="text-center">
+										<span [ngClass]="{ 'gold': row.rank === 1, 'silver': row.rank === 2, 'bronze': row.rank === 3 }" class="rank-badge">
+											{{ row.rank }}
+										 </span>
+									</td>
+									<td>
+										<div class="d-flex align-items-center">
+											<img *ngIf="row.uuid" style="" class="table-player-head mb-1 mt-1 mr-1" src="https://crafatar.com/avatars/{{ row.uuid }}?overlay">
+											<span class="fw-bold font-rem-1 font-rem-md-1_25 pl-1">{{ row.name }}</span>
+										</div>
+									</td>
+									<td class="text-end pr-3">{{ row.value }}</td>
+								</ng-container>
+
+								<ng-template #mergedRow>
+									<td colspan="2" class="pl-3 fw-bold">{{ row.rank }}</td>
+									<td></td>
+								</ng-template>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
 		</div>
 	</div>
 </div>
