@@ -2,12 +2,14 @@ import {Component} from '@angular/core';
 import {MercuryComponent} from '../../lifecycle/MercuryComponent';
 import {Utils} from '../../utils/utils';
 import {ApiService} from '../../service/api.service';
+import {ActivatedRoute} from '@angular/router';
 
 
 type Stat = {
 	stats: { [key:string]: string },
 	mechanic: string,
-	title: string
+	title: string,
+	description: string
 }
 
 // {
@@ -32,19 +34,23 @@ export class MinigamesComponent extends MercuryComponent {
 	constructor(
 		public utils: Utils,
 		public apiService: ApiService,
+		private route: ActivatedRoute
 	) {
 		super()
 	}
 
 	stats: Stat[];
 	mechanics: { [key:string]: string } = {}
+	descriptions: { [key:string]: string } = {}
 	statisticsEntries: { [key:string]: string }
 	dateRanges = {
 		"all": "All Time",
-		"last_7": "Last 7 Days",
-		"last_30": "Last 30 Days",
-		"last_365": "Last 365 Days"
-	}
+		"last_7": "Weekly",
+		"last_30": "Monthly",
+		"last_365": "Yearly"
+	};
+	globalStats: any = []
+	userAggregateStats: any = []
 
 	selectedMechanic: string | undefined;
 	selectedStatistic: string | undefined;
@@ -53,7 +59,11 @@ export class MinigamesComponent extends MercuryComponent {
 	tableData: any = []
 
 	override ngOnInit() {
-		this.fetchPicklistData();
+		this.route.paramMap.subscribe(params => {
+			this.selectedMechanic = params.get('mechanic');
+			this.fetchPicklistData();
+		});
+
 		this.utils.nerd$.subscribe({
 			next: () => {
 				this.onChangeStatistic()
@@ -61,24 +71,43 @@ export class MinigamesComponent extends MercuryComponent {
 		})
 	}
 
+	onClickBackButton() {
+		this.selectedMechanic = null;
+	}
+
+	get dateRangeEntries() {
+		return Object.entries(this.dateRanges).map(([key, value]) => ({ key, value }));
+	}
+
+	onClickDateRange(key: string) {
+		this.selectedDateRange = key;
+		this.onChangeStatistic();
+	}
+
+	getButtonClass(key: string, index: number) {
+		const total = this.dateRangeEntries.length;
+		return {
+			'btn': true,
+			'btn-outline-primary': key !== this.selectedDateRange,
+			'btn-primary': key === this.selectedDateRange,
+			'custom-rounded-start': index === 0,
+			'custom-rounded-none': index > 0 && index < total - 1,
+			'custom-rounded-end': index === total - 1
+		};
+	}
+
 	fetchPicklistData() {
 		this.apiService.getMinigameStats().subscribe({
 			next: value => {
 				this.stats = value as Stat[];
-				console.log(value)
 				for (let stat of this.stats) {
 					this.mechanics[stat.mechanic] = stat.title
+					this.descriptions[stat.mechanic] = stat.description;
 				}
 
-				this.selectedMechanic = Object.keys(this.mechanics).sort((a,b) => a.localeCompare(b))[0];
 				this.onChangeMechanic();
 			}
 		});
-	}
-
-	public onChangeSelectedMechanic(event: any) {
-		this.selectedMechanic = event.target.value;
-		this.onChangeMechanic();
 	}
 
 	onChangeMechanic() {
@@ -91,11 +120,7 @@ export class MinigamesComponent extends MercuryComponent {
 		}
 		this.statisticsEntries = stat.stats;
 		this.selectedStatistic = Object.keys(this.statisticsEntries).sort((a, b) => a.localeCompare(b))[0];
-		this.onChangeStatistic()
-	}
 
-	public onChangeSelectedDateRange(event: any) {
-		this.selectedDateRange = event.target.value;
 		this.onChangeStatistic()
 	}
 
@@ -105,6 +130,8 @@ export class MinigamesComponent extends MercuryComponent {
 	}
 
 	onChangeStatistic() {
+		if (this.selectedStatistic == undefined || this.selectedMechanic == undefined)
+			return
 		let date: any = null;
 		if (this.selectedDateRange != "all") {
 			let days = parseInt(this.selectedDateRange.replace("last_", ""));
@@ -116,10 +143,45 @@ export class MinigamesComponent extends MercuryComponent {
 		this.apiService.getMinigameStatsForStat(this.selectedMechanic, this.selectedStatistic, date, uuid).subscribe({
 			next: (value: any) => {
 				this.tableData = Object.keys(value).map((key: any) => ({
-					col1: `${value[key].rank} - ${value[key].name}`,
-					col2: value[key].score
+					rank: value[key].rank,
+					uuid: value[key].uuid,
+					name: `${value[key].name}`,
+					value: value[key].score
+				}));
+				if (this.tableData.length >= 2) {
+					const last = this.tableData[this.tableData.length - 1];
+					const secondLast = this.tableData[this.tableData.length - 2];
+
+					if (typeof last.rank === 'number' && typeof secondLast.rank === 'number') {
+						if (last.rank !== secondLast.rank + 1) {
+							this.tableData.splice(-1, 0, { rank: "Your ranking:" });
+						}
+					}
+				}
+			}
+		})
+
+		this.apiService.getMinigameAggregateStats(this.selectedMechanic, date, null).subscribe({
+			next: (value: any) => {
+				this.globalStats = Object.keys(value).map((key: any) => ({
+					stat: value[key].stat,
+					value: value[key].value
 				}));
 			}
 		})
+		if (this.utils.nerd) {
+			this.apiService.getMinigameAggregateStats(this.selectedMechanic, date, this.utils.nerd.uuid).subscribe({
+				next: (value: any) => {
+					this.userAggregateStats = Object.keys(value).map((key: any) => ({
+						stat: value[key].stat,
+						value: value[key].value
+					}));
+				}
+			})
+		}
+		else {
+			this.userAggregateStats = []
+		}
 	}
+
 }

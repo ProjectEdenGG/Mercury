@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {MinigamesComponent} from './minigames.component';
 
 const routes: Routes = [
+	{ path: ':mechanic', component: MinigamesComponent },
 	{ path: '', component: MinigamesComponent },
 	{ path: '**', redirectTo: '' },
 ]
