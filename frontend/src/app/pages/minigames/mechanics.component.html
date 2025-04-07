@@ -6,16 +6,16 @@
 		</div>
 		<div
 			*ngFor="let mechanic of stats"
-			[routerLink]="'/minigames/' + mechanic.mechanic"
 			class="col-12 col-sm-6 col-md-4 col-lg-3 text-center p-1 p-sm-2"
 		>
 			<div
-				class="mechanic-image mb-2"
+				class="mechanic-image mb-2 cursor-pointer"
+				[routerLink]="'/minigames/' + mechanic.mechanic"
 				[ngStyle]="{
-			'--bg-url': 'url(https://github.com/ProjectEdenGG/CMS/blob/master/images/minigames/' + mechanic.mechanic + '.png?raw=true)',
-			'background-image': 'var(--bg-url)',
-			'background-position': 'center -0px'
-		}"
+					'--bg-url': 'url(https://github.com/ProjectEdenGG/CMS/blob/master/images/minigames/' + mechanic.mechanic + '.png?raw=true)',
+					'background-image': 'var(--bg-url)',
+					'background-position': 'center -0px'
+				}"
 			>
 				<div class="mechanic-title">{{ mechanic.title }}</div>
 			</div>

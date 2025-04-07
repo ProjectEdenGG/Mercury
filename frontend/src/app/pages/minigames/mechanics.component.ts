@@ -7,9 +7,7 @@ import {ApiService} from '../../service/api.service';
 type Stat = {
 	mechanic: string,
 	title: string,
-	description: string,
-	imageURL: string,
-	imageOffset: number
+	description: string
 }
 
 // {
@@ -39,14 +37,12 @@ export class MechanicsComponent extends MercuryComponent {
 	}
 
 	stats: Stat[];
-	mechanics: { [key:string]: string } = {}
-	descriptions: { [key:string]: string } = {}
 
 	override ngOnInit() {
-		this.fetchPicklistData();
+		this.fetchMechanics();
 	}
 
-	fetchPicklistData() {
+	fetchMechanics() {
 		this.apiService.getMinigameStats().subscribe({
 			next: value => {
 				this.stats = value as Stat[];

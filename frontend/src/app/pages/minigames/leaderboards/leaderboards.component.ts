@@ -9,7 +9,8 @@ type Stat = {
 	stats: { [key:string]: string },
 	mechanic: string,
 	title: string,
-	description: string
+	description: string,
+	timed: boolean
 }
 
 // {
@@ -20,7 +21,9 @@ type Stat = {
 //         "time_played": "Time Played"
 //     },
 //     "mechanic": "archery",
-//     "title": "Archery"
+//     "title": "Archery",
+// 	   "description": "...",
+//     "timed": false
 // }
 
 @Component({
@@ -52,6 +55,8 @@ export class LeaderboardsComponent extends MercuryComponent {
 	globalStats: any = []
 	userAggregateStats: any = []
 
+	timedLeaderboard: boolean = false
+
 	selectedMechanic: string | undefined;
 	selectedStatistic: string | undefined;
 	selectedDateRange: string = Object.keys(this.dateRanges)[0];
@@ -70,10 +75,6 @@ export class LeaderboardsComponent extends MercuryComponent {
 				this.onChangeStatistic()
 			}
 		})
-	}
-
-	onClickBackButton() {
-		this.selectedMechanic = null;
 	}
 
 	get dateRangeEntries() {
@@ -120,7 +121,10 @@ export class LeaderboardsComponent extends MercuryComponent {
 			}
 		}
 		this.statisticsEntries = stat.stats;
+		this.timedLeaderboard = stat.timed;
 		this.selectedStatistic = Object.keys(this.statisticsEntries).sort((a, b) => a.localeCompare(b))[0];
+		if ("wins" in this.statisticsEntries)
+			this.selectedStatistic = "wins"
 
 		this.onChangeStatistic()
 	}
@@ -152,21 +156,23 @@ export class LeaderboardsComponent extends MercuryComponent {
 			}
 		})
 
-		this.apiService.getMinigameAggregateStats(this.selectedMechanic, date, null).subscribe({
-			next: (value: any) => {
-				this.globalStats = Object.keys(value).map((key: any) => ({
-					stat: value[key].stat,
-					value: value[key].value
-				}));
-			}
-		})
+		if (this.timedLeaderboard) {
+			this.apiService.getMinigameAggregateStats(this.selectedMechanic, date, null).subscribe({
+				next: (value: any) => {
+					this.globalStats = Object.keys(value).map((key: any) => ({
+						stat: value[key].stat,
+						value: value[key].value
+					})).sort((a, b) => a.stat.localeCompare(b.stat));
+				}
+			})
+		}
 		if (this.utils.nerd) {
 			this.apiService.getMinigameAggregateStats(this.selectedMechanic, date, this.utils.nerd.uuid).subscribe({
 				next: (value: any) => {
 					this.userAggregateStats = Object.keys(value).map((key: any) => ({
 						stat: value[key].stat,
 						value: value[key].value
-					}));
+					})).sort((a, b) => a.stat.localeCompare(b.stat));
 				}
 			})
 		}

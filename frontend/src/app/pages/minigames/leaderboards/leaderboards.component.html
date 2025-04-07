@@ -13,7 +13,7 @@
 				<h1>{{ mechanics[this.selectedMechanic] }}</h1>
 				<span class="mt-2 mb-2">{{ descriptions[this.selectedMechanic] }}</span>
 
-				<table class="text-start w-100 mb-3">
+				<table *ngIf="!timedLeaderboard" class="text-start w-100 mb-3">
 					<thead style="background-color: #669AE1;">
 						<tr>
 							<th style="border-bottom: 2px solid; padding-bottom: 4px;" class="text-start pl-1">Global Statistics</th>
@@ -57,7 +57,7 @@
 							</select>
 						</div>
 
-						<div class="d-flex flex-column align-items-center align-items-sm-end align-items-md-start align-items-lg-end ">
+						<div *ngIf="!timedLeaderboard" class="d-flex flex-column align-items-center align-items-sm-end align-items-md-start align-items-lg-end ">
 							<div class="d-flex" style="gap: 3px;" id="buttons">
 								<button
 									type="button"
