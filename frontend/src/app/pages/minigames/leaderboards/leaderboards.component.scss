@@ -1,6 +1,6 @@
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/mixins";
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
 
 .rank-badge {
 	display: inline-flex;
@@ -76,6 +76,7 @@ tbody tr:hover {
 }
 
 .table-player-head {
+	aspect-ratio: 1/1;
 	border-radius: 8px;
 	height: 48px;
 	@Media (max-width: 768px) {

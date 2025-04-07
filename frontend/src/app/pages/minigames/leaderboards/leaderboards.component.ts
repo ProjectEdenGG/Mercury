@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {MercuryComponent} from '../../lifecycle/MercuryComponent';
-import {Utils} from '../../utils/utils';
-import {ApiService} from '../../service/api.service';
+import {MercuryComponent} from '../../../lifecycle/MercuryComponent';
+import {Utils} from '../../../utils/utils';
+import {ApiService} from '../../../service/api.service';
 import {ActivatedRoute} from '@angular/router';
 
 
@@ -24,12 +24,12 @@ type Stat = {
 // }
 
 @Component({
-	selector: 'app-minigames',
-	templateUrl: './minigames.component.html',
-	styleUrl: './minigames.component.scss',
+	selector: 'app-minigames-leaderboards',
+	templateUrl: './leaderboards.component.html',
+	styleUrl: './leaderboards.component.scss',
 	standalone: false
 })
-export class MinigamesComponent extends MercuryComponent {
+export class LeaderboardsComponent extends MercuryComponent {
 
 	constructor(
 		public utils: Utils,
@@ -60,6 +60,7 @@ export class MinigamesComponent extends MercuryComponent {
 
 	override ngOnInit() {
 		this.route.paramMap.subscribe(params => {
+			console.log(params)
 			this.selectedMechanic = params.get('mechanic');
 			this.fetchPicklistData();
 		});
@@ -140,23 +141,13 @@ export class MinigamesComponent extends MercuryComponent {
 			date = date.toISOString()
 		}
 		let uuid = this.utils.nerd?.uuid ?? null;
-		this.apiService.getMinigameStatsForStat(this.selectedMechanic, this.selectedStatistic, date, uuid).subscribe({
+		this.apiService.getMinigameStatsForStat(this.selectedMechanic, this.selectedStatistic, date, uuid, this.currentPage).subscribe({
 			next: (value: any) => {
-				this.tableData = Object.keys(value).map((key: any) => ({
-					rank: value[key].rank,
-					uuid: value[key].uuid,
-					name: `${value[key].name}`,
-					value: value[key].score
-				}));
-				if (this.tableData.length >= 2) {
-					const last = this.tableData[this.tableData.length - 1];
-					const secondLast = this.tableData[this.tableData.length - 2];
-
-					if (typeof last.rank === 'number' && typeof secondLast.rank === 'number') {
-						if (last.rank !== secondLast.rank + 1) {
-							this.tableData.splice(-1, 0, { rank: "Your ranking:" });
-						}
-					}
+				this.tableData = value.leaderboard;
+				this.totalRows = value.totalRows;
+				if (value.self) {
+					this.tableData.push(value.self);
+					this.tableData.splice(-1, 0, { rank: "Your ranking:" });
 				}
 			}
 		})
@@ -182,6 +173,22 @@ export class MinigamesComponent extends MercuryComponent {
 		else {
 			this.userAggregateStats = []
 		}
+	}
+
+	currentPage: number = 1
+	totalRows: number = 0
+
+	changePage(page: number) {
+		this.currentPage = page
+		this.onChangeStatistic()
+	}
+
+	firstPage() {
+		return this.currentPage === 1
+	}
+
+	lastPage() {
+		return this.currentPage === Math.ceil(this.totalRows / 10)
 	}
 
 }

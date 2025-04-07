@@ -1,0 +1,70 @@
+.mechanic-image {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 120px;
+	border-radius: 12px;
+	border: 2px solid #656565;
+	box-sizing: border-box;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	--bg-url: none;
+
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mechanic-image:hover {
+	transform: scale(1.03);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mechanic-image::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image: var(--bg-url);
+	background-size: 130%;
+	background-repeat: no-repeat;
+	background-position: center;
+	filter: blur(2px);
+	z-index: 0;
+
+	transition: filter 0.3s ease;
+}
+
+.mechanic-image:hover::before {
+	filter: blur(4px);
+}
+
+.mechanic-image::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 1;
+
+	transition: background 0.3s ease;
+}
+
+.mechanic-image:hover::after {
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.mechanic-title {
+	position: relative;
+	z-index: 2;
+	color: white;
+	font-weight: bold;
+	font-size: 1.3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	text-shadow: 0 1px 2px black;
+	pointer-events: none;
+
+	transition: transform 0.3s ease;
+}
+
+.mechanic-image:hover .mechanic-title {
+	transform: scale(1.12);
+}

@@ -56,12 +56,22 @@ export class ApiService {
 		return this.http.get('/nexus/minigames/stats')
 	}
 
-	getMinigameStatsForStat(mechanic: string, stat_key: string, date: string, uuid: string) {
-		return this.http.get(`/nexus/minigames/stats/leaderboard/${mechanic}/${stat_key}/${date}/${uuid}`)
+	getMinigameStatsForStat(mechanic: string, stat_key: string, date: string, uuid: string, page: number) {
+		return this.http.post('/nexus/minigames/stats', {
+			"mechanic": mechanic,
+			"stat": stat_key,
+			"date": date,
+			"uuid": uuid,
+			"page": page
+		})
 	}
 
 	getMinigameAggregateStats(mechanic: string, date: string, uuid: string) {
-		return this.http.get(`/nexus/minigames/stats/aggregate/${mechanic}/${date}/${uuid}`)
+		return this.http.post('/nexus/minigames/stats/aggregate', {
+			"mechanic": mechanic,
+			"date": date,
+			"uuid": uuid
+		})
 	}
 
 }

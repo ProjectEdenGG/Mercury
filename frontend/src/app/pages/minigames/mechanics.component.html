@@ -1,0 +1,25 @@
+<div class="container-fluid container-md">
+	<div class="row">
+		<div class="col-12">
+			<h1 class="mb-2">Minigame Leaderboards</h1>
+			<div class="spectrum"></div>
+		</div>
+		<div
+			*ngFor="let mechanic of stats"
+			[routerLink]="'/minigames/' + mechanic.mechanic"
+			class="col-12 col-sm-6 col-md-4 col-lg-3 text-center p-1 p-sm-2"
+		>
+			<div
+				class="mechanic-image mb-2"
+				[ngStyle]="{
+			'--bg-url': 'url(https://github.com/ProjectEdenGG/CMS/blob/master/images/minigames/' + mechanic.mechanic + '.png?raw=true)',
+			'background-image': 'var(--bg-url)',
+			'background-position': 'center -0px'
+		}"
+			>
+				<div class="mechanic-title">{{ mechanic.title }}</div>
+			</div>
+		</div>
+
+	</div>
+</div>
