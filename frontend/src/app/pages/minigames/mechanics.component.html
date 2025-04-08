@@ -6,14 +6,14 @@
 		</div>
 		<div
 			*ngFor="let mechanic of stats"
-			class="col-12 col-sm-6 col-md-4 col-lg-3 text-center p-1 p-sm-2"
+			class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center p-1 p-sm-2"
 		>
 			<div
 				class="mechanic-image mb-2 cursor-pointer"
 				[routerLink]="'/minigames/' + mechanic.mechanic"
 				[ngStyle]="{'--bg-url': 'url(' + ('minigames/' + mechanic.mechanic + '.png' | cmsImage) + ')'}"
 			>
-				<div class="mechanic-title">{{ mechanic.title }}</div>
+				<div class="mechanic-title" [innerHTML]="getMechanicTitle(mechanic)"></div>
 			</div>
 		</div>
 

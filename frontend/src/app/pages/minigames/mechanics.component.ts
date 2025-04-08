@@ -50,4 +50,8 @@ export class MechanicsComponent extends MercuryComponent {
 		});
 	}
 
+	getMechanicTitle(mechanic: any): string {
+		return mechanic.title
+			.replace('Four Team Deathmatch', 'Four Team<br class="d-none d-sm-block"/> Deathmatch')
+	}
 }
