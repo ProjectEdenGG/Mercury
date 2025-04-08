@@ -25,6 +25,10 @@
 							<td class="p-1">{{ row.stat }}</td>
 							<td style="text-align: right;" class="text-end pr-1">{{ row.value }}</td>
 						</tr>
+
+						<tr *ngIf="disabled">
+							<td colspan="2" class="text-center fw-bold">Loading results...</td>
+						</tr>
 					</tbody>
 				</table>
 
@@ -39,6 +43,9 @@
 						<tr *ngFor="let row of userAggregateStats;">
 							<td class="p-1">{{ row.stat }}</td>
 							<td class="text-end pr-1">{{ row.value }}</td>
+						</tr>
+						<tr *ngIf="disabled">
+							<td colspan="2" class="text-center fw-bold">Loading results...</td>
 						</tr>
 					</tbody>
 				</table>
