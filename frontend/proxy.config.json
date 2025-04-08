@@ -1,15 +1,12 @@
 {
 	"/api": {
-		"target": "http://localhost:8888/",
+		"target": "https://projecteden.gg/",
 		"secure": true,
 		"changeOrigin": true
 	},
 	"/nexus": {
-		"target": "http://localhost:8181/",
+		"target": "https://projecteden.gg/",
 		"secure": true,
-		"changeOrigin": true,
-		"pathRewrite": {
-			"^/nexus": ""
-		}
+		"changeOrigin": true
 	}
 }

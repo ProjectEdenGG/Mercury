@@ -4,6 +4,7 @@
 	"scripts": {
 		"ng": "ng",
 		"dev": "rimraf ./frontend/dist && ng serve --proxy-config proxy.config.json",
+		"dev:localproxy": "rimraf ./frontend/dist && ng serve --proxy-config proxy.config.local.json",
 		"start": "ng serve",
 		"build": "ng build --configuration production",
 		"build:watch": "ng build --watch --configuration production",
