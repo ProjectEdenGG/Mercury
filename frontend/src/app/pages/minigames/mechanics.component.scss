@@ -7,7 +7,8 @@
 	border: 2px solid #656565;
 	box-sizing: border-box;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-	--bg-url: none;
+	background-image: var(--bg-url);
+	background-position: center 0;
 
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
