@@ -15,13 +15,13 @@
 					<li class="nav-item"><a routerLink="/vote">Vote</a></li>
 					<li class="nav-item"><a target="_blank" href="https://wiki.projecteden.gg">Wiki</a></li>
 					<li class="nav-item"><a target="_blank" href="https://store.projecteden.gg">Store</a></li>
-					<li class="nav-item d-md-none d-lg-block"><a routerLink="/minigames">Minigames</a></li>
+					<li *ngIf="utils.getEnvironment() == 'development'" class="nav-item d-md-none d-lg-block"><a routerLink="/minigames">Minigames</a></li>
 					<li class="nav-item"><a (click)="map()">Map</a></li>
 					<li class="nav-item"><a routerLink="/titan">Titan</a></li>
 					<li class="nav-item nav-item-dropdown">
 						<a class="d-none d-md-block"><i class="bi bi-caret-down-fill"></i></a>
 						<ul class="nav-item-dropdown-menu right">
-							<li class="nav-item d-none d-md-block d-lg-none"><a routerLink="/minigames">Minigames</a></li>
+							<li *ngIf="utils.getEnvironment() == 'development'" class="nav-item d-none d-md-block d-lg-none"><a routerLink="/minigames">Minigames</a></li>
 							<li><a routerLink="/status">Status</a></li>
 							<li><a routerLink="/applications">Applications</a></li>
 							<li><a target="_blank" href="https://projecteden.gg/appeal">Ban Appeal</a></li>

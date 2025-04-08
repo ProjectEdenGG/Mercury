@@ -144,6 +144,9 @@ export class LeaderboardsComponent extends MercuryComponent {
 			return
 
 		this.disabled = true;
+		this.tableData = []
+		this.globalStats = []
+		this.userAggregateStats = []
 
 		let date: any = null;
 		if (this.selectedDateRange != "all") {
