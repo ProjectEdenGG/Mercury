@@ -52,10 +52,28 @@ tbody tr:hover {
 	border-color: #156464;
 }
 
+.custom-dropdown:disabled {
+	border-color: #156464;
+	background-color: #161618;
+}
+
 .btn-outline-primary {
 	background-color: #161618;
 	color: white;
 	border: none;
+}
+
+.btn-outline-primary:disabled {
+	background-color: #161618;
+	color: white;
+	border: none;
+	opacity: 100;
+}
+
+.btn-primary:disabled {
+	color: white;
+	border: none;
+	opacity: 100;
 }
 
 .btn-outline-primary:hover {

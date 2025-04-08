@@ -56,6 +56,7 @@ export class LeaderboardsComponent extends MercuryComponent {
 	userAggregateStats: any = []
 
 	timedLeaderboard: boolean = false
+	disabled: boolean = true;
 
 	selectedMechanic: string | undefined;
 	selectedStatistic: string | undefined;
@@ -82,6 +83,8 @@ export class LeaderboardsComponent extends MercuryComponent {
 	}
 
 	onClickDateRange(key: string) {
+		if (this.selectedDateRange == key)
+			return;
 		this.selectedDateRange = key;
 		this.onChangeStatistic();
 	}
@@ -130,6 +133,8 @@ export class LeaderboardsComponent extends MercuryComponent {
 	}
 
 	public onChangeSelectedStatistic(event: any) {
+		if (this.selectedStatistic == event.target.value)
+			return;
 		this.selectedStatistic = event.target.value;
 		this.onChangeStatistic();
 	}
@@ -137,6 +142,9 @@ export class LeaderboardsComponent extends MercuryComponent {
 	onChangeStatistic() {
 		if (this.selectedStatistic == undefined || this.selectedMechanic == undefined)
 			return
+
+		this.disabled = true;
+
 		let date: any = null;
 		if (this.selectedDateRange != "all") {
 			let days = parseInt(this.selectedDateRange.replace("last_", ""));
@@ -153,6 +161,8 @@ export class LeaderboardsComponent extends MercuryComponent {
 					this.tableData.push(value.self);
 					this.tableData.splice(-1, 0, { rank: "Your ranking:" });
 				}
+
+				this.disabled = false;
 			}
 		})
 

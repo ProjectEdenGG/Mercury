@@ -50,7 +50,7 @@
 				<div class="w-100">
 					<div class="d-sm-flex d-md-block d-lg-flex justify-content-between align-items-start" style="margin-bottom: 16px;">
 						<div class="d-flex flex-column align-items-center align-items-sm-start align-items-md-start pb-2 pb-md-2 pb-lg-0">
-							<select (change)="onChangeSelectedStatistic($event)" id="statistics" class="form-select custom-dropdown" style="width: 220px;">
+							<select [disabled]="disabled" (change)="onChangeSelectedStatistic($event)" id="statistics" class="form-select custom-dropdown" style="width: 220px;">
 								<option *ngFor="let entry of statisticsEntries | keyvalue" [value]="entry.key" [selected]="entry.key == selectedStatistic">
 									{{ entry.value }}
 								</option>
@@ -61,6 +61,7 @@
 							<div class="d-flex" style="gap: 3px;" id="buttons">
 								<button
 									type="button"
+									[disabled]="disabled"
 									*ngFor="let entry of dateRangeEntries; let i = index"
 									(click)="onClickDateRange(entry.key)"
 									[ngClass]="getButtonClass(entry.key, i)">
@@ -99,6 +100,13 @@
 									<td colspan="2" class="pl-3 fw-bold">{{ row.rank }}</td>
 									<td></td>
 								</ng-template>
+							</tr>
+
+							<tr *ngIf="disabled">
+								<td colspan="3" class="text-center fw-bold">Loading results...</td>
+							</tr>
+							<tr *ngIf="!disabled && totalRows == 0">
+								<td colspan="3" class="text-center fw-bold">No results</td>
 							</tr>
 						</tbody>
 					</table>
