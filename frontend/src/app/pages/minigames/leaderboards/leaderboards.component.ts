@@ -156,7 +156,7 @@ export class LeaderboardsComponent extends MercuryComponent {
 			}
 		})
 
-		if (this.timedLeaderboard) {
+		if (!this.timedLeaderboard) {
 			this.apiService.getMinigameAggregateStats(this.selectedMechanic, date, null).subscribe({
 				next: (value: any) => {
 					this.globalStats = Object.keys(value).map((key: any) => ({
@@ -166,7 +166,7 @@ export class LeaderboardsComponent extends MercuryComponent {
 				}
 			})
 		}
-		if (this.utils.nerd) {
+		if (this.utils.nerd?.uuid) {
 			this.apiService.getMinigameAggregateStats(this.selectedMechanic, date, this.utils.nerd.uuid).subscribe({
 				next: (value: any) => {
 					this.userAggregateStats = Object.keys(value).map((key: any) => ({

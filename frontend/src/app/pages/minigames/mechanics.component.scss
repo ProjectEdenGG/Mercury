@@ -20,7 +20,7 @@
 .mechanic-image::before {
 	content: "";
 	position: absolute;
-	inset: 0;
+	inset: -4px;
 	background-image: var(--bg-url);
 	background-size: 130%;
 	background-repeat: no-repeat;
@@ -54,7 +54,7 @@
 	z-index: 2;
 	color: white;
 	font-weight: bold;
-	font-size: 1.3rem;
+	font-size: 1.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
