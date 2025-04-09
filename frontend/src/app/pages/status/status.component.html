@@ -63,10 +63,13 @@
 						<paginated-table title="MongoDB" [headers]="{ timestamp: 'Time', size: 'Size' }" [rows]="data.backups.databases.mongodb"></paginated-table>
 					</div>
 					<div class="col-12 col-lg-6 mb-4">
-						<paginated-table title="Config Files" [headers]="{ timestamp: 'Time', files: 'Files' }" [rows]="data.backups.git.server"></paginated-table>
+						<paginated-table title="Minecraft Config Files" [headers]="{ timestamp: 'Time', files: 'Files' }" [rows]="data.backups.git.server"></paginated-table>
 					</div>
 					<div class="col-12 col-lg-6 mb-4">
-						<paginated-table title="Player Data" [headers]="{ timestamp: 'Time', files: 'Files' }" [rows]="data.backups.git.storage"></paginated-table>
+						<paginated-table title="Minecraft Player Data" [headers]="{ timestamp: 'Time', files: 'Files' }" [rows]="data.backups.git.storage"></paginated-table>
+					</div>
+					<div class="col-12 col-lg-6 mb-4">
+						<paginated-table title="Linux Config Files" [headers]="{ timestamp: 'Time', files: 'Files' }" [rows]="data.backups.git.sol"></paginated-table>
 					</div>
 				</div>
 			</ng-container>

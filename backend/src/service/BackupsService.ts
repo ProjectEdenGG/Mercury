@@ -21,6 +21,7 @@ export class BackupsService {
 			let repos: { [key: string]: string } = {
 				server: 'ProjectEdenGG/Server',
 				storage: 'ProjectEdenGG/Server-Storage',
+				sol: 'ProjectEdenGG/Sol',
 			}
 
 			for (let repo of Object.keys(repos)) {
