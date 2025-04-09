@@ -11,7 +11,7 @@
 			<div
 				class="mechanic-image mb-2 cursor-pointer"
 				[routerLink]="'/minigames/' + mechanic.mechanic"
-				[ngStyle]="{'--bg-url': 'url(' + ('minigames/' + mechanic.mechanic + '.png' | cmsImage) + ')'}"
+				[ngStyle]="{'--bg-url': 'url(' + ('minigames/' + mechanic.mechanic + '.webp' | cmsImage) + ')'}"
 			>
 				<div class="mechanic-title" [innerHTML]="getMechanicTitle(mechanic)"></div>
 			</div>
