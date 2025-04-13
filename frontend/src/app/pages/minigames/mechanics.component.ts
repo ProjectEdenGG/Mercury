@@ -7,7 +7,8 @@ import {ApiService} from '../../service/api.service';
 type Stat = {
 	mechanic: string,
 	title: string,
-	description: string
+	description: string,
+	group: string
 }
 
 // {
@@ -37,6 +38,8 @@ export class MechanicsComponent extends MercuryComponent {
 	}
 
 	stats: Stat[];
+	groups: string[] = [];
+	enabledGroups: string[] = [];
 
 	override ngOnInit() {
 		this.fetchMechanics();
@@ -46,6 +49,7 @@ export class MechanicsComponent extends MercuryComponent {
 		this.apiService.getMinigameStats().subscribe({
 			next: value => {
 				this.stats = value as Stat[];
+				this.groups = [...new Set(this.stats.map(stat => stat.group))];
 			}
 		});
 	}
@@ -53,5 +57,12 @@ export class MechanicsComponent extends MercuryComponent {
 	getMechanicTitle(mechanic: any): string {
 		return mechanic.title
 			.replace('Four Team Deathmatch', 'Four Team<br class="d-none d-sm-block"/> Deathmatch')
+	}
+
+	toggleGroup(group: string) {
+		if (this.enabledGroups.includes(group))
+			this.enabledGroups = this.enabledGroups.filter(_group => _group !== group)
+		else
+			this.enabledGroups.push(group)
 	}
 }

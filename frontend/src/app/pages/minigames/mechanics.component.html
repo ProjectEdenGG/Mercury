@@ -4,18 +4,27 @@
 			<h1 class="mb-2">Minigame Leaderboards</h1>
 			<div class="spectrum"></div>
 		</div>
-		<div
-			*ngFor="let mechanic of stats"
-			class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center p-1 p-sm-2"
-		>
-			<div
-				class="mechanic-image mb-2 cursor-pointer"
-				[routerLink]="'/minigames/' + mechanic.mechanic"
-				[ngStyle]="{'--bg-url': 'url(' + ('minigames/' + mechanic.mechanic + '.webp' | cmsImage) + ')'}"
-			>
-				<div class="mechanic-title" [innerHTML]="getMechanicTitle(mechanic)"></div>
-			</div>
-		</div>
 
+		<button *ngFor="let group of groups" type="button" class="btn mb-2 col-2 ml-1 ml-sm-2"
+				[ngClass]="{'btn-primary': enabledGroups.includes(group), 'btn-outline-primary': !enabledGroups.includes(group) }" style="border-radius: 0.375rem; max-width: 100px"
+				(click)="toggleGroup(group)"
+		>
+			{{ group }}
+		</button>
+
+		<!-- spacer to keep the mechanics from jumping up -->
+		<div style="clear: both;"></div>
+
+		<ng-container *ngFor="let mechanic of stats">
+			<div *ngIf="enabledGroups.includes(mechanic.group) || enabledGroups.length == 0" class="col-12 col-sm-6 col-lg-4 col-xl-3 text-center p-1 p-sm-2">
+				<div
+					class="mechanic-image mb-2 cursor-pointer"
+					[routerLink]="'/minigames/' + mechanic.mechanic"
+					[ngStyle]="{'--bg-url': 'url(' + ('minigames/' + mechanic.mechanic + '.webp' | cmsImage) + ')'}"
+				>
+					<div class="mechanic-title" [innerHTML]="getMechanicTitle(mechanic)"></div>
+				</div>
+			</div>
+		</ng-container>
 	</div>
 </div>
