@@ -1,7 +1,7 @@
 import { Injectable } from "@tsed/di";
 import fs from 'node:fs';
 import path from 'node:path';
-import { GitHubService } from './GitHubService';
+import { GitHubService } from './GitHubService.js';
 
 @Injectable()
 export class BackupsService {

@@ -1,14 +1,10 @@
 import { PlatformExpress } from '@tsed/platform-express';
-import { Server } from './Server';
+import { Server } from './Server.js';
 import { $log } from '@tsed/common';
 
-async function bootstrap() {
-	try {
-		let platform = await PlatformExpress.bootstrap(Server)
-		await platform.listen();
-	} catch (e) {
-		$log.error(e)
-	}
+try {
+	const platform = await PlatformExpress.bootstrap(Server);
+	await platform.listen();
+} catch (e) {
+	$log.error(e)
 }
-
-bootstrap()

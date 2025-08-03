@@ -1,8 +1,8 @@
 import { Controller, Get } from "@tsed/common"
 import * as os from 'node:os'
-import { SystemService } from '../service/SystemService';
-import { BackupsService } from '../service/BackupsService';
-import { GitHubService } from '../service/GitHubService';
+import { SystemService } from '../service/SystemService.js';
+import { BackupsService } from '../service/BackupsService.js';
+import { GitHubService } from '../service/GitHubService.js';
 
 @Controller('/api')
 export class MainController {

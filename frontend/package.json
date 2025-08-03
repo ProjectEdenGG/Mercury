@@ -24,7 +24,7 @@
 		"@angular/router": "^19.0.0",
 		"@ng-bootstrap/ng-bootstrap": "^18.0.0",
 		"@popperjs/core": "^2.11.8",
-		"@twemoji/api": "^15.1.0",
+		"@twemoji/api": "^16.0.1",
 		"bootstrap": "^5.3.3",
 		"bootstrap-icons": "^1.11.3",
 		"date-fns": "^4.1.0",
