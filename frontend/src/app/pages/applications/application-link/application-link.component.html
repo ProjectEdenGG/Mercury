@@ -1,0 +1,47 @@
+<ng-template #applyButton>
+	<ng-container *ngIf="!this.utils.nerd.rank">
+		<a
+			(click)="this.utils.openLoginModal()"
+			hoverBrightness [up]="30"
+			class="py-1 px-2 rounded fw-medium font-rem-1_25 w-100 btn btn-primary"
+		>
+			Log in to apply
+		</a>
+	</ng-container>
+	<ng-container *ngIf="this.utils.nerd.rank">
+		<ng-container *ngIf="isEligible()">
+			<a
+				[routerLink]="'/apply/' + app.toLowerCase()"
+				hoverBrightness [down]="30"
+				[ngClass]="'background-color-' + utils.asCssClass(color ?? app)"
+				class="py-1 px-2 rounded fw-medium color-white font-rem-1_25 text-decoration-none w-100"
+			>
+				Apply now
+			</a>
+		</ng-container>
+		<ng-container *ngIf="!isEligible()">
+			<span style="transform: translateY(18px)" class="mr-2" [attr.data-tooltip]="'You must be ' + utils.camelCase(requiredRank) + ' rank to apply'">Ineligible</span>
+		</ng-container>
+	</ng-container>
+</ng-template>
+
+<div class="mt-4">
+	<div class="d-flex justify-content-between">
+		<h2 class="mb-0 fw-bold font-rem-2 font-rem-md-2_5 color-{{ utils.asCssClass(color ?? app) }}">
+			{{ app }}
+		</h2>
+		<div class="d-none d-md-flex">
+			<ng-container *ngTemplateOutlet="applyButton"></ng-container>
+		</div>
+	</div>
+	<hr>
+	<p>
+		<ng-content></ng-content>
+	</p>
+	<p *ngIf="requiredRank" class="mb-2">
+		You must be <span class="fw-bold" [ngClass]="'color-' + requiredRank">{{ utils.camelCase(requiredRank) }}</span> rank or above to apply
+	</p>
+	<div class="mt-3 d-flex d-md-none text-center">
+		<ng-container *ngTemplateOutlet="applyButton"></ng-container>
+	</div>
+</div>

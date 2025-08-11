@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { Utils } from '../utils/utils';
 
 @Injectable({providedIn: 'root'})
 export class ApiService {
 
 	constructor(
+		private utils: Utils,
 		private http: HttpClient
 	) { }
 
@@ -22,6 +24,14 @@ export class ApiService {
 
 	getShowcase() {
 		return this.http.get('/api/showcase');
+	}
+
+	getApplications() {
+		return this.http.get('/api/applications');
+	}
+
+	submitApplication(id: string, answers: any) {
+		return this.http.post(`/api/applications/submit/${id}`, { nerd: this.utils.nerd, answers });
 	}
 
 	getMinecraftServerStatus() {

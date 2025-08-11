@@ -1,3 +1,6 @@
 <div class="progress-bar-container rounded mt-1">
+	<div class="position-absolute ml-1"> <!-- TODO Right align? -->
+		<ng-content></ng-content>
+	</div>
 	<div class="progress-bar" [style.width.%]="percentage"></div>
 </div>

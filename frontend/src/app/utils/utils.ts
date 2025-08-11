@@ -36,11 +36,15 @@ export class Utils {
 	}
 
 	public get nerd() {
-		return JSON.parse(localStorage.getItem('nerd') ?? '{}');
+		return this.getLocalStorageJson('nerd')
 	}
 
 	public set nerd(nerd: Nerd) {
 		this.nerd$.next(nerd);
+	}
+
+	getLocalStorageJson(key: string): any {
+		return JSON.parse(localStorage.getItem(key) ?? '{}');
 	}
 
 	camelCase(text: string | null): string | null {
@@ -115,7 +119,7 @@ export class Utils {
 	}
 
 	asCssClass(string: any) {
-		return string.toLowerCase().replaceAll(' ', '-');
+		return string?.toLowerCase().replaceAll(' ', '-');
 	}
 
 	createCssVariable(variable: string, value: any) {

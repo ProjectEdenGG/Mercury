@@ -10,4 +10,5 @@ export class LoadingButtonComponent {
 	@Input() loading: boolean
 	@Input() type: string;
 	@Input() classes: string;
+	@Input() disabled: boolean;
 }

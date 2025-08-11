@@ -1,6 +1,7 @@
 {
 	"scripts": {
 		"frontend:dev": "cd frontend && npm run dev",
+		"frontend:dev:local": "cd frontend && npm run dev:local",
 		"backend:dev": "cd backend && npm run dev"
 	},
 	"devDependencies": {
