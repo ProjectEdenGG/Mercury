@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Utils } from '../../../utils/utils';
 import { MercuryComponent } from '../../../lifecycle/MercuryComponent';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { ApiService } from '../../../service/api.service';
 	standalone: false,
 })
 export class ApplicationComponent extends MercuryComponent {
+	@Input() applicationId: string;
 	application: Application;
 	currentPage: number = 0;
 	answers: Answers
@@ -30,13 +31,24 @@ export class ApplicationComponent extends MercuryComponent {
 		this.answers = this.utils.getLocalStorageJson('application-answers')
 
 		this.route.params.subscribe(params => {
-			this.application = this.applicationsService.getApplication(params['app'])
-			this.answers ??= {}
-			this.answers[this.application.id] ??= {}
-			this.answers[this.application.id].answers ??= {}
-
-			this.currentPage = this.answers[this.application.id].page ?? 0;
+			if (params['app'])
+				this.setApplication(params['app']);
 		})
+	}
+
+	override ngOnInit() {
+		if (this.applicationId)
+			this.setApplication(this.applicationId)
+	}
+
+	private setApplication(id: string) {
+		this.application = this.applicationsService.getApplication(id)
+		console.log('application selected', id, this.application)
+		this.answers ??= {}
+		this.answers[this.application.id] ??= {}
+		this.answers[this.application.id].answers ??= {}
+
+		this.currentPage = this.answers[this.application.id].page ?? 0;
 	}
 
 	save() {

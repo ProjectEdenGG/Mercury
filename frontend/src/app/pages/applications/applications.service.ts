@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 export type Application = {
 	id: string,
 	name: string,
+	title: string,
+	hide: boolean;
 	requiredRank?: string,
 	width?: string,
 	color?: string,
@@ -11,7 +13,7 @@ export type Application = {
 }
 
 export type Page = {
-	title: string,
+	title?: string,
 	description?: string,
 	questions?: Question[]
 	review?: boolean

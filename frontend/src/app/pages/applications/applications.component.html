@@ -4,9 +4,11 @@
 			<h1>Applications</h1>
 			<div class="spectrum"></div>
 			@for (application of applicationsService.getApplications(); track application) {
-				<application-link [app]="application.name" [color]="application.color" [requiredRank]="application.requiredRank">
-					<div [innerHTML]="application.description"></div>
-				</application-link>
+				@if (!application.hide) {
+					<application-link [app]="application.name" [color]="application.color" [requiredRank]="application.requiredRank">
+						<div [innerHTML]="application.description"></div>
+					</application-link>
+				}
 			}
 		</div>
 	</div>

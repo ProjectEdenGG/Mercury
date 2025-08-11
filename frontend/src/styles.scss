@@ -241,6 +241,14 @@ img.emoji {
 	vertical-align: -0.1em;
 }
 
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
 [data-tooltip] {
 	position: relative;
 	z-index: 2;

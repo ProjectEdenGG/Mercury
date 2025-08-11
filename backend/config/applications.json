@@ -1,20 +1,115 @@
 [
 	{
-		"id": "Creator",
+		"id": "appeal",
+		"name": "Ban Appeal",
+		"title": "Ban Appeal",
+		"hide": true,
+		"pages": [
+			{
+				"description": "Lorem ipsum",
+				"questions": [
+					{
+						"id": "username",
+						"type": "short-text",
+						"label": "What is your in-game name?"
+					},
+					{
+						"id": "date",
+						"type": "date",
+						"label": "When were you banned?"
+					},
+					{
+						"id": "staff",
+						"type": "short-text",
+						"label": "Who banned you?"
+					},
+					{
+						"id": "reason",
+						"type": "short-text",
+						"label": "What was your ban reason?"
+					}
+				]
+			},
+			{
+				"title": "Your side of the story",
+				"questions": [
+					{
+						"id": "what",
+						"type": "long-text",
+						"label": "Tell us what happened"
+					},
+					{
+						"id": "why",
+						"type": "long-text",
+						"label": "Why do you think you should be unbanned?",
+						"description": "Please give us a descriptive, well thought out, mature explanation of your reasoning."
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": "creator",
 		"name": "Creator",
+		"title": "Creator Application",
 		"requiredRank": "member",
 		"color": "twitch",
-		"description": "Project Eden strives to be a welcoming and supportive environment for creators of all kinds. To help facilitate involvement from the community and support your ambitions as a creator, we have created exclusive badges for content creators. If you produce Project Eden related content on Twitch, YouTube, or any other platform, you can apply to receive your badge and access to the #creators channel on Discord, where you can announce when you go live or release new content."
+		"description": "Project Eden strives to be a welcoming and supportive environment for creators of all kinds. To help facilitate involvement from the community and support your ambitions as a creator, we have created exclusive badges for content creators. If you produce Project Eden related content on Twitch, YouTube, or any other platform, you can apply to receive your badge and access to the #creators channel on Discord, where you can announce when you go live or release new content.",
+		"pages": [
+			{
+				"description": "<div><img class='ml-3 mb-2 mb-lg-0 float-right w-100 w-lg-50' src='https://raw.githubusercontent.com/ProjectEdenGG/CMS/master/images/applications/content-creator-badge.png'>Project Eden strives to be a welcoming and supportive environment for creators of all kinds. To help facilitate involvement from the community and support your ambitions as a creator, we have created exclusive badges for content creators. If you produce Project Eden related content on Twitch, YouTube, or any other platform, you can apply to receive your badge and access to the #creators channel on Discord, where you can announce when you go live or release new content.</div><hr><div class='font-rem-1_75 fw-medium'>Rules</div><ol><li>You may advertise your channel in our Discord's #creators channel and in-game once per day, and only when you are creating content on Project Eden</li><li>If you or your followers show a pattern of misbehavior, your badge and/or access to the server may be revoked</li><li>Do not purposefully flood the community with players</li><li>You must be Member rank to apply</li></ol><hr><div class='font-rem-1_75 fw-medium'>FAQ</div><div class='ml-1'><div>Q: Does the badge expire?</div><div>A: Yes, if no Project Eden related content is created for 1 year, your badges will expire and you will have to re-apply</div><div class='mt-2'>Q: Can I have more than one badge?</div><div>A: You can own multiple badges, but only one can be active at any one time. You may switch badges as often as you like (/badge &lt;platform&gt;)</platform><div class='mt-2'>Q: Can I create content about other communities?</div><div>A: Yes, Project Eden will not police your content in any way</div><div class='mt-2'>Q: How does the \"no advertising\" rule apply to me?</div><div>A: See Rule #1. What you advertise outside of Project Eden is up to you; however, if we observe any malicious intent, your badge and/or access to the server may be revoked</div></div>"
+			},
+			{
+				"questions": [
+					{
+						"id": "channels",
+						"type": "long-text",
+						"label": "Link to your channel(s)",
+						"description": "Please provide links to every platform you wish to obtain badges for, and make sure examples of previous content are available for review"
+					},
+					{
+						"id": "content",
+						"type": "long-text",
+						"label": "Describe your channel and your content",
+						"description": "Please provide links to every platform you wish to obtain badges for, and make sure examples of previous content are available for review"
+					},
+					{
+						"id": "goals",
+						"type": "long-text",
+						"label": "What are your goals as a content creator?",
+						"description": "Do you have any specific goals for your channel and community? What goals do you have specifically within Project Eden?"
+					},
+					{
+						"id": "frequency",
+						"type": "long-text",
+						"rows": 3,
+						"label": "How often do you plan to make content on or about Project Eden?"
+					},
+					{
+						"id": "mature",
+						"type": "long-text",
+						"label": "Is your content made for mature audiences (18+)?",
+						"description": "If yes or if you are unsure, please elaborate and give examples of the kind of content that will appear on your channel. Answering yes does not automatically disqualify you from being accepted. If accepted, any links to your channel will be marked as 18+ only in order to protect our younger player-base."
+					}
+				]
+			},
+			{
+				"title": "Review & Submit",
+				"description": "Please review your answers and submit your application below",
+				"review": true
+			}
+		]
 	},
 	{
 		"id": "builder",
 		"name": "Builder",
+		"title": "Builder Application",
 		"requiredRank": "trusted",
 		"description": "Builders help with any build related needs for the server, such as events, minigame maps, spawns, and warps. They frequently collaborate as a team on large-scale projects. Strong technical skills, such as proficiency in WorldEdit and an in-depth knowledge of Minecraft mechanics, are essential for achieving the highest quality work. Additionally, Builders may assist in designing custom items and blocks for the server using Blockbench.",
 		"pages": [
 			{
 				"title": "Understanding the Requirements",
-				"description": "Before continuing, please fully read the Builder rank section on the wiki: <a href=\"https://wiki.projecteden.gg/wiki/Ranks#Builder\">https://wiki.projecteden.gg/wiki/Ranks#Builder</a>"
+				"description": "Before continuing, please fully read the Builder rank section on the wiki: <a href='https://wiki.projecteden.gg/wiki/Ranks#Builder'>https://wiki.projecteden.gg/wiki/Ranks#Builder</a>"
 			},
 			{
 				"title": "Availability & Communication",
@@ -85,7 +180,8 @@
 	{
 		"id": "moderator",
 		"name": "Moderator",
+		"title": "Moderator Application",
 		"requiredRank": "trusted",
-		"description": "Moderators serve as the frontline of the server staff, ensuring a smooth and enjoyable experience for all players. Their responsibilities include answering player questions, resolving griefing issues, moderating chat, and addressing general player concerns. Beyond day-to-day support, Moderators actively contribute to the server's growth by collaborating with senior staff to brainstorm ideas and assist in implementing exciting new features that enhance the community experience."
+		"description": "Moderators serve as the front line of the server staff, ensuring a smooth and enjoyable experience for all players. Their responsibilities include answering player questions, resolving griefing issues, moderating chat, and addressing general player concerns. Beyond day-to-day support, Moderators actively contribute to the server's growth by collaborating with senior staff to brainstorm ideas and assist in implementing exciting new features that enhance the community experience."
 	}
 ]

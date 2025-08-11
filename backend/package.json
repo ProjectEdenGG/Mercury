@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "compile": "tsc --project tsconfig.compile.json",
-    "dev": "nodemon --watch \"src/**/*.ts\" --ignore \"node_modules/**/*\" -e ts --exec \"npm run compile && node\" ./dist/index.js"
+    "dev": "nodemon --watch \"src/**/*.ts\" --watch \"config/*.json\" --ignore \"node_modules/**/*\" -e ts,json --exec \"npm run compile && node\" ./dist/index.js"
   },
   "author": "",
   "license": "ISC",
