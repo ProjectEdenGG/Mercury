@@ -1,22 +1,22 @@
-<div class="container font-rem-1_25 color-white">
-	<div class="row">
-		<div class="col-12">
-			<div class="d-flex justify-content-between">
-				<h1>{{ application.title }}</h1>
-				<div class="d-none d-md-block w-25">
+@if (application.pages[currentPage]; as page) {
+	<div class="container font-rem-1_25 color-white">
+		<div class="row">
+			<div class="col-12">
+				<div class="d-flex justify-content-between">
+					<h1>{{ application.title }}</h1>
+					<div class="d-none d-md-block w-25">
+						<progress-bar [percentage]="getProgressPercentage()"></progress-bar>
+					</div>
+				</div>
+
+				<div class="spectrum"></div>
+				<div class="d-md-none w-100 mb-2">
 					<progress-bar [percentage]="getProgressPercentage()"></progress-bar>
 				</div>
-			</div>
 
-			<div class="spectrum"></div>
-			<div class="d-md-none w-100 mb-2">
-				<progress-bar [percentage]="getProgressPercentage()"></progress-bar>
-			</div>
-
-			@if (submitted) {
-				<div>Thanks for applying!</div>
-			} @else {
-				@if (application.pages[currentPage]; as page) {
+				@if (submitted) {
+					<div>Thanks for applying!</div>
+				} @else {
 					@if (page.title) {
 						<div class="font-rem-2 fw-medium" [innerHTML]="page.title"></div>
 					}
@@ -29,7 +29,7 @@
 								<div class="mt-2">
 									<hr>
 									<div class="font-rem-1_5 fw-medium mb-1" [innerHTML]="question.label"></div>
-									<div class="font-rem-1_125" [innerHTML]="getAnswer(question)"></div>
+									<div class="font-rem-1_125" [innerHTML]="getAnswerFormatted(question)"></div>
 								</div>
 							}
 						}
@@ -86,27 +86,31 @@
 							</div>
 						}
 					}
-				}
 
-				<div class="mt-3 d-flex justify-content-between">
-					@if (firstPage()) {
-						<div></div>
-					} @else {
-						<button class="btn btn-primary" [disabled]="firstPage()" (click)="firstPage() ? null : changePage(-1)">
-							Previous Page
-						</button>
-					}
-					@if (lastPage()) {
-						<loading-button class="btn btn-primary" [loading]="submitting" [disabled]="isNextDisabled()" (click)="submit()">
-							Submit
-						</loading-button>
-					} @else {
-						<button class="btn btn-primary" [disabled]="isNextDisabled()" (click)="lastPage() ? null : changePage(+1)">
-							Next Page
-						</button>
-					}
-				</div>
-			}
+					<div class="mt-3 d-flex justify-content-between">
+						@if (firstPage()) {
+							<div></div>
+						} @else {
+							<button class="btn btn-primary font-rem-1_25" [disabled]="firstPage()" (click)="firstPage() ? null : changePage(-1)">
+								Previous Page
+							</button>
+						}
+						@if (lastPage()) {
+							<loading-button class="btn btn-primary font-rem-1_25" [loading]="submitting" [disabled]="isNextDisabled()" (click)="submit()">
+								Submit
+							</loading-button>
+						} @else {
+							<button class="btn btn-primary font-rem-1_25" [disabled]="isNextDisabled()" (click)="lastPage() ? null : changePage(+1)">
+								@if (firstPage() && !page.questions) {
+									Start Application
+								} @else {
+									Next Page
+								}
+							</button>
+						}
+					</div>
+				}
+			</div>
 		</div>
 	</div>
-</div>
+}

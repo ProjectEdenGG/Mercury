@@ -4,6 +4,7 @@ import { MercuryComponent } from '../../../lifecycle/MercuryComponent';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Answers, Application, ApplicationsService, Option, Question } from '../applications.service';
 import { ApiService } from '../../../service/api.service';
+import { format } from 'date-fns';
 
 @Component({
 	selector: 'application',
@@ -138,5 +139,15 @@ export class ApplicationComponent extends MercuryComponent {
 				return answer.join(', ')
 			return answer ?? ''
 		}
+	}
+
+	getAnswerFormatted(question: Question, option?: Option): string {
+		let answer = this.getAnswer(question, option)
+		if (typeof answer === 'string') {
+			if (question.type === 'date')
+				return format(answer + 'T00:00:00', 'MM/dd/yyyy');
+		}
+
+		return String(answer).replace(/\n/g, '<br>')
 	}
 }

@@ -83,10 +83,10 @@ export class MainController {
 		return this.applicationsService.getApplications();
 	}
 
-	@Post('/applications/submit/:appType')
-	async submitApplication(@PathParams("appType") appType: any, @BodyParams() body: any) {
-		$log.info(appType, body)
-		return this.applicationsService.submitApplication(appType, body.nerd, body.answers);
+	@Post('/applications/submit/:appId')
+	async submitApplication(@PathParams("appId") appId: any, @BodyParams() body: any) {
+		$log.info(appId, body)
+		return await this.applicationsService.submitApplication(appId, body.nerd, body.answers);
 	}
 
 }
