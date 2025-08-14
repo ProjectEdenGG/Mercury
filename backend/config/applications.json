@@ -6,13 +6,13 @@
 		"hide": true,
 		"pages": [
 			{
-				"description": "Lorem ipsum",
+				"description": "We understand that mistakes happen, and we believe in giving players a chance to make things right. Our goal is to see you back on the server and enjoying the community again. Please fill out this form honestly and with as much detail as possible. Once submitted, our staff team will review your appeal and reach out to you as soon as possible.",
 				"questions": [
 					{
 						"id": "username",
 						"type": "short-text",
-						"required":true,
-						"label": "What is your in-game name?"
+						"required": true,
+						"label": "What is your in-game username?"
 					},
 					{
 						"id": "date",
@@ -30,7 +30,7 @@
 						"id": "reason",
 						"type": "short-text",
 						"required": true,
-						"label": "What was your ban reason?"
+						"label": "What reason were you given for the ban?"
 					}
 				]
 			},
@@ -63,7 +63,7 @@
 		"description": "Project Eden strives to be a welcoming and supportive environment for creators of all kinds. To help facilitate involvement from the community and support your ambitions as a creator, we have created exclusive badges for content creators. If you produce Project Eden related content on Twitch, YouTube, or any other platform, you can apply to receive your badge and access to the #creators channel on Discord, where you can announce when you go live or release new content.",
 		"pages": [
 			{
-				"description": "<div><img class='ml-3 mb-2 mb-lg-0 float-right w-100 w-lg-50' src='https://raw.githubusercontent.com/ProjectEdenGG/CMS/master/images/applications/content-creator-badge.png'>Project Eden strives to be a welcoming and supportive environment for creators of all kinds. To help facilitate involvement from the community and support your ambitions as a creator, we have created exclusive badges for content creators. If you produce Project Eden related content on Twitch, YouTube, or any other platform, you can apply to receive your badge and access to the #creators channel on Discord, where you can announce when you go live or release new content.</div><hr><div class='font-rem-1_75 fw-medium'>Rules</div><ol><li>You may advertise your channel in our Discord's #creators channel and in-game once per day, and only when you are creating content on Project Eden</li><li>If you or your followers show a pattern of misbehavior, your badge and/or access to the server may be revoked</li><li>Do not purposefully flood the community with players</li><li>You must be Member rank to apply</li></ol><hr><div class='font-rem-1_75 fw-medium'>FAQ</div><div class='ml-1'><div>Q: Does the badge expire?</div><div>A: Yes, if no Project Eden related content is created for 1 year, your badges will expire and you will have to re-apply</div><div class='mt-2'>Q: Can I have more than one badge?</div><div>A: You can own multiple badges, but only one can be active at any one time. You may switch badges as often as you like (/badge &lt;platform&gt;)</platform><div class='mt-2'>Q: Can I create content about other communities?</div><div>A: Yes, Project Eden will not police your content in any way</div><div class='mt-2'>Q: How does the \"no advertising\" rule apply to me?</div><div>A: See Rule #1. What you advertise outside of Project Eden is up to you; however, if we observe any malicious intent, your badge and/or access to the server may be revoked</div></div>"
+				"description": "<div><img class='ml-3 mb-2 mb-lg-0 float-right w-100 w-lg-50' src='https://raw.githubusercontent.com/ProjectEdenGG/CMS/master/images/applications/content-creator-badge.png'>Project Eden strives to be a welcoming and supportive environment for creators of all kinds. To help facilitate involvement from the community and support your ambitions as a creator, we have created exclusive badges for content creators. If you produce Project Eden related content on Twitch, YouTube, or any other platform, you can apply to receive your badge and access to the #creators channel on Discord, where you can announce when you go live or release new content.</div><hr><div class='font-rem-1_75 fw-medium'>Rules</div><ol><li>You may advertise your channel in our Discord's #creators channel and in-game once per day, and only when you are creating content on Project Eden</li><li>If you or your followers show a pattern of misbehavior, your badge and/or access to the server may be revoked</li><li>Do not purposefully flood the community with players</li><li>You must be Member rank to apply</li></ol><hr><div class='font-rem-1_75 fw-medium'>FAQ</div><div class='ml-1'><div>Q: Does the badge expire?</div><div>A: Yes, if no Project Eden related content is created for 1 year, your badges will expire and you will have to re-apply</div><div class='mt-2'>Q: Can I have more than one badge?</div><div>A: You can own multiple badges, but only one can be active at any one time. You may switch badges as often as you like (/badge &lt;platform&gt;)</div><div class='mt-2'>Q: Can I create content about other communities?</div><div>A: Yes, Project Eden will not police your content in any way</div><div class='mt-2'>Q: How does the \"no advertising\" rule apply to me?</div><div>A: See Rule #1. What you advertise outside of Project Eden is up to you; however, if we observe any malicious intent, your badge and/or access to the server may be revoked</div></div>"
 			},
 			{
 				"questions": [
@@ -72,14 +72,13 @@
 						"type": "long-text",
 						"required": true,
 						"label": "Link to your channel(s)",
-						"description": "Please provide links to every platform you wish to obtain badges for, and make sure examples of previous content are available for review"
+						"description": "Please provide links to every platform you wish to obtain badges for, and make sure examples of previous content are publicly available for review"
 					},
 					{
 						"id": "content",
 						"type": "long-text",
 						"required": true,
-						"label": "Describe your channel and your content",
-						"description": "Please provide links to every platform you wish to obtain badges for, and make sure examples of previous content are available for review"
+						"label": "Describe your channel and your content, as well as what type of content you plan to make on Project Eden."
 					},
 					{
 						"id": "goals",
@@ -119,7 +118,10 @@
 		"description": "Builders help with any build related needs for the server, such as events, minigame maps, spawns, and warps. They frequently collaborate as a team on large-scale projects. Strong technical skills, such as proficiency in WorldEdit and an in-depth knowledge of Minecraft mechanics, are essential for achieving the highest quality work. Additionally, Builders may assist in designing custom items and blocks for the server resource pack using Blockbench.",
 		"pages": [
 			{
-				"description": "Builders help with any build related needs for the server, such as events, minigame maps, spawns, and warps. They frequently collaborate as a team on large-scale projects. Strong technical skills, such as proficiency in WorldEdit and an in-depth knowledge of Minecraft mechanics, are essential for achieving the highest quality work. Additionally, Builders may assist in designing custom items and blocks for the server resource pack using Blockbench.",
+				"description": "<div class='mb-2'>Builders handle all construction-related tasks for the server, including event areas, minigame maps, spawns, and warps. They often work together on large-scale projects, combining their talents to bring ambitious ideas to life. Strong technical abilities—such as mastery of WorldEdit and a deep understanding of Minecraft mechanics—are crucial for producing top-quality results. Builders may also contribute to the creation of custom items and blocks for the server’s resource pack using tools like Blockbench.</div><div>The Builder rank is not just a title — it comes with real responsibilities. If promoted, you will be expected to actively contribute to ongoing projects, meet agreed deadlines, and collaborate effectively with other team members to maintain the server’s high standards.</div>"
+			},
+			{
+				"title": "General Information",
 				"questions": [
 					{
 						"id": "birthday",
@@ -127,6 +129,13 @@
 						"required": true,
 						"label": "When is your birthday?",
 						"description": "While there is no minimum age requirement for staff, age can be taken into account. Please be sure to select the correct year."
+					},
+					{
+						"id": "strengths",
+						"type": "long-text",
+						"required": true,
+						"label": "What makes you different from other applicants? Why should we choose you?",
+						"description": "Write about what your strengths are, both as a builder and as a team member, what experience you have, etc."
 					}
 				]
 			},
@@ -173,27 +182,24 @@
 			},
 			{
 				"title": "Your Portfolio",
-				"description": "To become a builder, we need to be able to see that you have the skills and the dedication. The Builder rank isn't a trophy, it is considered a staff rank that is an integral part of our team.",
 				"questions": [
-					{
-						"id": "strengths",
-						"type": "long-text",
-						"required": true,
-						"label": "What makes you different from other applicants? Why should we choose you?",
-						"description": "Write about what your strengths are, both as a builder and as a team member, what experience you have, etc."
-					},
 					{
 						"id": "builds",
 						"type": "long-text",
+						"rows": 10,
 						"required": true,
 						"label": "What builds have you completed on Project Eden?",
-						"description": "Please provide a map link and/or command to teleport to each build"
-					},
+						"description": "Please provide a map link and/or command to teleport to each build. Builds completed outside of Project Eden will not be taken into account."
+					}
+				]
+			},
+			{
+				"questions": [
 					{
 						"id": "other",
 						"type": "long-text",
-						"required": false,
-						"label": "Anything else you'd like to share?"
+						"label": "Anything else you would like us to know?",
+						"required": false
 					}
 				]
 			},
@@ -213,7 +219,7 @@
 		"description": "Moderators serve as the front line of the server staff, ensuring a smooth and enjoyable experience for all players. Their responsibilities include answering player questions, resolving griefing issues, moderating chat, and addressing general player concerns. Beyond day-to-day support, Moderators actively contribute to the server's growth by collaborating with senior staff to brainstorm ideas and assist in implementing exciting new features that enhance the community experience.",
 		"pages": [
 			{
-				"description": "<div class='mb-2'>Project Eden's staff members are essential to the server. Without our dedicated staff members, the server would not, and could not, be what it is today. If you want to become part of that team, and give new players the same welcoming experience you got when you joined for the first time, if not an even better one, then please apply for Moderator! We'd love to have you.</div><div class='mb-2'>A moderator's number one priority is keeping the server running smoothly. They fix grief, answer any questions a player might have, control chat, and settle disputes. Moderators must be well-tempered, patient, kind, helpful, and have to be extremely familiar with how the server works. However, moderators also are expected to participate in behind-the-scenes server development, whether that be providing opinions in the staff chat about new features or how to reform an old one, relaying feedback about how the server can improve from a player's perspective, and many other development related tasks. You must also be very active in the community and plan to continue that trend into the foreseeable future.</div><div>Good luck to all those that apply, and may the odds be ever in your favor... :)"
+				"description": "<div class='mb-2'>Project Eden's staff members are essential to the server. Without our dedicated staff members, the server would not, and could not, be what it is today. If you want to become part of that team, and give new players the same welcoming experience you got when you joined for the first time, if not an even better one, then please apply for Moderator! We'd love to have you.</div><div class='mb-2'>A moderator's number one priority is keeping the server running smoothly. They fix grief, answer any questions a player might have, control chat, and settle disputes. Moderators must be well-tempered, patient, kind, helpful, and have to be extremely familiar with how the server works. However, moderators also are expected to participate in behind-the-scenes server development, whether that be providing opinions in the staff chat about new features or how to reform an old one, relaying feedback about how the server can improve from a player's perspective, and many other development related tasks. You must also be very active in the community and plan to continue that trend into the foreseeable future.</div>"
 			},
 			{
 				"title": "General Information",
