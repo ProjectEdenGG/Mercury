@@ -11,21 +11,25 @@
 					{
 						"id": "username",
 						"type": "short-text",
+						"required":true,
 						"label": "What is your in-game name?"
 					},
 					{
 						"id": "date",
 						"type": "date",
+						"required": true,
 						"label": "When were you banned?"
 					},
 					{
 						"id": "staff",
 						"type": "short-text",
+						"required": true,
 						"label": "Who banned you?"
 					},
 					{
 						"id": "reason",
 						"type": "short-text",
+						"required": true,
 						"label": "What was your ban reason?"
 					}
 				]
@@ -36,11 +40,13 @@
 					{
 						"id": "what",
 						"type": "long-text",
+						"required": true,
 						"label": "Tell us what happened"
 					},
 					{
 						"id": "why",
 						"type": "long-text",
+						"required": true,
 						"label": "Why do you think you should be unbanned?",
 						"description": "Please give us a descriptive, well thought out, mature explanation of your reasoning."
 					}
@@ -64,18 +70,21 @@
 					{
 						"id": "channels",
 						"type": "long-text",
+						"required": true,
 						"label": "Link to your channel(s)",
 						"description": "Please provide links to every platform you wish to obtain badges for, and make sure examples of previous content are available for review"
 					},
 					{
 						"id": "content",
 						"type": "long-text",
+						"required": true,
 						"label": "Describe your channel and your content",
 						"description": "Please provide links to every platform you wish to obtain badges for, and make sure examples of previous content are available for review"
 					},
 					{
 						"id": "goals",
 						"type": "long-text",
+						"required": true,
 						"label": "What are your goals as a content creator?",
 						"description": "Do you have any specific goals for your channel and community? What goals do you have specifically within Project Eden?"
 					},
@@ -83,11 +92,13 @@
 						"id": "frequency",
 						"type": "long-text",
 						"rows": 3,
+						"required": true,
 						"label": "How often do you plan to make content on or about Project Eden?"
 					},
 					{
 						"id": "mature",
 						"type": "long-text",
+						"required": true,
 						"label": "Is your content made for mature audiences (18+)?",
 						"description": "If yes or if you are unsure, please elaborate and give examples of the kind of content that will appear on your channel that may not be family-friendly (e.g. swearing, alcohol, etc). Answering yes does not automatically disqualify you from being accepted. If accepted, any links to your channel may be marked as 18+ only in order to protect our younger players."
 					}
@@ -105,15 +116,15 @@
 		"name": "Builder",
 		"title": "Builder Application",
 		"requiredRank": "trusted",
-		"description": "Builders help with any build related needs for the server, such as events, minigame maps, spawns, and warps. They frequently collaborate as a team on large-scale projects. Strong technical skills, such as proficiency in WorldEdit and an in-depth knowledge of Minecraft mechanics, are essential for achieving the highest quality work. Additionally, Builders may assist in designing custom items and blocks for the server using Blockbench.",
+		"description": "Builders help with any build related needs for the server, such as events, minigame maps, spawns, and warps. They frequently collaborate as a team on large-scale projects. Strong technical skills, such as proficiency in WorldEdit and an in-depth knowledge of Minecraft mechanics, are essential for achieving the highest quality work. Additionally, Builders may assist in designing custom items and blocks for the server resource pack using Blockbench.",
 		"pages": [
 			{
-				"title": "Understanding the Requirements",
-				"description": "Before continuing, please fully read the Builder rank section on the wiki: <a target='_blank' href='https://wiki.projecteden.gg/wiki/Ranks#Builder'>https://wiki.projecteden.gg/wiki/Ranks#Builder</a>",
+				"description": "Builders help with any build related needs for the server, such as events, minigame maps, spawns, and warps. They frequently collaborate as a team on large-scale projects. Strong technical skills, such as proficiency in WorldEdit and an in-depth knowledge of Minecraft mechanics, are essential for achieving the highest quality work. Additionally, Builders may assist in designing custom items and blocks for the server resource pack using Blockbench.",
 				"questions": [
 					{
 						"id": "birthday",
 						"type": "date",
+						"required": true,
 						"label": "When is your birthday?",
 						"description": "While there is no minimum age requirement for staff, age can be taken into account. Please be sure to select the correct year."
 					}
@@ -126,32 +137,37 @@
 					{
 						"id": "discord",
 						"type": "short-text",
+						"required": true,
 						"label": "Do you have Discord?",
 						"description": "We use hidden Discord text channels to communicate among staff, so being active on Discord is a very important aspect of being a builder. If the answer is no, please explain why not."
 					},
 					{
 						"id": "phone",
 						"type": "short-text",
+						"required": true,
 						"label": "Do you have a smartphone capable of running Discord, and if so, are you able to keep it on most of the time (so you receive Discord notifications)?",
 						"description": "We don't need you to dedicate every waking hour to Project Eden, or be on 24/7, but its important that we're able to reach our staff quickly and that messages get seen and responded to in a timely fashion."
 					},
 					{
 						"id": "computer",
 						"type": "short-text",
+						"required": true,
 						"label": "Is your computer or phone able to run multiple applications (Minecraft, Discord, web browser) at the same time?",
 						"description": "Don't worry if it isn't - we'd just like to know."
 					},
 					{
 						"id": "mic",
 						"type": "short-text",
+						"required": true,
 						"label": "Do you have a mic to communicate with on Discord, and are you willing to use it?",
 						"description": "Using a mic helps us progress tasks/conversations quicker than with text. If no, are you at least able to join voice, listen, and communicate via text?"
 					},
 					{
 						"id": "github",
 						"type": "short-text",
-						"label": "We use GitHub as a project management tool and to-do list. Are you willing to sign up and use the service in order to keep up to date?",
-						"description": "GitHub is free, and you can also interact with it via a Discord bot. You will receive training for this service during the on-boarding process."
+						"required": true,
+						"label": "Are you willing to sign up for GitHub?",
+						"description": "We use GitHub as a project management tool and to-do list. GitHub is free, and you can also interact with it via a Discord bot. You will receive training for this service during the on-boarding process."
 					}
 				]
 			},
@@ -162,18 +178,21 @@
 					{
 						"id": "strengths",
 						"type": "long-text",
+						"required": true,
 						"label": "What makes you different from other applicants? Why should we choose you?",
 						"description": "Write about what your strengths are, both as a builder and as a team member, what experience you have, etc."
 					},
 					{
 						"id": "builds",
 						"type": "long-text",
+						"required": true,
 						"label": "What builds have you completed on Project Eden?",
 						"description": "Please provide a map link and/or command to teleport to each build"
 					},
 					{
 						"id": "other",
 						"type": "long-text",
+						"required": false,
 						"label": "Anything else you'd like to share?"
 					}
 				]
@@ -186,7 +205,8 @@
 		]
 	},
 	{
-		"id": "mod",
+		"id": "moderator",
+		"short": "mod",
 		"name": "Moderator",
 		"title": "Moderator Application",
 		"requiredRank": "trusted",
@@ -201,24 +221,28 @@
 					{
 						"id": "birthday",
 						"type": "date",
+						"required": true,
 						"label": "When is your birthday?",
 						"description": "While there is no minimum age requirement for staff, age can be taken into account. Please be sure to select the correct year."
 					},
 					{
 						"id": "experience",
 						"type": "long-text",
+						"required": true,
 						"label": "Do you have any previous experience as a staff member?",
 						"description": "If yes, please tell us a little bit about your experience, how long you held that position, and list the rank you were in Project Eden terms - for example, if you were a Head Mod, that would probably be considered an Operator here."
 					},
 					{
 						"id": "why",
 						"type": "long-text",
+						"required": true,
 						"label": "What makes you different from other applicants? Why should we choose you?",
 						"description": "Write about what your strengths are, why you want to become a mod, what you can bring to the team, etc."
 					},
 					{
-						"id": "current",
+						"id": "community",
 						"type": "long-text",
+						"required": true,
 						"label": "Being a moderator on Project Eden is about helping our server, our community and being a positive role model. What do you currently do as a member of the Project Eden community to help the server?"
 					}
 				]
@@ -229,45 +253,59 @@
 				"questions": [
 					{
 						"id": "hours",
-						"type": "short-text",
+						"type": "long-text",
+						"rows": 3,
+						"required": true,
 						"label": "On average, how many hours per week are you willing and able to commit to being ingame?",
 						"description": ""
 					},
 					{
 						"id": "timezone",
 						"type": "long-text",
+						"rows": 3,
+						"required": true,
 						"label": "When are you generally available? Please list days/times and your timezone.",
 						"description": "Don't know your timezone? http://whatismytimezone.com/ Use the third line. Please also include some basic information about your time schedule during holidays, breaks (if you're in school), weekends vs weekdays, etc."
 					},
 					{
 						"id": "discord",
 						"type": "long-text",
+						"rows": 3,
+						"required": true,
 						"label": "Do you have (or are willing to get) Discord?",
 						"description": "We use hidden Discord text channels to communicate among staff, so being active on Discord is a very important aspect of being a staff member. If the answer is no, please explain why."
 					},
 					{
 						"id": "phone",
 						"type": "long-text",
+						"rows": 3,
+						"required": true,
 						"label": "Do you have a smartphone capable of running Discord, and if so, are you able to keep it on most of the time (so you receive notifications)?",
 						"description": "We don't need you to dedicate every waking hour to Project Eden, or be on 24/7, but its important that we're able to reach our staff quickly and that messages get seen and responded to in a timely fashion."
 					},
 					{
 						"id": "computer",
 						"type": "long-text",
+						"rows": 3,
+						"required": true,
 						"label": "Is your computer or phone able to run multiple applications (Minecraft, Discord, web browser) at the same time?",
 						"description": "Don't worry if it isn't - we'd just like to know."
 					},
 					{
 						"id": "mic",
 						"type": "long-text",
+						"rows": 3,
+						"required": true,
 						"label": "Do you have a mic to communicate with on Discord, and are you willing to use it?",
 						"description": "Using a mic helps us progress tasks/conversations quicker than with text. If no, are you at least able to join voice, listen, and communicate via text?"
 					},
 					{
 						"id": "github",
 						"type": "long-text",
-						"label": "We currently use GitHub as a project management tool and to-do list. Are you willing to sign up and use the service in order to keep up to date?",
-						"description": "GitHub is free, and you can also interact with it via a Discord bot. You will receive training for this service during the on-boarding process."
+						"rows": 3,
+						"required": true,
+						"label": "Are you willing to sign up for GitHub?",
+						"description": "We use GitHub as a project management tool and to-do list. GitHub is free, and you can also interact with it via a Discord bot. You will receive training for this service during the on-boarding process."
 					}
 				]
 			},
@@ -278,28 +316,33 @@
 					{
 						"id": "grief",
 						"type":"long-text",
+						"required": true,
 						"label": "VictimBear, a player, has contacted you for help through the in-game ticket system about grief to their home (caused by AsshatBear)- what would you do to resolve this issue?",
 						"description": "Please list the commands you would use (hint: check the wiki) as well as how you would deal with the players involved."
 					},
 					{
 						"id": "newplayer",
 						"type": "long-text",
+						"required": true,
 						"label": "A new player logs in for the first time while you are working on your survival build- what do you do?"
 					},
 					{
 						"id": "chat",
 						"type": "long-text",
+						"required": true,
 						"label": "What started as a friendly discussion in chat has taken a turn for the ugly- You’ve just seen the words Trump, Nazi and Jesus all come across the screen. As a moderator part of your job is to enforce our rules and keep chat friendly. What exactly would you say or do to resolve this situation?"
 					}
 				]
 			},
 			{
-				"title": "Anything else?",
-				"questions": {
-					"id": "other",
-					"type": "long-text",
-					"label": "Anything else you would like us to know?"
-				}
+				"questions": [
+					{
+						"id": "other",
+						"type": "long-text",
+						"label": "Anything else you would like us to know?",
+						"required": false
+					}
+				]
 			},
 			{
 				"title": "Review & Submit",

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 export type Application = {
 	id: string,
+	short: string,
 	name: string,
 	title: string,
 	hide: boolean;
@@ -23,6 +24,7 @@ export type Question = {
 	id: string,
 	type: 'short-text' | 'long-text' | 'date' | 'checkbox' | 'radio' | 'select'
 	rows?: number,
+	required: boolean
 	width?: number,
 	label: string,
 	options?: Option[]
@@ -59,7 +61,7 @@ export class ApplicationsService {
 	}
 
 	getApplication(id: any): Application {
-		return this.applications.find(app => app.id === id)
+		return this.applications.find(app => app.id === id || app.short == id)
 	}
 
 }

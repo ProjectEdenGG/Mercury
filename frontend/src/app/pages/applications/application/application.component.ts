@@ -67,7 +67,23 @@ export class ApplicationComponent extends MercuryComponent {
 	}
 
 	getProgressPercentage() {
-		let completedAnswers = Object.values(this.answers[this.application.id].answers).filter(answer => !!answer).length
+		let completedAnswers: number = 0;
+		for (let index = 0; index < this.application.pages.length; index++) {
+			if (index > this.currentPage)
+				continue
+
+			let page = this.application.pages[index];
+			if (!page.questions)
+				continue;
+
+			completedAnswers += page.questions.filter(question => {
+				if (this.getAnswer(question))
+					return true;
+
+				return index < this.currentPage && !question.required
+			}).length;
+		}
+
 		let totalAnswers = this.application.pages.reduce((acc, page) => acc + (page.questions?.length ?? 0), 0)
 		let progress = completedAnswers + this.currentPage
 		let progressGoal = totalAnswers + this.application.pages.length
@@ -81,14 +97,14 @@ export class ApplicationComponent extends MercuryComponent {
 		this.answers[this.application.id] ??= {}
 		this.answers[this.application.id].page = this.currentPage
 		this.save()
-		// TODO focus first element
 		window.scrollTo(0, 0);
+		setTimeout(() => document.querySelector<HTMLElement>('input, textarea')?.focus())
 	}
 
 	isNextDisabled() {
 		if (this.application.pages[this.currentPage].questions)
 			for (const question of this.application.pages[this.currentPage].questions)
-				if (!this.getAnswer(question))
+				if (question.required && !this.getAnswer(question))
 					return true;
 		return false;
 	}

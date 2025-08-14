@@ -46,7 +46,7 @@ export class ApplicationsService {
 		let body: string[] = []
 		let current: string = ''
 		for (let answer of Object.keys(answers)) {
-			let label = `${questions.find((question: any) => question.id === answer)?.label}`;
+			let label = `${questions.find((question: any) => question?.id === answer)?.label}`;
 			let value = `${answers[answer]}`;
 			let next = `**${label}**\n${value}\n\n`;
 			let length = current.length + next.length;

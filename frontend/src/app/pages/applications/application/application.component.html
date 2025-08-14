@@ -25,12 +25,16 @@
 					}
 					@if (page.review) {
 						@for (reviewPage of application.pages; track reviewPage) {
-							@for (question of reviewPage.questions; track question) {
-								<div class="mt-2">
-									<hr>
-									<div class="font-rem-1_5 fw-medium mb-1" [innerHTML]="question.label"></div>
-									<div class="font-rem-1_125" [innerHTML]="getAnswerFormatted(question)"></div>
-								</div>
+							@if (reviewPage.questions?.length > 0) {
+								@for (question of reviewPage.questions; track question) {
+									@if (getAnswerFormatted(question); as answer) {
+										<div class="mt-2">
+											<hr>
+											<div class="font-rem-1_5 fw-medium mb-1" [innerHTML]="question.label"></div>
+											<div class="font-rem-1_125" [innerHTML]="answer"></div>
+										</div>
+									}
+								}
 							}
 						}
 						<hr>
@@ -46,17 +50,17 @@
 								}
 								@if (question.type == 'short-text') {
 									<div class="mt-2" [ngClass]="application.width ?? 'w-100 w-md-75 w-lg-50'">
-										<input (input)="setAnswer($event, question)" [value]="getAnswer(question)" placeholder="Short answer text" type="text" class="form-control" [id]="question.id" autocomplete="off">
+										<input (input)="setAnswer($event, question)" [value]="getAnswer(question)" placeholder="Answer text" type="text" class="form-control" [id]="question.id" autocomplete="off">
 									</div>
 								}
 								@if (question.type == 'long-text') {
 									<div class="mt-2" [ngClass]="application.width ?? 'w-100 w-lg-100'">
-										<textarea (input)="setAnswer($event, question)" [value]="getAnswer(question)" placeholder="Long answer text" class="form-control" [id]="question.id" [rows]="question.rows ?? 5" autocomplete="off"></textarea>
+										<textarea (input)="setAnswer($event, question)" [value]="getAnswer(question)" placeholder="Answer text" class="form-control" [id]="question.id" [rows]="question.rows ?? 5" autocomplete="off"></textarea>
 									</div>
 								}
 								@if (question.type == 'date') {
 									<div class="mt-2" [ngClass]="application.width ?? 'w-100 w-md-50 w-lg-25'">
-										<input (input)="setAnswer($event, question)" [value]="getAnswer(question)" placeholder="Date" type="date" class="form-control" [id]="question.id" autocomplete="off">
+										<input (input)="setAnswer($event, question)" [value]="getAnswer(question)" placeholder="Date" type="date" class="form-control" [id]="question.id" autocomplete="off" max="2999-12-31">
 									</div>
 								}
 								@if (question.type == 'checkbox' || question.type == 'radio') {
@@ -96,7 +100,7 @@
 							</button>
 						}
 						@if (lastPage()) {
-							<loading-button class="btn btn-primary font-rem-1_25" [loading]="submitting" [disabled]="isNextDisabled()" (click)="submit()">
+							<loading-button classes="font-rem-1_25" [loading]="submitting" [disabled]="isNextDisabled()" (click)="submit()">
 								Submit
 							</loading-button>
 						} @else {
