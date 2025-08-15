@@ -10,6 +10,7 @@ export type Application = {
 	width?: string,
 	color?: string,
 	description?: string,
+	thanks: string,
 	pages: Page[]
 }
 

@@ -2,9 +2,11 @@ import { Injectable } from "@tsed/di";
 import { ConfigService } from './ConfigService.js';
 import { DiscordService } from './DiscordService.js';
 import { ForumChannel, ForumThreadChannel, Snowflake } from 'discord.js';
-import { InternalServerError } from '@tsed/exceptions';
-import { $log } from '@tsed/common';
+import { BadRequest, InternalServerError } from '@tsed/exceptions';
+import { $log, application } from '@tsed/common';
 import { Utils } from '../utils/Utils.js';
+import fs from 'node:fs';
+import path from 'node:path';
 
 @Injectable()
 export class ApplicationsService {
@@ -20,27 +22,31 @@ export class ApplicationsService {
 		return this.configService.files.applications
 	}
 
-	async submitApplication(appId: string, nerd: any, answers: any) {
-		$log.info('answers', answers)
+	getApplication(appId: string) {
+		let application = this.getApplications().find((application: any) => application.id === appId || application.short === appId);
+		if (!application)
+			throw new BadRequest("Could not find application with id " + appId)
+		return application
+	}
 
-		let body: string[] = this.getApplicationBody(appId, answers);
+	async submitApplication(application: any, nerd: any, answers: any) {
+		let body: string[] = this.getApplicationBody(application, answers);
 
 		try {
-			this.logApplicationToFile(appId, body, nerd);
+			this.logApplicationToFile(application, body, nerd);
 		} catch (error) {
 			$log.error(error)
 		}
 
 		try {
-			await this.submitApplicationToDiscord(appId, body, nerd);
+			await this.submitApplicationToDiscord(application, body, nerd);
 		} catch (error) {
 			$log.error(error)
-			throw new InternalServerError("Failed to post application to Discord, please notify a staff member so they can retrieve the application from the logs")
+			throw new InternalServerError("Failed to post application to Discord, please notify a staff member so they can retrieve your application from the logs")
 		}
 	}
 
-	private getApplicationBody(appId: string, answers: any): string[] {
-		let application = this.getApplications().find((application: any) => application.id === appId);
+	private getApplicationBody(application: any, answers: any): string[] {
 		let questions = application.pages.map((page: any) => page.questions).flat();
 
 		let body: string[] = []
@@ -67,15 +73,19 @@ export class ApplicationsService {
 		return body;
 	}
 
-	private logApplicationToFile(appId: string, body: any, nerd: any) {
-		// TODO
+	private logApplicationToFile(application: any, body: any, nerd: any) {
+		let dir = path.join(process.cwd(), 'applications')
+		let file = path.join(dir, `${nerd.nickname}-${application.id}-${new Date().toISOString()}.txt`.replace(/:/g, '-'));
+		console.log(dir, file)
+		fs.mkdirSync(dir, { recursive: true })
+		fs.writeFileSync(file, body.join('\n\n'))
 	}
 
-	private async submitApplicationToDiscord(appId: string, body: string[], nerd: any) {
+	private async submitApplicationToDiscord(application: any, body: string[], nerd: any) {
 		const forum = this.discordService.getForumChannel(this.CHANNEL_ID)
-		const tag = this.getTag(forum, appId);
+		const tag = this.getTag(application, forum);
 
-		let name = this.utils.camelCase(appId) + " Application - " + nerd.nickname;
+		let name = `${application.title} - ${nerd.nickname}`;
 
 		let thread: ForumThreadChannel = await forum?.threads.create({
 			message: {
@@ -89,10 +99,10 @@ export class ApplicationsService {
 			await thread.send(message);
 	}
 
-	private getTag(forum: ForumChannel, id: string) {
-		const tag = forum?.availableTags.find(tag => tag.name.toLowerCase() === id);
+	private getTag(application: any, forum: ForumChannel) {
+		const tag = forum?.availableTags.find(tag => tag.name === application.name);
 		if (!tag)
-			throw new InternalServerError(`Tag ${id} is not available`)
+			throw new InternalServerError(`Tag ${application.name} is not available`)
 		return tag;
 	}
 }

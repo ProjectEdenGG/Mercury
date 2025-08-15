@@ -19,6 +19,7 @@ export class ApplicationComponent extends MercuryComponent {
 	answers: Answers
 	submitted: boolean;
 	submitting: boolean;
+	message: string;
 
 	constructor(
 		public router: Router,
@@ -44,7 +45,6 @@ export class ApplicationComponent extends MercuryComponent {
 
 	private setApplication(id: string) {
 		this.application = this.applicationsService.getApplication(id)
-		console.log('application selected', id, this.application)
 		this.answers ??= {}
 		this.answers[this.application.id] ??= {}
 		this.answers[this.application.id].answers ??= {}
@@ -120,6 +120,7 @@ export class ApplicationComponent extends MercuryComponent {
 			},
 			error: (error) => {
 				this.submitting = false;
+				this.message = error.message;
 				console.error(error)
 			}
 		})

@@ -85,8 +85,7 @@ export class MainController {
 
 	@Post('/applications/submit/:appId')
 	async submitApplication(@PathParams("appId") appId: any, @BodyParams() body: any) {
-		$log.info(appId, body)
-		return await this.applicationsService.submitApplication(appId, body.nerd, body.answers);
+		return await this.applicationsService.submitApplication(this.applicationsService.getApplication(appId), body.nerd, body.answers);
 	}
 
 }
