@@ -32,6 +32,14 @@
 						"type": "short-text",
 						"required": true,
 						"label": "What reason were you given for the ban?"
+					},
+					{
+						"id": "contact",
+						"type": "long-text",
+						"rows": 3,
+						"required": true,
+						"label": "How can we get in contact with you?",
+						"description": "Please leave your Discord username or email address"
 					}
 				]
 			},
