@@ -1,9 +1,10 @@
+import { AppealComponent } from './appeal.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ApplicationComponent } from './application.component';
+import { ApplicationsGuard } from '../applications/applications.guard';
 
 const routes: Routes = [
-	{ path: '', component: ApplicationComponent },
+	{ path: '', canActivate: [ApplicationsGuard], component: AppealComponent },
 	{ path: '**', redirectTo: '' },
 ]
 
@@ -11,5 +12,5 @@ const routes: Routes = [
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class ApplicationRoutingModule {
+export class AppealRoutingModule {
 }

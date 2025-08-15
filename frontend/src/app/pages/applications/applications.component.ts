@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MercuryComponent } from '../../lifecycle/MercuryComponent';
+import { ApplicationsService } from './applications.service';
 
 @Component({
 	selector: 'app-applications',
@@ -9,7 +10,9 @@ import { MercuryComponent } from '../../lifecycle/MercuryComponent';
 })
 export class ApplicationsComponent extends MercuryComponent {
 
-	constructor() {
+	constructor(
+		public applicationsService: ApplicationsService,
+	) {
 		super()
 	}
 

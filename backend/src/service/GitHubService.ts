@@ -9,7 +9,7 @@ export class GitHubService {
 	constructor(public configService: ConfigService) {
 		this.headers = {
 			'Accept': 'application/vnd.github+json',
-			'Authorization': `Bearer ${this.configService.secrets.github.token}`,
+			'Authorization': `Bearer ${this.configService.files.secrets.github.token}`,
 			'X-GitHub-Api-Version': '2022-11-28'
 		};
 	}

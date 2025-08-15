@@ -1,8 +1,9 @@
-import { Controller, Get } from "@tsed/common"
+import { $log, BodyParams, Controller, Get, PathParams, Post } from "@tsed/common"
 import * as os from 'node:os'
 import { SystemService } from '../service/SystemService.js';
 import { BackupsService } from '../service/BackupsService.js';
 import { GitHubService } from '../service/GitHubService.js';
+import { ApplicationsService } from '../service/ApplicationsService.js';
 
 @Controller('/api')
 export class MainController {
@@ -11,6 +12,7 @@ export class MainController {
 		public systemService: SystemService,
 		public backupsService: BackupsService,
 		public githubService: GitHubService,
+		public applicationsService: ApplicationsService,
 	) { }
 
 	@Get('/timestamp')
@@ -74,6 +76,16 @@ export class MainController {
 		}
 
 		return data
+	}
+
+	@Get('/applications')
+	async applications() {
+		return this.applicationsService.getApplications();
+	}
+
+	@Post('/applications/submit/:appId')
+	async submitApplication(@PathParams("appId") appId: any, @BodyParams() body: any) {
+		return await this.applicationsService.submitApplication(this.applicationsService.getApplication(appId), body.nerd, body.answers);
 	}
 
 }

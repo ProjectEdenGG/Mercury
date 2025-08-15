@@ -5,16 +5,21 @@ import { __dirname } from '../Server.js';
 
 @Injectable()
 export class ConfigService {
-	public secrets: any;
+	public files: any = {};
+
+	private readonly CONFIGS = [
+		'secrets',
+		'applications'
+	]
 
 	constructor() {
-		const secretsPath = path.resolve(__dirname, "../config/secrets.json");
-		try {
-			const data = fs.readFileSync(secretsPath, "utf8");
-			this.secrets = JSON.parse(data);
-		} catch (error) {
-			console.error("Error loading secrets.json:", error);
-			throw new Error("Unable to load secrets.json");
+		for (const file of this.CONFIGS) {
+			try {
+				const filePath = path.resolve(__dirname, `../config/${file}.json`);
+				this.files[file] = JSON.parse(fs.readFileSync(filePath, "utf8"));
+			} catch (error) {
+				console.error(`Error loading ${file}.json:`, error);
+			}
 		}
 	}
 

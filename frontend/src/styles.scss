@@ -241,6 +241,14 @@ img.emoji {
 	vertical-align: -0.1em;
 }
 
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
 [data-tooltip] {
 	position: relative;
 	z-index: 2;
@@ -295,395 +303,93 @@ img.emoji {
 	opacity: 1;
 }
 
-.font-rem-0_75 {
-	font-size: 0.75rem;
-}
+$font-sizes: (
+	0_75: 0.75rem,
+	1: 1rem,
+	1_125: 1.125rem,
+	1_25: 1.25rem,
+	1_5: 1.5rem,
+	1_75: 1.75rem,
+	2: 2rem,
+	2_25: 2.25rem,
+	2_5: 2.5rem,
+	2_75: 2.75rem,
+	3: 3rem,
+	3_25: 3.25rem,
+	3_5: 3.5rem,
+	3_75: 3.75rem,
+	4: 4rem,
+	4_25: 4.25rem,
+	4_5: 4.5rem,
+	4_75: 4.75rem
+);
 
-.font-rem-1 {
-	font-size: 1rem;
-}
+$breakpoints: (
+	'': 0,
+	'sm': 576px,
+	'md': 768px,
+	'lg': 992px,
+	'xl': 1200px
+);
 
-.font-rem-1_25 {
-	font-size: 1.25rem;
-}
+@each $breakpoint-name, $min-width in $breakpoints {
+	@if $breakpoint-name == '' {
+		@each $size-name, $size-value in $font-sizes {
+			.font-rem-#{$size-name} {
+				font-size: $size-value;
+			}
+		}
 
-.font-rem-1_5 {
-	font-size: 1.5rem;
-}
+		.font-size-default {
+			font-size: map-get($font-sizes, '1_125');
+		}
+	} @else {
+		@media (min-width: $min-width) {
+			@each $size-name, $size-value in $font-sizes {
+				.font-rem-#{$breakpoint-name}-#{$size-name} {
+					font-size: $size-value;
+				}
+			}
 
-.font-rem-1 {
-	font-size: 1rem;
-}
-
-.font-size-default,
-.font-rem-1_125 {
-	font-size: 1.125rem;
-}
-
-.font-rem-1_75 {
-	font-size: 1.75rem;
-}
-
-.font-rem-2 {
-	font-size: 2rem;
-}
-
-.font-rem-2_25 {
-	font-size: 2.25rem;
-}
-
-.font-rem-2_5 {
-	font-size: 2.5rem;
-}
-
-.font-rem-2_75 {
-	font-size: 2.75rem;
-}
-
-.font-rem-3 {
-	font-size: 3rem;
-}
-
-.font-rem-3_25 {
-	font-size: 3.25rem;
-}
-
-.font-rem-3_5 {
-	font-size: 3.5rem;
-}
-
-.font-rem-3_75 {
-	font-size: 3.75rem;
-}
-
-.font-rem-4 {
-	font-size: 4rem;
-}
-
-.font-rem-4_25 {
-	font-size: 4.25rem;
-}
-
-.font-rem-4_5 {
-	font-size: 4.5rem;
-}
-
-.font-rem-4_75 {
-	font-size: 4.75rem;
-}
-
-@media (min-width: 576px) {
-	.font-rem-sm-0_75 {
-		font-size: 0.75rem;
-	}
-
-	.font-rem-sm-1 {
-		font-size: 1rem;
-	}
-
-	.font-rem-sm-1_25 {
-		font-size: 1.25rem;
-	}
-
-	.font-rem-sm-1_5 {
-		font-size: 1.5rem;
-	}
-
-	.font-rem-sm-1 {
-		font-size: 1rem;
-	}
-
-	.font-size-sm-default,
-	.font-rem-sm-1_125 {
-		font-size: 1.125rem;
-	}
-
-	.font-rem-sm-1_75 {
-		font-size: 1.75rem;
-	}
-
-	.font-rem-sm-2 {
-		font-size: 2rem;
-	}
-
-	.font-rem-sm-2_25 {
-		font-size: 2.25rem;
-	}
-
-	.font-rem-sm-2_5 {
-		font-size: 2.5rem;
-	}
-
-	.font-rem-sm-2_75 {
-		font-size: 2.75rem;
-	}
-
-	.font-rem-sm-3 {
-		font-size: 3rem;
-	}
-
-	.font-rem-sm-3_25 {
-		font-size: 3.25rem;
-	}
-
-	.font-rem-sm-3_5 {
-		font-size: 3.5rem;
-	}
-
-	.font-rem-sm-3_75 {
-		font-size: 3.75rem;
-	}
-
-	.font-rem-sm-4 {
-		font-size: 4rem;
-	}
-
-	.font-rem-sm-4_25 {
-		font-size: 4.25rem;
-	}
-
-	.font-rem-sm-4_5 {
-		font-size: 4.5rem;
-	}
-
-	.font-rem-sm-4_75 {
-		font-size: 4.75rem;
+			.font-size-#{$breakpoint-name}-default {
+				font-size: map-get($font-sizes, '1_125');
+			}
+		}
 	}
 }
 
-@media (min-width: 768px) {
-	.font-rem-md-0_75 {
-		font-size: 0.75rem;
-	}
+$width-steps: 21;
 
-	.font-rem-md-1 {
-		font-size: 1rem;
-	}
+@each $breakpoint in map-keys($grid-breakpoints) {
+	@include media-breakpoint-up($breakpoint) {
+		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-	.font-rem-md-1_25 {
-		font-size: 1.25rem;
-	}
+		@for $i from 0 through $width-steps - 1 {
+			$width-value: $i * 5;
 
-	.font-rem-md-1_5 {
-		font-size: 1.5rem;
-	}
+			.w#{$infix}-#{$width-value} {
 
-	.font-rem-md-1 {
-		font-size: 1rem;
-	}
+				width: #{$width-value}#{"%"} !important;
+			}
 
-	.font-size-md-default,
-	.font-rem-md-1_125 {
-		font-size: 1.125rem;
-	}
+			.min-w#{$infix}-#{$width-value} {
+				min-width: #{$width-value}#{"%"} !important;
+			}
 
-	.font-rem-md-1_75 {
-		font-size: 1.75rem;
-	}
+			.max-w#{$infix}-#{$width-value} {
+				max-width: #{$width-value}#{"%"} !important;
+			}
+		}
 
-	.font-rem-md-2 {
-		font-size: 2rem;
-	}
-
-	.font-rem-md-2_25 {
-		font-size: 2.25rem;
-	}
-
-	.font-rem-md-2_5 {
-		font-size: 2.5rem;
-	}
-
-	.font-rem-md-2_75 {
-		font-size: 2.75rem;
-	}
-
-	.font-rem-md-3 {
-		font-size: 3rem;
-	}
-
-	.font-rem-md-3_25 {
-		font-size: 3.25rem;
-	}
-
-	.font-rem-md-3_5 {
-		font-size: 3.5rem;
-	}
-
-	.font-rem-md-3_75 {
-		font-size: 3.75rem;
-	}
-
-	.font-rem-md-4 {
-		font-size: 4rem;
-	}
-
-	.font-rem-md-4_25 {
-		font-size: 4.25rem;
-	}
-
-	.font-rem-md-4_5 {
-		font-size: 4.5rem;
-	}
-
-	.font-rem-md-4_75 {
-		font-size: 4.75rem;
+		.w#{$infix}-auto {
+			width: auto !important;
+		}
 	}
 }
 
-@media (min-width: 992px) {
-	.font-rem-lg-0_75 {
-		font-size: 0.75rem;
-	}
-
-	.font-rem-lg-1 {
-		font-size: 1rem;
-	}
-
-	.font-rem-lg-1_25 {
-		font-size: 1.25rem;
-	}
-
-	.font-rem-lg-1_5 {
-		font-size: 1.5rem;
-	}
-
-	.font-rem-lg-1 {
-		font-size: 1rem;
-	}
-
-	.font-size-lg-default,
-	.font-rem-lg-1_125 {
-		font-size: 1.125rem;
-	}
-
-	.font-rem-lg-1_75 {
-		font-size: 1.75rem;
-	}
-
-	.font-rem-lg-2 {
-		font-size: 2rem;
-	}
-
-	.font-rem-lg-2_25 {
-		font-size: 2.25rem;
-	}
-
-	.font-rem-lg-2_5 {
-		font-size: 2.5rem;
-	}
-
-	.font-rem-lg-2_75 {
-		font-size: 2.75rem;
-	}
-
-	.font-rem-lg-3 {
-		font-size: 3rem;
-	}
-
-	.font-rem-lg-3_25 {
-		font-size: 3.25rem;
-	}
-
-	.font-rem-lg-3_5 {
-		font-size: 3.5rem;
-	}
-
-	.font-rem-lg-3_75 {
-		font-size: 3.75rem;
-	}
-
-	.font-rem-lg-4 {
-		font-size: 4rem;
-	}
-
-	.font-rem-lg-4_25 {
-		font-size: 4.25rem;
-	}
-
-	.font-rem-lg-4_5 {
-		font-size: 4.5rem;
-	}
-
-	.font-rem-lg-4_75 {
-		font-size: 4.75rem;
+@each $breakpoint in map-keys($grid-breakpoints) {
+	@include media-breakpoint-up($breakpoint) {
+		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 	}
 }
 
-@media (min-width: 1200px) {
-	.font-rem-xl-0_75 {
-		font-size: 0.75rem;
-	}
-
-	.font-rem-xl-1 {
-		font-size: 1rem;
-	}
-
-	.font-rem-xl-1_25 {
-		font-size: 1.25rem;
-	}
-
-	.font-rem-xl-1_5 {
-		font-size: 1.5rem;
-	}
-
-	.font-rem-xl-1 {
-		font-size: 1rem;
-	}
-
-	.font-size-xl-default,
-	.font-rem-xl-1_125 {
-		font-size: 1.125rem;
-	}
-
-	.font-rem-xl-1_75 {
-		font-size: 1.75rem;
-	}
-
-	.font-rem-xl-2 {
-		font-size: 2rem;
-	}
-
-	.font-rem-xl-2_25 {
-		font-size: 2.25rem;
-	}
-
-	.font-rem-xl-2_5 {
-		font-size: 2.5rem;
-	}
-
-	.font-rem-xl-2_75 {
-		font-size: 2.75rem;
-	}
-
-	.font-rem-xl-3 {
-		font-size: 3rem;
-	}
-
-	.font-rem-xl-3_25 {
-		font-size: 3.25rem;
-	}
-
-	.font-rem-xl-3_5 {
-		font-size: 3.5rem;
-	}
-
-	.font-rem-xl-3_75 {
-		font-size: 3.75rem;
-	}
-
-	.font-rem-xl-4 {
-		font-size: 4rem;
-	}
-
-	.font-rem-xl-4_25 {
-		font-size: 4.25rem;
-	}
-
-	.font-rem-xl-4_5 {
-		font-size: 4.5rem;
-	}
-
-	.font-rem-xl-4_75 {
-		font-size: 4.75rem;
-	}
-}
