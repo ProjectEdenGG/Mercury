@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import {
+	ActivatedRouteSnapshot,
+	CanActivate,
+	GuardResult,
+	MaybeAsync,
+	Router,
+	RouterStateSnapshot
+} from '@angular/router';
 import { ApiService } from '../service/api.service';
 import { Utils } from '../utils/utils';
 
@@ -12,11 +19,12 @@ export class AuthGuard implements CanActivate {
 		public apiService: ApiService,
 	) { }
 
-	canActivate(): boolean {
+	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
 		if (!this.utils.nerd.uuid) {
-			this.router.navigate(['/apply'])
+			this.router.navigate([route.data['onNoAuth'] || '/'])
 			return false;
 		}
 		return true;
 	}
+
 }

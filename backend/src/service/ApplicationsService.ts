@@ -74,7 +74,6 @@ export class ApplicationsService {
 	private logApplicationToFile(application: any, body: any, nerd: any) {
 		let dir = path.join(process.cwd(), 'applications')
 		let file = path.join(dir, `${nerd.nickname}-${application.id}-${new Date().toISOString()}.txt`.replace(/:/g, '-'));
-		console.log(dir, file)
 		fs.mkdirSync(dir, { recursive: true })
 		fs.writeFileSync(file, body.join('\n\n'))
 	}
