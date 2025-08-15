@@ -3,8 +3,7 @@ import { ConfigService } from './ConfigService.js';
 import { DiscordService } from './DiscordService.js';
 import { ForumChannel, ForumThreadChannel, Snowflake } from 'discord.js';
 import { BadRequest, InternalServerError } from '@tsed/exceptions';
-import { $log, application } from '@tsed/common';
-import { Utils } from '../utils/Utils.js';
+import { $log } from '@tsed/common';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -13,7 +12,6 @@ export class ApplicationsService {
 	private readonly CHANNEL_ID: Snowflake = '1404309409403764872'
 
 	constructor(
-		private utils: Utils,
 		private configService: ConfigService,
 		private discordService: DiscordService,
 	) { }
@@ -42,7 +40,7 @@ export class ApplicationsService {
 			await this.submitApplicationToDiscord(application, body, nerd);
 		} catch (error) {
 			$log.error(error)
-			throw new InternalServerError("Failed to post application to Discord, please notify a staff member so they can retrieve your application from the logs")
+			throw new InternalServerError("Failed to post application to Discord")
 		}
 	}
 

@@ -19,7 +19,7 @@ export class ApplicationComponent extends MercuryComponent {
 	answers: Answers
 	submitted: boolean;
 	submitting: boolean;
-	message: string;
+	errorMessage: string;
 
 	constructor(
 		public router: Router,
@@ -120,7 +120,8 @@ export class ApplicationComponent extends MercuryComponent {
 			},
 			error: (error) => {
 				this.submitting = false;
-				this.message = error.message;
+				this.submitted = true;
+				this.errorMessage = error.message;
 				console.error(error)
 			}
 		})

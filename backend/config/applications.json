@@ -4,7 +4,7 @@
 		"name": "Ban Appeal",
 		"title": "Ban Appeal",
 		"hide": true,
-		"thanks": "Our <a href=\"/staff\">staff team</a> will review it as soon as possible and contact you with an update. We appreciate your patience and look forward to hopefully welcoming you back to the server soon.",
+		"thanks": "Our <a href='/staff'>staff team</a> will review it as soon as possible and contact you with an update. We appreciate your patience and look forward to hopefully welcoming you back to the server soon.",
 		"pages": [
 			{
 				"description": "We understand that mistakes happen, and we believe in giving players a chance to make things right. Our goal is to see you back on the server and enjoying the community again. Please fill out this form honestly and with as much detail as possible. Once submitted, our staff team will review your appeal and reach out to you as soon as possible.",
