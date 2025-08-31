@@ -31,7 +31,7 @@ export class ApiService {
 	}
 
 	submitApplication(id: string, answers: any) {
-		return this.http.post(`/api/applications/submit/${id}`, { nerd: this.utils.nerd, answers });
+		return this.http.post(`/api/applications/submit/${id}`, { nerd: this.utils.nerd ?? { nickname: answers.username }, answers });
 	}
 
 	getMinecraftServerStatus() {
