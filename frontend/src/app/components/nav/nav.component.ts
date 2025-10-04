@@ -7,6 +7,7 @@ import { Nerd, Utils } from '../../utils/utils';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
 import { FormMessage } from '../../utils/form-util';
+import { MercuryComponent } from '../../lifecycle/MercuryComponent';
 
 @Component({
 	selector: 'app-nav',
@@ -14,7 +15,7 @@ import { FormMessage } from '../../utils/form-util';
 	styleUrl: './nav.component.scss',
 	standalone: false,
 })
-export class NavComponent {
+export class NavComponent extends MercuryComponent {
 	@ViewChild('nav') nav: ElementRef;
 	@ViewChild('loginModal') loginModal: ModalComponent;
 	@ViewChild('mapModal') mapModal: ModalComponent;
@@ -36,13 +37,14 @@ export class NavComponent {
 		public apiService: ApiService,
 		public responsiveUtil: ResponsiveUtil,
 	) {
+		super()
 		this.router.events.subscribe(e => {
 			if (e instanceof NavigationEnd)
 				this.open$.next(false)
 		})
 	}
 
-	ngAfterViewInit() {
+	override ngAfterViewInit() {
 		let element = this.nav.nativeElement;
 		let classList = element.classList;
 		this.open$.subscribe(open => {

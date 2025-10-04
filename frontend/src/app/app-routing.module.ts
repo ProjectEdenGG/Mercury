@@ -11,6 +11,7 @@ export const routes: Routes = [
 			{ path: 'blockparty', loadChildren: () => import('./pages/blockparty/blockparty.module').then(m => m.BlockpartyModule) },
 			{ path: 'minigames', loadChildren: () => import('./pages/minigames/mechanics.module').then(m => m.MechanicsModule) },
 			{ path: 'vote', loadChildren: () => import('./pages/vote/vote.module').then(m => m.VoteModule) },
+			{ path: 'discord', loadChildren: () => import('./pages/discord/discord.module').then(m => m.DiscordModule) },
 			{ path: 'titan', loadChildren: () => import('./pages/titan/titan.module').then(m => m.TitanModule) },
 			{ path: 'status', loadChildren: () => import('./pages/status/status.module').then(m => m.StatusModule) },
 			{ path: 'apply', loadChildren: () => import('./pages/applications/applications.module').then(m => m.ApplicationsModule) },
