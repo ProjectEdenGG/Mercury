@@ -1,9 +1,10 @@
-import { $log, BodyParams, Controller, Get, PathParams, Post } from "@tsed/common"
+import { BodyParams, Controller, Get, MultipartFile, PathParams, Post } from "@tsed/common"
 import * as os from 'node:os'
 import { SystemService } from '../service/SystemService.js';
 import { BackupsService } from '../service/BackupsService.js';
 import { GitHubService } from '../service/GitHubService.js';
 import { ApplicationsService } from '../service/ApplicationsService.js';
+import { ImageService } from '../service/ImageService.js';
 
 @Controller('/api')
 export class MainController {
@@ -13,6 +14,7 @@ export class MainController {
 		public backupsService: BackupsService,
 		public githubService: GitHubService,
 		public applicationsService: ApplicationsService,
+		public imageService: ImageService
 	) { }
 
 	@Get('/timestamp')
@@ -88,4 +90,8 @@ export class MainController {
 		return await this.applicationsService.submitApplication(this.applicationsService.getApplication(appId), body.nerd, body.answers);
 	}
 
+	@Post('/image/upload')
+	async uploadImage(@MultipartFile('image') file: Express.Multer.File) {
+		return this.imageService.upload(file);
+	}
 }

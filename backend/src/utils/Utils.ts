@@ -2,6 +2,8 @@ import { Injectable } from '@tsed/di';
 
 @Injectable()
 export class Utils {
+	static ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	static NUMBERS = '0123456789';
 
 	camelCase(text: string | null): string | null {
 		if (!text || text.trim() === "")

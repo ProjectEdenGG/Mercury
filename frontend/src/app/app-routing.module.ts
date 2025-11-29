@@ -19,6 +19,7 @@ export const routes: Routes = [
 			{ path: 'staff', loadChildren: () => import('./pages/staff/staff.module').then(m => m.StaffModule) },
 			{ path: 'showcase', loadChildren: () => import('./pages/showcase/showcase.module').then(m => m.ShowcaseModule) },
 			{ path: 'diversity', loadChildren: () => import('./pages/diversity/diversity.module').then(m => m.DiversityModule) },
+			{ path: 'images/upload', loadChildren: () => import('./pages/images/upload.module').then(m => m.UploadModule) },
 			{ path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
 			{ path: '**', redirectTo: '' },
 		]

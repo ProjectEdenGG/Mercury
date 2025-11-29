@@ -30,6 +30,10 @@ export class ApiService {
 		return this.http.get('/api/applications');
 	}
 
+	uploadImage(formData: FormData) {
+		return this.http.post('/api/image/upload', formData);
+	}
+
 	submitApplication(id: string, answers: any) {
 		return this.http.post(`/api/applications/submit/${id}`, { nerd: this.utils.nerd ?? { nickname: answers.username }, answers });
 	}
