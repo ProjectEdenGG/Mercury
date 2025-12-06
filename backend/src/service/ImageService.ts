@@ -26,18 +26,20 @@ export class ImageService {
 
 			let filename
 			let filepath
+			const isGif = file.mimetype === 'image/gif' || file.originalname.toLowerCase().endsWith('.gif');
+			const extension = isGif ? '.gif' : '.webp';
 
 			while (true) {
-				filename = `${this.generateRandomFilename()}.webp`;
+				filename = `${this.generateRandomFilename()}${extension}`;
 				filepath = path.join(directory, filename);
 
 				if (!fs.existsSync(filepath))
 					break;
 			}
 
-			const webpBuffer = await sharp(file.buffer).webp().toBuffer();
+			const imageBuffer = isGif ? file.buffer : await sharp(file.buffer).webp().toBuffer();
 
-			fs.writeFileSync(filepath, webpBuffer);
+			fs.writeFileSync(filepath, imageBuffer);
 
 			$log.info(`Image uploaded successfully: ${filename}`);
 
