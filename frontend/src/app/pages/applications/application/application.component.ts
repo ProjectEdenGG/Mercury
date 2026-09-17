@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Utils } from '../../../utils/utils';
 import { MercuryComponent } from '../../../lifecycle/MercuryComponent';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Answers, Application, ApplicationsService, Option, Question } from '../applications.service';
 import { ApiService } from '../../../service/api.service';
 import { format } from 'date-fns';
+import { ModalComponent } from '../../../components/modal/modal.component';
 
 @Component({
 	selector: 'application',
@@ -20,6 +21,9 @@ export class ApplicationComponent extends MercuryComponent {
 	submitted: boolean;
 	submitting: boolean;
 	errorMessage: string;
+
+	game: string;
+	@ViewChild('wrongGameModal') wrongGameModal: ModalComponent;
 
 	constructor(
 		public router: Router,
@@ -137,6 +141,11 @@ export class ApplicationComponent extends MercuryComponent {
 				answer.push(option.id)
 			else
 				answer.remove(option.id)
+		}
+
+		if (this.applicationId === 'appeal' && question.id === 'game' && answer !== 'Minecraft') {
+			this.game = answer;
+			this.wrongGameModal.open()
 		}
 
 		this.answers ??= {}

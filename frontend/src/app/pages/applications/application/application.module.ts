@@ -6,6 +6,7 @@ import { HoverBrightnessDirective } from '../../../directive/hover-brightness/ho
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProgressBarModule } from '../../../components/progress-bar/progress-bar.module';
 import { LoadingButtonModule } from '../../../components/loading-button/loading-button.module';
+import { ModalModule } from "../../../components/modal/modal.module";
 
 @NgModule({
 	declarations: [ApplicationComponent],
@@ -19,6 +20,7 @@ import { LoadingButtonModule } from '../../../components/loading-button/loading-
 		ReactiveFormsModule,
 		ProgressBarModule,
 		LoadingButtonModule,
+		ModalModule,
 	]
 })
 export class ApplicationModule {

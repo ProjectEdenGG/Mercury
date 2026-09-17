@@ -10,6 +10,17 @@
 				"description": "We understand that mistakes happen, and we believe in giving players a chance to make things right. Our goal is to see you back on the server and enjoying the community again. Please fill out this form honestly and with as much detail as possible. Once submitted, our staff team will review your appeal and reach out to you as soon as possible.",
 				"questions": [
 					{
+						"id": "game",
+						"type": "select",
+						"required": true,
+						"label": "What game are you appealing for?",
+						"options": [
+							{ "id": "Minecraft", "label": "Minecraft", "value": "Minecraft" },
+							{ "id": "Dark Age of Camelot", "label": "Dark Age of Camelot", "value": "Dark Age of Camelot" },
+							{ "id": "Other", "label": "Other", "value": "Other" }
+						]
+					},
+					{
 						"id": "username",
 						"type": "short-text",
 						"required": true,
